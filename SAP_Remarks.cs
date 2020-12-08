@@ -15,6 +15,7 @@ namespace AB
         public static int sap_number = 0;
         public static string rem = "";
         public static bool isSubmit = false;
+        public bool isOptional = false;
         public SAP_Remarks()
         {
             InitializeComponent();
@@ -22,11 +23,11 @@ namespace AB
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtSAP.Text.Trim()))
+            if (String.IsNullOrEmpty(txtSAP.Text.Trim()) && !isOptional)
             {
                 MessageBox.Show("SAP # field is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (string.IsNullOrEmpty(txtRemarks.Text.Trim()))
+            else if (string.IsNullOrEmpty(txtRemarks.Text.Trim()) && !isOptional)
             {
                 MessageBox.Show("Remarks field is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -36,7 +37,7 @@ namespace AB
                 if (dialogResult == DialogResult.Yes)
                 {
                     isSubmit = true;
-                    sap_number = Convert.ToInt32(txtSAP.Text.Trim());
+                    sap_number = string.IsNullOrEmpty(txtSAP.Text.Trim()) ? 0 : Convert.ToInt32(txtSAP.Text.Trim());
                     rem = txtRemarks.Text.Trim();
                     this.Dispose();
                 }
@@ -50,6 +51,9 @@ namespace AB
 
         private void SAP_Remarks_Load(object sender, EventArgs e)
         {
+            label2.Text = isOptional ? "SAP #:" : "*SAP #:";
+            label1.Text = isOptional ? "Remarks:" : "*Remarks";
+            this.Text = isOptional ? "Enter SAP # & Remarks (Optional)" : "Enter SAP # & Remarks";
             isSubmit = false;
         }
     }

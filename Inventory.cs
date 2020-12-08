@@ -264,6 +264,7 @@ namespace AB
                 }
                 if (!token.Equals(""))
                 {
+                    AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
                     dgv.Rows.Clear();
                     var client = new RestClient(utilityc.URL);
                     client.Timeout = -1;
@@ -302,6 +303,7 @@ namespace AB
                                             if (q.Key.Equals("item_code"))
                                             {
                                                 itemCode = q.Value.ToString();
+                                                auto.Add(itemCode);
                                             }
                                             else if (q.Key.Equals("Beginning"))
                                             {
@@ -349,7 +351,17 @@ namespace AB
                                                 pullout = Convert.ToDouble(q.Value.ToString());
                                             }
                                         }
-                                        dgv.Rows.Add(itemCode, beginning.ToString("N0"), received.ToString("N0"), transferIn.ToString("N0"), adjin.ToString("N0"), totalIn.ToString("N0"), transferred.ToString("N0"), adjout.ToString("N0"), pullout.ToString("N0"), sold.ToString("N0"),  totalOut.ToString("N0"), available.ToString("N0"));
+                                        if (!string.IsNullOrEmpty(txtSearch.Text.ToString().Trim()))
+                                        {
+                                            if (txtSearch.Text.ToString().Trim().Contains(itemCode))
+                                            {
+                                                dgv.Rows.Add(itemCode, beginning.ToString("N0"), received.ToString("N0"), transferIn.ToString("N0"), adjin.ToString("N0"), totalIn.ToString("N0"), transferred.ToString("N0"), adjout.ToString("N0"), pullout.ToString("N0"), sold.ToString("N0"), totalOut.ToString("N0"), available.ToString("N0"));
+                                            }
+                                        }
+                                        else
+                                        {
+                                            dgv.Rows.Add(itemCode, beginning.ToString("N0"), received.ToString("N0"), transferIn.ToString("N0"), adjin.ToString("N0"), totalIn.ToString("N0"), transferred.ToString("N0"), adjout.ToString("N0"), pullout.ToString("N0"), sold.ToString("N0"), totalOut.ToString("N0"), available.ToString("N0"));
+                                        }
                                     }
                                 }
                             }
@@ -374,6 +386,7 @@ namespace AB
                             MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
+                    txtSearch.AutoCompleteCustomSource = auto;
                 }
                 Cursor.Current = Cursors.Default;
             }
@@ -422,6 +435,19 @@ namespace AB
            if(cBranch <= 0)
             {
                 loadWarehouse();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                loadData();
             }
         }
 

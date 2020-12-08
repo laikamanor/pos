@@ -152,5 +152,17 @@ namespace AB
             transfer.Text = "Pullout Transactions";
             showForm(transfer);
         }
+
+        private void adjustmentInToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AdjustmentIn adjustmentIn = new AdjustmentIn("in");
+            showForm(adjustmentIn);
+        }
+
+        private void adjustmentOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AdjustmentIn adjustmentIn = new AdjustmentIn("out");
+            showForm(adjustmentIn);
+        }
     }
 }

@@ -40,8 +40,14 @@ namespace AB.API_Class.Warehouse
                     request.AddHeader("Authorization", "Bearer " + token);
                     var response = client.Execute(request);
                     JObject jObject = new JObject();
-                    jObject = JObject.Parse(response.Content.ToString());
-
+                    if (response.Content.ToString().Substring(0, 1).Equals("{"))
+                    {
+                        jObject = JObject.Parse(response.Content.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show(response.Content.ToString(), "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     bool isSuccess = false;
                     foreach (var x in jObject)
                     {

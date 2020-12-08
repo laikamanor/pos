@@ -172,11 +172,11 @@
             // 
             // cmbBranch
             // 
-            this.cmbBranch.BackColor = System.Drawing.Color.DodgerBlue;
+            this.cmbBranch.BackColor = System.Drawing.SystemColors.Control;
             this.cmbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBranch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbBranch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbBranch.ForeColor = System.Drawing.Color.White;
+            this.cmbBranch.ForeColor = System.Drawing.Color.Black;
             this.cmbBranch.FormattingEnabled = true;
             this.cmbBranch.Location = new System.Drawing.Point(88, 17);
             this.cmbBranch.Name = "cmbBranch";

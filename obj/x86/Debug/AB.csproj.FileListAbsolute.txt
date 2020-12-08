@@ -108,3 +108,9 @@ C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.forSAPI
 C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.forSAPIP2.resources
 C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.forSAPIP2_Items.resources
 C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.PullOut.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.AddAdjustmentIn.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.AdjustmentIn.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.csproj.CopyComplete
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.ItemInfo.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.SelectedItem.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.csprojAssemblyReference.cache

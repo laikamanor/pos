@@ -185,6 +185,18 @@
     <Compile Include="AddUser.Designer.cs">
       <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddAdjustmentIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAdjustmentIn.Designer.cs">
+      <DependentUpon>AddAdjustmentIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdjustmentIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdjustmentIn.Designer.cs">
+      <DependentUpon>AdjustmentIn.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdvancePayment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,6 +332,12 @@
     <Compile Include="Inventory.Designer.cs">
       <DependentUpon>Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="ItemInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemInfo.Designer.cs">
+      <DependentUpon>ItemInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ItemRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -454,6 +472,12 @@
     <Compile Include="SelectAdvancePayment.Designer.cs">
       <DependentUpon>SelectAdvancePayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectedItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectedItem.Designer.cs">
+      <DependentUpon>SelectedItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Transfer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -485,6 +509,9 @@
     <Compile Include="voidForm.Designer.cs">
       <DependentUpon>voidForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddAdjustmentIn.resx">
+      <DependentUpon>AddAdjustmentIn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddAdvancePayment.resx">
       <DependentUpon>AddAdvancePayment.cs</DependentUpon>
     </EmbeddedResource>
@@ -496,6 +523,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdjustmentIn.resx">
+      <DependentUpon>AdjustmentIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdvancePayment.resx">
       <DependentUpon>AdvancePayment.cs</DependentUpon>
@@ -549,6 +579,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemInfo.resx">
+      <DependentUpon>ItemInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemRequest.resx">
       <DependentUpon>ItemRequest.cs</DependentUpon>
@@ -626,6 +659,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectAdvancePayment.resx">
       <DependentUpon>SelectAdvancePayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectedItem.resx">
+      <DependentUpon>SelectedItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Transfer.resx">
       <DependentUpon>Transfer.cs</DependentUpon>

@@ -254,7 +254,10 @@ namespace AB
 
         private void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadData();
+            if(cBranch <= 0)
+            {
+                loadData();
+            }
         }
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
