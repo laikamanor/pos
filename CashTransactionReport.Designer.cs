@@ -1,0 +1,641 @@
+﻿namespace AB
+{
+    partial class CashTransactionReport
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CashTransactionReport));
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salestype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paymenttype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cmbCashier = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.dtTo = new System.Windows.Forms.DateTimePicker();
+            this.lblNoDataFound = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblARAgentCash = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnrefresh = new System.Windows.Forms.Button();
+            this.lblEpay = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblBankDeposit = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblUsedADV = new System.Windows.Forms.Label();
+            this.lblADVCash = new System.Windows.Forms.Label();
+            this.lblARCash = new System.Windows.Forms.Label();
+            this.lblCashSales = new System.Windows.Forms.Label();
+            this.lblCashOnHand = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbSalesType = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbPaymentType = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.dtFrom = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cmbBranch = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cmbWhse = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // dgv
+            // 
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv.BackgroundColor = System.Drawing.Color.White;
+            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(153)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv.ColumnHeadersHeight = 40;
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.reference,
+            this.amount,
+            this.salestype,
+            this.paymenttype,
+            this.transdate,
+            this.url});
+            this.dgv.EnableHeadersVisualStyles = false;
+            this.dgv.GridColor = System.Drawing.Color.Gray;
+            this.dgv.Location = new System.Drawing.Point(24, 121);
+            this.dgv.Name = "dgv";
+            this.dgv.RowHeadersWidth = 10;
+            this.dgv.Size = new System.Drawing.Size(739, 181);
+            this.dgv.TabIndex = 2;
+            this.dgv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
+            // 
+            // reference
+            // 
+            this.reference.HeaderText = "Reference";
+            this.reference.Name = "reference";
+            this.reference.ReadOnly = true;
+            // 
+            // amount
+            // 
+            this.amount.HeaderText = "Amount";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            // 
+            // salestype
+            // 
+            this.salestype.HeaderText = "Sales Type";
+            this.salestype.Name = "salestype";
+            this.salestype.ReadOnly = true;
+            // 
+            // paymenttype
+            // 
+            this.paymenttype.HeaderText = "Payment Type";
+            this.paymenttype.Name = "paymenttype";
+            this.paymenttype.ReadOnly = true;
+            // 
+            // transdate
+            // 
+            this.transdate.HeaderText = "Trans. Date";
+            this.transdate.Name = "transdate";
+            this.transdate.ReadOnly = true;
+            // 
+            // url
+            // 
+            this.url.HeaderText = "URL";
+            this.url.Name = "url";
+            this.url.ReadOnly = true;
+            this.url.Visible = false;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.DimGray;
+            this.label20.Location = new System.Drawing.Point(21, 98);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(56, 14);
+            this.label20.TabIndex = 16;
+            this.label20.Text = "Cashier:";
+            // 
+            // cmbCashier
+            // 
+            this.cmbCashier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.cmbCashier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCashier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbCashier.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCashier.ForeColor = System.Drawing.Color.Black;
+            this.cmbCashier.FormattingEnabled = true;
+            this.cmbCashier.Location = new System.Drawing.Point(133, 95);
+            this.cmbCashier.Name = "cmbCashier";
+            this.cmbCashier.Size = new System.Drawing.Size(131, 22);
+            this.cmbCashier.TabIndex = 14;
+            this.cmbCashier.SelectedIndexChanged += new System.EventHandler(this.cmbCashier_SelectedIndexChanged);
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Gray;
+            this.label21.Location = new System.Drawing.Point(557, 100);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(52, 15);
+            this.label21.TabIndex = 19;
+            this.label21.Text = "To Date:";
+            // 
+            // dtTo
+            // 
+            this.dtTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtTo.CustomFormat = "yyyy-MM-dd";
+            this.dtTo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtTo.Location = new System.Drawing.Point(646, 94);
+            this.dtTo.Name = "dtTo";
+            this.dtTo.Size = new System.Drawing.Size(117, 21);
+            this.dtTo.TabIndex = 18;
+            this.dtTo.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
+            // 
+            // lblNoDataFound
+            // 
+            this.lblNoDataFound.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblNoDataFound.AutoSize = true;
+            this.lblNoDataFound.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoDataFound.ForeColor = System.Drawing.Color.DimGray;
+            this.lblNoDataFound.Location = new System.Drawing.Point(367, 188);
+            this.lblNoDataFound.Name = "lblNoDataFound";
+            this.lblNoDataFound.Size = new System.Drawing.Size(105, 18);
+            this.lblNoDataFound.TabIndex = 20;
+            this.lblNoDataFound.Text = "No data found";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lblARAgentCash);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.btnrefresh);
+            this.panel1.Controls.Add(this.lblEpay);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.lblBankDeposit);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.lblUsedADV);
+            this.panel1.Controls.Add(this.lblADVCash);
+            this.panel1.Controls.Add(this.lblARCash);
+            this.panel1.Controls.Add(this.lblCashSales);
+            this.panel1.Controls.Add(this.lblCashOnHand);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(24, 308);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(739, 168);
+            this.panel1.TabIndex = 21;
+            // 
+            // lblARAgentCash
+            // 
+            this.lblARAgentCash.AutoSize = true;
+            this.lblARAgentCash.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblARAgentCash.ForeColor = System.Drawing.Color.Black;
+            this.lblARAgentCash.Location = new System.Drawing.Point(193, 104);
+            this.lblARAgentCash.Name = "lblARAgentCash";
+            this.lblARAgentCash.Size = new System.Drawing.Size(33, 16);
+            this.lblARAgentCash.TabIndex = 54;
+            this.lblARAgentCash.Text = "0.00";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Gray;
+            this.label10.Location = new System.Drawing.Point(14, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(106, 16);
+            this.label10.TabIndex = 53;
+            this.label10.Text = "AR Agent Cash:";
+            // 
+            // btnrefresh
+            // 
+            this.btnrefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnrefresh.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnrefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnrefresh.FlatAppearance.BorderSize = 0;
+            this.btnrefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnrefresh.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnrefresh.ForeColor = System.Drawing.Color.White;
+            this.btnrefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnrefresh.Image")));
+            this.btnrefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnrefresh.Location = new System.Drawing.Point(642, 3);
+            this.btnrefresh.Name = "btnrefresh";
+            this.btnrefresh.Size = new System.Drawing.Size(97, 30);
+            this.btnrefresh.TabIndex = 52;
+            this.btnrefresh.Text = "Refresh";
+            this.btnrefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnrefresh.UseVisualStyleBackColor = false;
+            this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
+            // 
+            // lblEpay
+            // 
+            this.lblEpay.AutoSize = true;
+            this.lblEpay.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEpay.ForeColor = System.Drawing.Color.Black;
+            this.lblEpay.Location = new System.Drawing.Point(477, 77);
+            this.lblEpay.Name = "lblEpay";
+            this.lblEpay.Size = new System.Drawing.Size(33, 16);
+            this.lblEpay.TabIndex = 13;
+            this.lblEpay.Text = "0.00";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Gray;
+            this.label7.Location = new System.Drawing.Point(329, 77);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 16);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "EPAY:";
+            // 
+            // lblBankDeposit
+            // 
+            this.lblBankDeposit.AutoSize = true;
+            this.lblBankDeposit.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBankDeposit.ForeColor = System.Drawing.Color.Black;
+            this.lblBankDeposit.Location = new System.Drawing.Point(477, 17);
+            this.lblBankDeposit.Name = "lblBankDeposit";
+            this.lblBankDeposit.Size = new System.Drawing.Size(33, 16);
+            this.lblBankDeposit.TabIndex = 11;
+            this.lblBankDeposit.Text = "0.00";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Gray;
+            this.label11.Location = new System.Drawing.Point(329, 17);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(95, 16);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Bank Deposit:";
+            // 
+            // lblUsedADV
+            // 
+            this.lblUsedADV.AutoSize = true;
+            this.lblUsedADV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsedADV.ForeColor = System.Drawing.Color.Black;
+            this.lblUsedADV.Location = new System.Drawing.Point(477, 45);
+            this.lblUsedADV.Name = "lblUsedADV";
+            this.lblUsedADV.Size = new System.Drawing.Size(33, 16);
+            this.lblUsedADV.TabIndex = 9;
+            this.lblUsedADV.Text = "0.00";
+            // 
+            // lblADVCash
+            // 
+            this.lblADVCash.AutoSize = true;
+            this.lblADVCash.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblADVCash.ForeColor = System.Drawing.Color.Black;
+            this.lblADVCash.Location = new System.Drawing.Point(193, 136);
+            this.lblADVCash.Name = "lblADVCash";
+            this.lblADVCash.Size = new System.Drawing.Size(33, 16);
+            this.lblADVCash.TabIndex = 8;
+            this.lblADVCash.Text = "0.00";
+            // 
+            // lblARCash
+            // 
+            this.lblARCash.AutoSize = true;
+            this.lblARCash.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblARCash.ForeColor = System.Drawing.Color.Black;
+            this.lblARCash.Location = new System.Drawing.Point(193, 75);
+            this.lblARCash.Name = "lblARCash";
+            this.lblARCash.Size = new System.Drawing.Size(33, 16);
+            this.lblARCash.TabIndex = 7;
+            this.lblARCash.Text = "0.00";
+            // 
+            // lblCashSales
+            // 
+            this.lblCashSales.AutoSize = true;
+            this.lblCashSales.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCashSales.ForeColor = System.Drawing.Color.Black;
+            this.lblCashSales.Location = new System.Drawing.Point(193, 45);
+            this.lblCashSales.Name = "lblCashSales";
+            this.lblCashSales.Size = new System.Drawing.Size(33, 16);
+            this.lblCashSales.TabIndex = 6;
+            this.lblCashSales.Text = "0.00";
+            // 
+            // lblCashOnHand
+            // 
+            this.lblCashOnHand.AutoSize = true;
+            this.lblCashOnHand.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCashOnHand.ForeColor = System.Drawing.Color.Black;
+            this.lblCashOnHand.Location = new System.Drawing.Point(192, 17);
+            this.lblCashOnHand.Name = "lblCashOnHand";
+            this.lblCashOnHand.Size = new System.Drawing.Size(40, 19);
+            this.lblCashOnHand.TabIndex = 5;
+            this.lblCashOnHand.Text = "0.00";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Gray;
+            this.label5.Location = new System.Drawing.Point(329, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 16);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Used Deposit:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Gray;
+            this.label3.Location = new System.Drawing.Point(14, 136);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 16);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Deposit Cash:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Gray;
+            this.label4.Location = new System.Drawing.Point(14, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 16);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "AR Cash:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Gray;
+            this.label2.Location = new System.Drawing.Point(14, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Cash Sales:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Gray;
+            this.label1.Location = new System.Drawing.Point(13, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(167, 19);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Total Cash On Hand:";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.DimGray;
+            this.label6.Location = new System.Drawing.Point(520, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 14);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Sales Type:";
+            // 
+            // cmbSalesType
+            // 
+            this.cmbSalesType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSalesType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.cmbSalesType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSalesType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbSalesType.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSalesType.ForeColor = System.Drawing.Color.Black;
+            this.cmbSalesType.FormattingEnabled = true;
+            this.cmbSalesType.Location = new System.Drawing.Point(632, 38);
+            this.cmbSalesType.Name = "cmbSalesType";
+            this.cmbSalesType.Size = new System.Drawing.Size(131, 22);
+            this.cmbSalesType.TabIndex = 22;
+            this.cmbSalesType.SelectedIndexChanged += new System.EventHandler(this.cmbSalesType_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.DimGray;
+            this.label8.Location = new System.Drawing.Point(520, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(95, 14);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Payment Type:";
+            // 
+            // cmbPaymentType
+            // 
+            this.cmbPaymentType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbPaymentType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.cmbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbPaymentType.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPaymentType.ForeColor = System.Drawing.Color.Black;
+            this.cmbPaymentType.FormattingEnabled = true;
+            this.cmbPaymentType.Location = new System.Drawing.Point(632, 10);
+            this.cmbPaymentType.Name = "cmbPaymentType";
+            this.cmbPaymentType.Size = new System.Drawing.Size(131, 22);
+            this.cmbPaymentType.TabIndex = 24;
+            this.cmbPaymentType.SelectedIndexChanged += new System.EventHandler(this.cmbPaymentType_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Gray;
+            this.label9.Location = new System.Drawing.Point(557, 72);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(68, 15);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "From Date:";
+            // 
+            // dtFrom
+            // 
+            this.dtFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtFrom.CustomFormat = "yyyy-MM-dd";
+            this.dtFrom.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFrom.Location = new System.Drawing.Point(646, 66);
+            this.dtFrom.Name = "dtFrom";
+            this.dtFrom.Size = new System.Drawing.Size(117, 21);
+            this.dtFrom.TabIndex = 26;
+            this.dtFrom.ValueChanged += new System.EventHandler(this.dtFrom_ValueChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.DimGray;
+            this.label12.Location = new System.Drawing.Point(19, 36);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(53, 14);
+            this.label12.TabIndex = 35;
+            this.label12.Text = "Branch:";
+            // 
+            // cmbBranch
+            // 
+            this.cmbBranch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.cmbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBranch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbBranch.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbBranch.ForeColor = System.Drawing.Color.Black;
+            this.cmbBranch.FormattingEnabled = true;
+            this.cmbBranch.Location = new System.Drawing.Point(131, 33);
+            this.cmbBranch.Name = "cmbBranch";
+            this.cmbBranch.Size = new System.Drawing.Size(131, 22);
+            this.cmbBranch.TabIndex = 34;
+            this.cmbBranch.SelectedValueChanged += new System.EventHandler(this.cmbBranch_SelectedValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.DimGray;
+            this.label13.Location = new System.Drawing.Point(21, 68);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(76, 14);
+            this.label13.TabIndex = 33;
+            this.label13.Text = "Warehouse:";
+            // 
+            // cmbWhse
+            // 
+            this.cmbWhse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.cmbWhse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWhse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbWhse.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbWhse.ForeColor = System.Drawing.Color.Black;
+            this.cmbWhse.FormattingEnabled = true;
+            this.cmbWhse.Location = new System.Drawing.Point(133, 65);
+            this.cmbWhse.Name = "cmbWhse";
+            this.cmbWhse.Size = new System.Drawing.Size(131, 22);
+            this.cmbWhse.TabIndex = 32;
+            this.cmbWhse.SelectedValueChanged += new System.EventHandler(this.cmbWhse_SelectedValueChanged);
+            // 
+            // CashTransactionReport
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(789, 488);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.cmbBranch);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.cmbWhse);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.dtFrom);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cmbPaymentType);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cmbSalesType);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.lblNoDataFound);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.dtTo);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.cmbCashier);
+            this.Controls.Add(this.dgv);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "CashTransactionReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Cash Transaction Report";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.SalesReport_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+        private System.Windows.Forms.DataGridView dgv;
+        internal System.Windows.Forms.Label label20;
+        internal System.Windows.Forms.ComboBox cmbCashier;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.DateTimePicker dtTo;
+        private System.Windows.Forms.Label lblNoDataFound;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblBankDeposit;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblUsedADV;
+        private System.Windows.Forms.Label lblADVCash;
+        private System.Windows.Forms.Label lblARCash;
+        private System.Windows.Forms.Label lblCashSales;
+        private System.Windows.Forms.Label lblCashOnHand;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblEpay;
+        private System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.Button btnrefresh;
+        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.ComboBox cmbSalesType;
+        internal System.Windows.Forms.Label label8;
+        internal System.Windows.Forms.ComboBox cmbPaymentType;
+        private System.Windows.Forms.Label lblARAgentCash;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker dtFrom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn reference;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn salestype;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paymenttype;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn url;
+        internal System.Windows.Forms.Label label12;
+        internal System.Windows.Forms.ComboBox cmbBranch;
+        internal System.Windows.Forms.Label label13;
+        internal System.Windows.Forms.ComboBox cmbWhse;
+    }
+}
