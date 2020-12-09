@@ -105,72 +105,80 @@ namespace AB
                     var request = new RestRequest("/api/auth/user/get_all?isSales=1");
                     request.AddHeader("Authorization", "Bearer " + token);
                     var response = client.Execute(request);
-                    JObject jObjectResponse = JObject.Parse(response.Content);
-                    cmbsales.Items.Add("All");
+                    if (response.ErrorMessage == null)
+                    {
+                        JObject jObjectResponse = JObject.Parse(response.Content);
+                        cmbsales.Items.Add("All");
 
-                    bool isSuccess = false;
-                    foreach (var x in jObjectResponse)
-                    {
-                        if (x.Key.Equals("success"))
-                        {
-                            isSuccess = Convert.ToBoolean(x.Value.ToString());
-                        }
-                    }
-                    if (isSuccess)
-                    {
+                        bool isSuccess = false;
                         foreach (var x in jObjectResponse)
                         {
-                            if (x.Key.Equals("data"))
+                            if (x.Key.Equals("success"))
                             {
-                                if (x.Value.ToString() != "[]")
+                                isSuccess = Convert.ToBoolean(x.Value.ToString());
+                            }
+                        }
+                        if (isSuccess)
+                        {
+                            foreach (var x in jObjectResponse)
+                            {
+                                if (x.Key.Equals("data"))
                                 {
-                                    lblNoDataFound.Visible = false;
-                                    JArray jsonArray = JArray.Parse(x.Value.ToString());
-                                    for (int i = 0; i < jsonArray.Count(); i++)
+                                    if (x.Value.ToString() != "[]")
                                     {
-                                        JObject jObjectData = JObject.Parse(jsonArray[i].ToString());
-                                        int id = 0;
-                                        string username = "";
-                                        foreach (var y in jObjectData)
+                                        lblNoDataFound.Visible = false;
+                                        JArray jsonArray = JArray.Parse(x.Value.ToString());
+                                        for (int i = 0; i < jsonArray.Count(); i++)
                                         {
-                                            if (y.Key.Equals("id"))
+                                            JObject jObjectData = JObject.Parse(jsonArray[i].ToString());
+                                            int id = 0;
+                                            string username = "";
+                                            foreach (var y in jObjectData)
                                             {
-                                                id = Convert.ToInt32(y.Value.ToString());
+                                                if (y.Key.Equals("id"))
+                                                {
+                                                    id = Convert.ToInt32(y.Value.ToString());
+                                                }
+                                                else if (y.Key.Equals("username"))
+                                                {
+                                                    username = y.Value.ToString();
+                                                }
                                             }
-                                            else if (y.Key.Equals("username"))
-                                            {
-                                                username = y.Value.ToString();
-                                            }
-                                        }
-                                        dtSalesAgent.Rows.Add(id, username);
-                                        cmbsales.Items.Add(username);
+                                            dtSalesAgent.Rows.Add(id, username);
+                                            cmbsales.Items.Add(username);
 
+                                        }
                                     }
                                 }
                             }
-                        }
-                        cmbsales.SelectedIndex = 0;
-                    }
-                    else
-                    {
-                        string msg = "No message response found";
-                        foreach (var x in jObjectResponse)
-                        {
-                            if (x.Key.Equals("message"))
-                            {
-                                msg = x.Value.ToString();
-                            }
-                        }
-                        if (msg.Equals("Token is invalid"))
-                        {
-                            Cursor.Current = Cursors.Default;
-                            MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            cmbsales.SelectedIndex = 0;
                         }
                         else
                         {
-                            Cursor.Current = Cursors.Default;
-                            MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            string msg = "No message response found";
+                            foreach (var x in jObjectResponse)
+                            {
+                                if (x.Key.Equals("message"))
+                                {
+                                    msg = x.Value.ToString();
+                                }
+                            }
+                            if (msg.Equals("Token is invalid"))
+                            {
+                                Cursor.Current = Cursors.Default;
+                                MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else
+                            {
+                                Cursor.Current = Cursors.Default;
+                                MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
+                    }
+                    else
+                    {
+                        Cursor.Current = Cursors.Default;
+                        MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -242,131 +250,139 @@ namespace AB
                     request.AddHeader("Authorization", "Bearer " + token);            
                     var response = client.Execute(request);
                     JObject jObject = new JObject();
-                    jObject = JObject.Parse(response.Content.ToString());
-                    dgvOrders.Rows.Clear();
-                    dgvitems.Rows.Clear();
-                    clearBillsField();
-                    AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
-                    bool isSuccess = false;
-                    foreach (var x in jObject)
+
+                    if (response.ErrorMessage == null)
                     {
-                        if (x.Key.Equals("success"))
-                        {
-                            isSuccess = Convert.ToBoolean(x.Value.ToString());
-                        }
-                    }
-                    if (isSuccess)
-                    {
+                        jObject = JObject.Parse(response.Content.ToString());
+                        dgvOrders.Rows.Clear();
+                        dgvitems.Rows.Clear();
+                        clearBillsField();
+                        AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
+                        bool isSuccess = false;
                         foreach (var x in jObject)
                         {
-                            if (x.Key.Equals("data"))
+                            if (x.Key.Equals("success"))
                             {
-                                if (x.Value.ToString() != "[]")
+                                isSuccess = Convert.ToBoolean(x.Value.ToString());
+                            }
+                        }
+                        if (isSuccess)
+                        {
+                            foreach (var x in jObject)
+                            {
+                                if (x.Key.Equals("data"))
                                 {
-                                    lblNoDataFound.Visible = false;
-                                    JArray jsonArray = JArray.Parse(x.Value.ToString());
-                                    for (int i = 0; i < jsonArray.Count(); i++)
+                                    if (x.Value.ToString() != "[]")
                                     {
-                                        string forSAPAmountColumnName = (gForType.Equals("for SAP") ? "doctotal" : "amount_due");
-                                        JObject data = JObject.Parse(jsonArray[i].ToString());
-                                        int id = 0, transNumber = 0;
-                                        string referenceNumber = "",
-            transType = "", salesAgent = "N/A", cust_code = "";
-                                        double amountDue = 0.00, tenderAmount = 0.00;
-                                        DateTime dtTransDate = new DateTime();
-                                        foreach (var q in data)
+                                        lblNoDataFound.Visible = false;
+                                        JArray jsonArray = JArray.Parse(x.Value.ToString());
+                                        for (int i = 0; i < jsonArray.Count(); i++)
                                         {
-                                            if (q.Key.Equals("reference"))
+                                            string forSAPAmountColumnName = (gForType.Equals("for SAP") ? "doctotal" : "amount_due");
+                                            JObject data = JObject.Parse(jsonArray[i].ToString());
+                                            int id = 0, transNumber = 0;
+                                            string referenceNumber = "",
+                transType = "", salesAgent = "N/A", cust_code = "";
+                                            double amountDue = 0.00, tenderAmount = 0.00;
+                                            DateTime dtTransDate = new DateTime();
+                                            foreach (var q in data)
                                             {
-                                                referenceNumber = q.Value.ToString();
-                                            }
-                                            else if (q.Key.Equals("transtype"))
-                                            {
-                                                transType = q.Value.ToString();
-                                            }
-                                            if (q.Key.Equals(forSAPAmountColumnName))
-                                            {
-                                                amountDue = Convert.ToDouble(q.Value.ToString());
-                                            }
-                                            else if (q.Key.Equals("id"))
-                                            {
-                                                id = Convert.ToInt32(q.Value.ToString());
-                                            }
-                                            else if (q.Key.Equals("cust_code"))
-                                            {
-                                                cust_code = q.Value.ToString();
-                                            }
-                                            else if (q.Key.Equals("transnumber"))
-                                            {
-                                                transNumber = Convert.ToInt32(q.Value.ToString());
-                                            }
-                                            else if (q.Key.Equals("tenderamt"))
-                                            {
-                                                tenderAmount = Convert.ToDouble(q.Value.ToString());
-                                            }
-                                            else if (q.Key.Equals("created_user"))
-                                            {
-                                                JObject jObjectCreatedUser = JObject.Parse(q.Value.ToString());
-                                                foreach (var a in jObjectCreatedUser)
+                                                if (q.Key.Equals("reference"))
                                                 {
-                                                    if (a.Key.Equals("username"))
+                                                    referenceNumber = q.Value.ToString();
+                                                }
+                                                else if (q.Key.Equals("transtype"))
+                                                {
+                                                    transType = q.Value.ToString();
+                                                }
+                                                if (q.Key.Equals(forSAPAmountColumnName))
+                                                {
+                                                    amountDue = Convert.ToDouble(q.Value.ToString());
+                                                }
+                                                else if (q.Key.Equals("id"))
+                                                {
+                                                    id = Convert.ToInt32(q.Value.ToString());
+                                                }
+                                                else if (q.Key.Equals("cust_code"))
+                                                {
+                                                    cust_code = q.Value.ToString();
+                                                }
+                                                else if (q.Key.Equals("transnumber"))
+                                                {
+                                                    transNumber = Convert.ToInt32(q.Value.ToString());
+                                                }
+                                                else if (q.Key.Equals("tenderamt"))
+                                                {
+                                                    tenderAmount = Convert.ToDouble(q.Value.ToString());
+                                                }
+                                                else if (q.Key.Equals("created_user"))
+                                                {
+                                                    JObject jObjectCreatedUser = JObject.Parse(q.Value.ToString());
+                                                    foreach (var a in jObjectCreatedUser)
                                                     {
-                                                        salesAgent = a.Value.ToString();
+                                                        if (a.Key.Equals("username"))
+                                                        {
+                                                            salesAgent = a.Value.ToString();
+                                                        }
                                                     }
                                                 }
+                                                else if (q.Key.Equals("transdate"))
+                                                {
+                                                    string replaceT = q.Value.ToString().Replace("T", "");
+                                                    dtTransDate = Convert.ToDateTime(replaceT);
+                                                }
                                             }
-                                            else if (q.Key.Equals("transdate"))
-                                            {
-                                                string replaceT = q.Value.ToString().Replace("T", "");
-                                                dtTransDate = Convert.ToDateTime(replaceT);
-                                            }
+                                            dgvOrders.Rows.Add(false, id, transNumber, referenceNumber, amountDue.ToString("n2"), salesAgent, transType, cust_code, tenderAmount, "", dtTransDate.ToString("yyyy-MM-dd"));
+                                            auto.Add(transNumber.ToString());
                                         }
-                                        dgvOrders.Rows.Add(false, id, transNumber, referenceNumber, amountDue.ToString("n2"), salesAgent, transType, cust_code, tenderAmount, "", dtTransDate.ToString("yyyy-MM-dd"));
-                                        auto.Add(transNumber.ToString());
+                                        txtsearch.AutoCompleteCustomSource = auto;
+                                        lblOrderCount.Text = "Orders (" + dgvOrders.Rows.Count.ToString("N0") + ")";
                                     }
-                                    txtsearch.AutoCompleteCustomSource = auto;
-                                    lblOrderCount.Text = "Orders (" + dgvOrders.Rows.Count.ToString("N0") + ")";
+                                    else
+                                    {
+                                        lblNoDataFound.Visible = true;
+                                        lblOrderCount.Text = "Orders (0)";
+                                        lblpendingamount.Text = "Selected Amount: 0.00";
+                                        dgvitems.Rows.Clear();
+                                        clearBillsField();
+                                    }
                                 }
-                                else
+                            }
+                        }
+                        else
+                        {
+                            lblOrderCount.Text = "Orders (0)";
+                            string msg = "No message response found";
+                            foreach (var x in jObject)
+                            {
+                                if (x.Key.Equals("message"))
                                 {
-                                    lblNoDataFound.Visible = true;
-                                    lblOrderCount.Text = "Orders (0)";
-                                    lblpendingamount.Text = "Selected Amount: 0.00";
-                                    dgvitems.Rows.Clear();
-                                    clearBillsField();
+                                    msg = x.Value.ToString();
                                 }
+                            }
+                            if (msg.Equals("Token is invalid"))
+                            {
+                                Cursor.Current = Cursors.Default;
+                                MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                lblOrderCount.Text = "Orders (0)";
+                                lblpendingamount.Text = "Selected Amount: 0.00";
+                                dgvitems.Rows.Clear();
+                                clearBillsField();
+                            }
+                            else
+                            {
+                                Cursor.Current = Cursors.Default;
+                                MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                lblOrderCount.Text = "Orders (0)";
+                                lblpendingamount.Text = "Selected Amount: 0.00";
+                                dgvitems.Rows.Clear();
+                                clearBillsField();
                             }
                         }
                     }
                     else
                     {
-                        lblOrderCount.Text = "Orders (0)";
-                        string msg = "No message response found";
-                        foreach (var x in jObject)
-                        {
-                            if (x.Key.Equals("message"))
-                            {
-                                msg = x.Value.ToString();
-                            }
-                        }
-                        if (msg.Equals("Token is invalid"))
-                        {
-                            Cursor.Current = Cursors.Default;
-                            MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            lblOrderCount.Text = "Orders (0)";
-                            lblpendingamount.Text = "Selected Amount: 0.00";
-                            dgvitems.Rows.Clear();
-                            clearBillsField();
-                        }
-                        else
-                        {
-                            Cursor.Current = Cursors.Default;
-                            MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            lblOrderCount.Text = "Orders (0)";
-                            lblpendingamount.Text = "Selected Amount: 0.00";
-                            dgvitems.Rows.Clear();
-                            clearBillsField();
-                        }
+                        MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -425,130 +441,139 @@ namespace AB
                     //MessageBox.Show("/api/sales/summary_trans?ids=%5B" + ids + "%5D");
                     request.AddHeader("Authorization", "Bearer " + token);
                     var response = client.Execute(request);
-                    JObject jObject = new JObject();
-                    jObject = JObject.Parse(response.Content.ToString());
 
-                    bool isSuccess = false;
-                    foreach (var x in jObject)
+                    if(response.ErrorMessage == null)
                     {
-                        if (x.Key.Equals("success"))
-                        {
-                            isSuccess = Convert.ToBoolean(x.Value.ToString());
-                        }
-                    }
-                    if (isSuccess)
-                    {
+                        JObject jObject = new JObject();
+                        jObject = JObject.Parse(response.Content.ToString());
+
+                        bool isSuccess = false;
                         foreach (var x in jObject)
                         {
-                            if (x.Key.Equals("data"))
+                            if (x.Key.Equals("success"))
                             {
-                                if (x.Value.ToString() != "{}")
+                                isSuccess = Convert.ToBoolean(x.Value.ToString());
+                            }
+                        }
+                        if (isSuccess)
+                        {
+                            foreach (var x in jObject)
+                            {
+                                if (x.Key.Equals("data"))
                                 {
-                                    JObject jObjectData = JObject.Parse(x.Value.ToString());
-                                    foreach (var y in jObjectData)
+                                    if (x.Value.ToString() != "{}")
                                     {
+                                        JObject jObjectData = JObject.Parse(x.Value.ToString());
+                                        foreach (var y in jObjectData)
+                                        {
 
-                                        if (y.Key.Equals("header"))
-                                        {
-                                            JObject jObjectHeader = JObject.Parse(y.Value.ToString());
-                                            foreach (var z in jObjectHeader)
+                                            if (y.Key.Equals("header"))
                                             {
-                                                if (z.Key.Equals("gross"))
+                                                JObject jObjectHeader = JObject.Parse(y.Value.ToString());
+                                                foreach (var z in jObjectHeader)
                                                 {
-                                                    txtGrossPrice.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
-                                                }
-                                                else if (z.Key.Equals("disc_amount"))
-                                                {
-                                                    txtDiscountAmount.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
-                                                }
-                                                else if (z.Key.Equals("disc_amount"))
-                                                {
-                                                    txtDiscountAmount.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
-                                                }
-                                                else if (z.Key.Equals("amount_due"))
-                                                {
-                                                    txtlAmountPayable.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
-                                                }
-                                                else if (z.Key.Equals("tenderamt"))
-                                                {
-                                                    txtTenderAmount.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
-                                                }
-                                                else if (z.Key.Equals("change"))
-                                                {
-                                                    txtChange.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
-                                                }
-                                            }
-                                        }
-                                        else if (y.Key.Equals("row"))
-                                        {
-                                            JArray jArrayRow = JArray.Parse(y.Value.ToString());
-                                            for (int i = 0; i < jArrayRow.Count(); i++)
-                                            {
-                                                JObject data = JObject.Parse(jArrayRow[i].ToString());
-                                                String itemName = "";
-                                                double quantity = 0.00, price = 0.00, discountPercent = 0.00, totalPrice = 0.00, discamt = 0.00;
-                                                bool free = false;
-                                                foreach (var z in data)
-                                                {
-                                                    if (z.Key.Equals("item_code"))
+                                                    if (z.Key.Equals("gross"))
                                                     {
-                                                        itemName = z.Value.ToString();
+                                                        txtGrossPrice.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
                                                     }
-                                                    else if (z.Key.Equals("quantity"))
-                                                    {
-                                                        quantity = Convert.ToDouble(z.Value.ToString());
-                                                    }
-                                                    else if (z.Key.Equals("unit_price"))
-                                                    {
-                                                        price = Convert.ToDouble(z.Value.ToString());
-                                                    }
-                                                    else if (z.Key.Equals("discprcnt"))
-                                                    {
-                                                        discountPercent = Convert.ToDouble(z.Value.ToString());
-                                                    }
-                                                    else if (z.Key.Equals("linetotal"))
-                                                    {
-                                                        totalPrice = Convert.ToDouble(z.Value.ToString());
-                                                    }
-                                                    else if (z.Key.Equals("free"))
-                                                    {
-                                                        free = Convert.ToBoolean(z.Value.ToString());
-                                                    }
-   
                                                     else if (z.Key.Equals("disc_amount"))
                                                     {
-                                                        discamt = Convert.ToDouble(z.Value.ToString());
+                                                        txtDiscountAmount.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
+                                                    }
+                                                    else if (z.Key.Equals("disc_amount"))
+                                                    {
+                                                        txtDiscountAmount.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
+                                                    }
+                                                    else if (z.Key.Equals("amount_due"))
+                                                    {
+                                                        txtlAmountPayable.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
+                                                    }
+                                                    else if (z.Key.Equals("tenderamt"))
+                                                    {
+                                                        txtTenderAmount.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
+                                                    }
+                                                    else if (z.Key.Equals("change"))
+                                                    {
+                                                        txtChange.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
                                                     }
                                                 }
-                                                dgvitems.Rows.Add(itemName, quantity.ToString("n2"), price.ToString("n2"), discountPercent.ToString("n2"),discamt.ToString("n2"), totalPrice.ToString("n2"), free);
+                                            }
+                                            else if (y.Key.Equals("row"))
+                                            {
+                                                JArray jArrayRow = JArray.Parse(y.Value.ToString());
+                                                for (int i = 0; i < jArrayRow.Count(); i++)
+                                                {
+                                                    JObject data = JObject.Parse(jArrayRow[i].ToString());
+                                                    String itemName = "";
+                                                    double quantity = 0.00, price = 0.00, discountPercent = 0.00, totalPrice = 0.00, discamt = 0.00;
+                                                    bool free = false;
+                                                    foreach (var z in data)
+                                                    {
+                                                        if (z.Key.Equals("item_code"))
+                                                        {
+                                                            itemName = z.Value.ToString();
+                                                        }
+                                                        else if (z.Key.Equals("quantity"))
+                                                        {
+                                                            quantity = Convert.ToDouble(z.Value.ToString());
+                                                        }
+                                                        else if (z.Key.Equals("unit_price"))
+                                                        {
+                                                            price = Convert.ToDouble(z.Value.ToString());
+                                                        }
+                                                        else if (z.Key.Equals("discprcnt"))
+                                                        {
+                                                            discountPercent = Convert.ToDouble(z.Value.ToString());
+                                                        }
+                                                        else if (z.Key.Equals("linetotal"))
+                                                        {
+                                                            totalPrice = Convert.ToDouble(z.Value.ToString());
+                                                        }
+                                                        else if (z.Key.Equals("free"))
+                                                        {
+                                                            free = Convert.ToBoolean(z.Value.ToString());
+                                                        }
+
+                                                        else if (z.Key.Equals("disc_amount"))
+                                                        {
+                                                            discamt = Convert.ToDouble(z.Value.ToString());
+                                                        }
+                                                    }
+                                                    dgvitems.Rows.Add(itemName, quantity.ToString("n2"), price.ToString("n2"), discountPercent.ToString("n2"), discamt.ToString("n2"), totalPrice.ToString("n2"), free);
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                        lblItemsCount.Text = "Items (" + dgvitems.Rows.Count.ToString("N0") + ")";
-                    }
-                    else
-                    {
-                        string msg = "No message response found";
-                        foreach (var x in jObject)
-                        {
-                            if (x.Key.Equals("message"))
-                            {
-                                msg = x.Value.ToString();
-                            }
-                        }
-                        if (msg.Equals("Token is invalid"))
-                        {
-                            Cursor.Current = Cursors.Default;
-                            MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            lblItemsCount.Text = "Items (" + dgvitems.Rows.Count.ToString("N0") + ")";
                         }
                         else
                         {
-                            Cursor.Current = Cursors.Default;
-                            MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            string msg = "No message response found";
+                            foreach (var x in jObject)
+                            {
+                                if (x.Key.Equals("message"))
+                                {
+                                    msg = x.Value.ToString();
+                                }
+                            }
+                            if (msg.Equals("Token is invalid"))
+                            {
+                                Cursor.Current = Cursors.Default;
+                                MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else
+                            {
+                                Cursor.Current = Cursors.Default;
+                                MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
+                    }
+                    else
+                    {
+                        Cursor.Current = Cursors.Default;
+                        MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -671,55 +696,63 @@ namespace AB
                     request.Method = Method.GET;
 
                     var response = client.Execute(request);
-                    JObject jObjectResponse = JObject.Parse(response.Content);
-                    bool isSuccess = false;
-                    foreach (var x in jObjectResponse)
-                    {
-                        if (x.Key.Equals("success"))
-                        {
-                            isSuccess = true;
-                            break;
-                        }
-                    }
 
-                    string msg = "No message response found";
-                    foreach (var x in jObjectResponse)
+                    if (response.ErrorMessage == null)
                     {
-                        if (x.Key.Equals("message"))
-                        {
-                            msg = x.Value.ToString();
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(msg))
-                    {
-                        MessageBox.Show(msg, isSuccess ? "Success" : "Validation", MessageBoxButtons.OK, isSuccess ? MessageBoxIcon.Information : MessageBoxIcon.Warning); 
-                    }
-                    if (isSuccess)
-                    {
-                        int for_payment = 0, for_confirmation = 0;
+                        JObject jObjectResponse = JObject.Parse(response.Content);
+                        bool isSuccess = false;
                         foreach (var x in jObjectResponse)
                         {
-                            if (x.Key.Equals("data"))
+                            if (x.Key.Equals("success"))
                             {
-                                if (x.Value.ToString() != "[]")
+                                isSuccess = true;
+                                break;
+                            }
+                        }
+
+                        string msg = "No message response found";
+                        foreach (var x in jObjectResponse)
+                        {
+                            if (x.Key.Equals("message"))
+                            {
+                                msg = x.Value.ToString();
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(msg))
+                        {
+                            MessageBox.Show(msg, isSuccess ? "Success" : "Validation", MessageBoxButtons.OK, isSuccess ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+                        }
+                        if (isSuccess)
+                        {
+                            int for_payment = 0, for_confirmation = 0;
+                            foreach (var x in jObjectResponse)
+                            {
+                                if (x.Key.Equals("data"))
                                 {
-                                    JObject data = JObject.Parse(x.Value.ToString());
-                                    foreach (var q in data)
+                                    if (x.Value.ToString() != "[]")
                                     {
-                                        if (q.Key.Equals("for_payment"))
+                                        JObject data = JObject.Parse(x.Value.ToString());
+                                        foreach (var q in data)
                                         {
-                                            for_payment = Convert.ToInt32(q.Value.ToString());
-                                        }
-                                        else if (q.Key.Equals("for_confirmation"))
-                                        {
-                                            for_confirmation = Convert.ToInt32(q.Value.ToString());
+                                            if (q.Key.Equals("for_payment"))
+                                            {
+                                                for_payment = Convert.ToInt32(q.Value.ToString());
+                                            }
+                                            else if (q.Key.Equals("for_confirmation"))
+                                            {
+                                                for_confirmation = Convert.ToInt32(q.Value.ToString());
+                                            }
                                         }
                                     }
                                 }
                             }
+                            btnForPayment.Text = "For Payment (" + for_payment.ToString("N0") + ")";
+                            btnForConfirmation.Text = "For AR Confirmation (" + for_confirmation.ToString("N0") + ")";
                         }
-                        btnForPayment.Text = "For Payment (" + for_payment.ToString("N0") + ")";
-                        btnForConfirmation.Text = "For AR Confirmation (" + for_confirmation.ToString("N0") + ")";
+                    }
+                    else
+                    {
+                        MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -777,31 +810,39 @@ namespace AB
                             request.Method = Method.PUT;
 
                             var response = client.Execute(request);
-                            JObject jObjectResponse = JObject.Parse(response.Content);
-                            bool isSuccess = false;
-                            foreach (var x in jObjectResponse)
-                            {
-                                if (x.Key.Equals("success"))
-                                {
-                                    isSuccess = true;
-                                    break;
-                                }
-                            }
 
-                            string msg = "No message response found";
-                            foreach (var x in jObjectResponse)
+                            if(response.ErrorMessage == null)
                             {
-                                if (x.Key.Equals("message"))
+                                JObject jObjectResponse = JObject.Parse(response.Content);
+                                bool isSuccess = false;
+                                foreach (var x in jObjectResponse)
                                 {
-                                    msg = x.Value.ToString();
+                                    if (x.Key.Equals("success"))
+                                    {
+                                        isSuccess = true;
+                                        break;
+                                    }
+                                }
+
+                                string msg = "No message response found";
+                                foreach (var x in jObjectResponse)
+                                {
+                                    if (x.Key.Equals("message"))
+                                    {
+                                        msg = x.Value.ToString();
+                                    }
+                                }
+                                MessageBox.Show(msg, isSuccess ? "Success" : "Validation", MessageBoxButtons.OK, isSuccess ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+                                if (isSuccess)
+                                {
+                                    string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
+                                    loadData(subURL);
+                                    counts();
                                 }
                             }
-                            MessageBox.Show(msg, isSuccess ? "Success" : "Validation", MessageBoxButtons.OK, isSuccess ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
-                            if (isSuccess)
+                            else
                             {
-                                string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
-                                loadData(subURL);
-                                counts();
+                                MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
                     }
