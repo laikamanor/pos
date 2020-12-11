@@ -139,7 +139,7 @@ namespace AB
                                                 {
                                                     id = Convert.ToInt32(y.Value.ToString());
                                                 }
-                                                else if (y.Key.Equals("username"))
+                                                else if (y.Key.Equals("fullname"))
                                                 {
                                                     username = y.Value.ToString();
                                                 }
@@ -332,7 +332,7 @@ namespace AB
                                                     dtTransDate = Convert.ToDateTime(replaceT);
                                                 }
                                             }
-                                            dgvOrders.Rows.Add(false, id, transNumber, referenceNumber, amountDue.ToString("n2"), salesAgent, transType, cust_code, tenderAmount, "", dtTransDate.ToString("yyyy-MM-dd"));
+                                            dgvOrders.Rows.Add(false, id, transNumber, referenceNumber, amountDue.ToString("n2"), salesAgent, transType, cust_code, tenderAmount, "", dtTransDate.ToString("yyyy-MM-dd hh:mm tt"));
                                             auto.Add(transNumber.ToString());
                                         }
                                         txtsearch.AutoCompleteCustomSource = auto;

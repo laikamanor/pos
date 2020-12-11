@@ -164,5 +164,11 @@ namespace AB
             AdjustmentIn adjustmentIn = new AdjustmentIn("out");
             showForm(adjustmentIn);
         }
+
+        private void objectTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ObjectType adjustmentIn = new ObjectType();
+            showForm(adjustmentIn);
+        }
     }
 }

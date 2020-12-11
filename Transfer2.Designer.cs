@@ -39,18 +39,19 @@
             this.Label2 = new System.Windows.Forms.Label();
             this.cmbStatusTransactions = new System.Windows.Forms.ComboBox();
             this.dgvTransactions = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.docstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbWhse = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbBranch = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbToWhse = new System.Windows.Forms.ComboBox();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.docstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sap_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Gray;
-            this.label3.Location = new System.Drawing.Point(547, 98);
+            this.label3.Location = new System.Drawing.Point(581, 98);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 16);
             this.label3.TabIndex = 41;
@@ -72,7 +73,7 @@
             this.dtDate.CustomFormat = "yyyy-MM-dd";
             this.dtDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDate.Location = new System.Drawing.Point(642, 93);
+            this.dtDate.Location = new System.Drawing.Point(676, 93);
             this.dtDate.Name = "dtDate";
             this.dtDate.Size = new System.Drawing.Size(117, 22);
             this.dtDate.TabIndex = 40;
@@ -84,7 +85,7 @@
             this.lblNoDataFound.AutoSize = true;
             this.lblNoDataFound.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoDataFound.ForeColor = System.Drawing.Color.DimGray;
-            this.lblNoDataFound.Location = new System.Drawing.Point(335, 214);
+            this.lblNoDataFound.Location = new System.Drawing.Point(352, 214);
             this.lblNoDataFound.Name = "lblNoDataFound";
             this.lblNoDataFound.Size = new System.Drawing.Size(105, 18);
             this.lblNoDataFound.TabIndex = 39;
@@ -123,7 +124,7 @@
             this.Label2.AutoSize = true;
             this.Label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label2.ForeColor = System.Drawing.Color.DimGray;
-            this.Label2.Location = new System.Drawing.Point(547, 127);
+            this.Label2.Location = new System.Drawing.Point(581, 127);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(75, 15);
             this.Label2.TabIndex = 36;
@@ -143,7 +144,7 @@
             "Open",
             "Closed",
             "Cancelled"});
-            this.cmbStatusTransactions.Location = new System.Drawing.Point(628, 121);
+            this.cmbStatusTransactions.Location = new System.Drawing.Point(662, 121);
             this.cmbStatusTransactions.Name = "cmbStatusTransactions";
             this.cmbStatusTransactions.Size = new System.Drawing.Size(131, 23);
             this.cmbStatusTransactions.TabIndex = 35;
@@ -177,53 +178,16 @@
             this.reference,
             this.remarks,
             this.docstatus,
+            this.sap_number,
             this.transdate});
             this.dgvTransactions.EnableHeadersVisualStyles = false;
             this.dgvTransactions.GridColor = System.Drawing.Color.DarkGray;
             this.dgvTransactions.Location = new System.Drawing.Point(9, 150);
             this.dgvTransactions.Name = "dgvTransactions";
             this.dgvTransactions.RowHeadersWidth = 10;
-            this.dgvTransactions.Size = new System.Drawing.Size(750, 259);
+            this.dgvTransactions.Size = new System.Drawing.Size(784, 259);
             this.dgvTransactions.TabIndex = 34;
             this.dgvTransactions.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransactions_CellContentDoubleClick);
-            // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // transnumber
-            // 
-            this.transnumber.HeaderText = "Trans. #";
-            this.transnumber.Name = "transnumber";
-            this.transnumber.ReadOnly = true;
-            this.transnumber.Visible = false;
-            // 
-            // reference
-            // 
-            this.reference.HeaderText = "Reference";
-            this.reference.Name = "reference";
-            this.reference.ReadOnly = true;
-            // 
-            // remarks
-            // 
-            this.remarks.HeaderText = "Remarks";
-            this.remarks.Name = "remarks";
-            this.remarks.ReadOnly = true;
-            // 
-            // docstatus
-            // 
-            this.docstatus.HeaderText = "Doc. Status";
-            this.docstatus.Name = "docstatus";
-            this.docstatus.ReadOnly = true;
-            // 
-            // transdate
-            // 
-            this.transdate.HeaderText = "Trans. Date";
-            this.transdate.Name = "transdate";
-            this.transdate.ReadOnly = true;
             // 
             // label1
             // 
@@ -303,12 +267,56 @@
             this.cmbToWhse.TabIndex = 46;
             this.cmbToWhse.SelectedValueChanged += new System.EventHandler(this.cmbToWhse_SelectedValueChanged);
             // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // transnumber
+            // 
+            this.transnumber.HeaderText = "Trans. #";
+            this.transnumber.Name = "transnumber";
+            this.transnumber.ReadOnly = true;
+            this.transnumber.Visible = false;
+            // 
+            // reference
+            // 
+            this.reference.HeaderText = "Reference";
+            this.reference.Name = "reference";
+            this.reference.ReadOnly = true;
+            // 
+            // remarks
+            // 
+            this.remarks.HeaderText = "Remarks";
+            this.remarks.Name = "remarks";
+            this.remarks.ReadOnly = true;
+            // 
+            // docstatus
+            // 
+            this.docstatus.HeaderText = "Doc. Status";
+            this.docstatus.Name = "docstatus";
+            this.docstatus.ReadOnly = true;
+            // 
+            // sap_number
+            // 
+            this.sap_number.HeaderText = "SAP #";
+            this.sap_number.Name = "sap_number";
+            this.sap_number.ReadOnly = true;
+            // 
+            // transdate
+            // 
+            this.transdate.HeaderText = "Trans. Date";
+            this.transdate.Name = "transdate";
+            this.transdate.ReadOnly = true;
+            // 
             // Transfer2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(765, 446);
+            this.ClientSize = new System.Drawing.Size(799, 446);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbToWhse);
             this.Controls.Add(this.label1);
@@ -344,17 +352,18 @@
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.ComboBox cmbStatusTransactions;
         private System.Windows.Forms.DataGridView dgvTransactions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transnumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn reference;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remarks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn docstatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transdate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbWhse;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbBranch;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbToWhse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transnumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn reference;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remarks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn docstatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sap_number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transdate;
     }
 }

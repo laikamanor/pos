@@ -199,6 +199,49 @@ namespace AB
                                             cmbWhse.Items.Add(row["whsename"].ToString());
                                             break;
                                         }
+                                        else
+                                        {
+                                            isAdmin += 1;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (y.Key.Equals("isManager"))
+                            {
+                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
+                                {
+                                    foreach (DataRow row in dtWarehouse.Rows)
+                                    {
+                                        if (row["whsecode"].ToString() == warehouse && isAdmin <= 0)
+                                        {
+                                            cmbWhse.Items.Add(row["whsename"].ToString());
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            isAdmin += 1;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (y.Key.Equals("isCashier"))
+                            {
+                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
+                                {
+                                    foreach (DataRow row in dtWarehouse.Rows)
+                                    {
+                                        if (row["whsecode"].ToString() == warehouse && isAdmin <= 0)
+                                        {
+                                            cmbWhse.Items.Add(row["whsename"].ToString());
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            isAdmin += 1;
+                                            break;
+                                        }
                                     }
                                 }
                             }
@@ -275,7 +318,7 @@ namespace AB
             cmb.Items.Add("All");
             foreach (DataRow r0w in adtUsers.Rows)
             {
-                cmb.Items.Add(r0w["username"].ToString());
+                cmb.Items.Add(r0w["fullname"].ToString());
             }
             cmb.SelectedIndex = 0;
         }
@@ -318,7 +361,7 @@ namespace AB
                     foreach (DataRow r0wUsers in dtSalesAgent.Rows)
                     {
 
-                        if (r0wUsers["username"].ToString() == cmbsales.Text)
+                        if (r0wUsers["fullname"].ToString() == cmbsales.Text)
                         {
                             salesID = Convert.ToInt32(r0wUsers["userid"].ToString());
                         }

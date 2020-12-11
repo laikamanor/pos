@@ -57,6 +57,7 @@
             this.adjustmentInToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.adjustmentOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelchildform = new System.Windows.Forms.Panel();
+            this.objectTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,7 +120,8 @@
             this.itemsToolStripMenuItem,
             this.usersToolStripMenuItem,
             this.branchesToolStripMenuItem,
-            this.customersToolStripMenuItem});
+            this.customersToolStripMenuItem,
+            this.objectTypeToolStripMenuItem});
             this.masterDataToolStripMenuItem.Name = "masterDataToolStripMenuItem";
             this.masterDataToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.masterDataToolStripMenuItem.Text = "Master Data";
@@ -127,27 +129,27 @@
             // itemsToolStripMenuItem
             // 
             this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
-            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.itemsToolStripMenuItem.Text = "Items";
             // 
             // usersToolStripMenuItem
             // 
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.usersToolStripMenuItem.Text = "Users";
             this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
             // branchesToolStripMenuItem
             // 
             this.branchesToolStripMenuItem.Name = "branchesToolStripMenuItem";
-            this.branchesToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.branchesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.branchesToolStripMenuItem.Text = "Branches";
             this.branchesToolStripMenuItem.Click += new System.EventHandler(this.branchesToolStripMenuItem_Click);
             // 
             // customersToolStripMenuItem
             // 
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
-            this.customersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.customersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.customersToolStripMenuItem.Text = "Customers";
             this.customersToolStripMenuItem.Click += new System.EventHandler(this.customersToolStripMenuItem_Click);
             // 
@@ -266,14 +268,14 @@
             // adjustmentInToolStripMenuItem1
             // 
             this.adjustmentInToolStripMenuItem1.Name = "adjustmentInToolStripMenuItem1";
-            this.adjustmentInToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.adjustmentInToolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
             this.adjustmentInToolStripMenuItem1.Text = "Adjustment In";
             this.adjustmentInToolStripMenuItem1.Click += new System.EventHandler(this.adjustmentInToolStripMenuItem1_Click);
             // 
             // adjustmentOutToolStripMenuItem
             // 
             this.adjustmentOutToolStripMenuItem.Name = "adjustmentOutToolStripMenuItem";
-            this.adjustmentOutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.adjustmentOutToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.adjustmentOutToolStripMenuItem.Text = "Adjustment Out";
             this.adjustmentOutToolStripMenuItem.Click += new System.EventHandler(this.adjustmentOutToolStripMenuItem_Click);
             // 
@@ -287,6 +289,13 @@
             this.panelchildform.Name = "panelchildform";
             this.panelchildform.Size = new System.Drawing.Size(676, 399);
             this.panelchildform.TabIndex = 1;
+            // 
+            // objectTypeToolStripMenuItem
+            // 
+            this.objectTypeToolStripMenuItem.Name = "objectTypeToolStripMenuItem";
+            this.objectTypeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.objectTypeToolStripMenuItem.Text = "Object Type";
+            this.objectTypeToolStripMenuItem.Click += new System.EventHandler(this.objectTypeToolStripMenuItem_Click);
             // 
             // MainMenu
             // 
@@ -340,5 +349,6 @@
         private System.Windows.Forms.ToolStripMenuItem adjustmentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adjustmentInToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem adjustmentOutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem objectTypeToolStripMenuItem;
     }
 }

@@ -179,6 +179,12 @@
     <Compile Include="AddCustomer.Designer.cs">
       <DependentUpon>AddCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddObjectType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddObjectType.Designer.cs">
+      <DependentUpon>AddObjectType.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,12 @@
     </Compile>
     <Compile Include="AdjustmentIn.Designer.cs">
       <DependentUpon>AdjustmentIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdjustmentIn_Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdjustmentIn_Details.Designer.cs">
+      <DependentUpon>AdjustmentIn_Details.cs</DependentUpon>
     </Compile>
     <Compile Include="AdvancePayment.cs">
       <SubType>Form</SubType>
@@ -368,6 +380,12 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="ObjectType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ObjectType.Designer.cs">
+      <DependentUpon>ObjectType.cs</DependentUpon>
+    </Compile>
     <Compile Include="PaymentMethodForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -509,6 +527,12 @@
     <Compile Include="voidForm.Designer.cs">
       <DependentUpon>voidForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse.Designer.cs">
+      <DependentUpon>Warehouse.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddAdjustmentIn.resx">
       <DependentUpon>AddAdjustmentIn.cs</DependentUpon>
     </EmbeddedResource>
@@ -521,11 +545,17 @@
     <EmbeddedResource Include="AddCustomer.resx">
       <DependentUpon>AddCustomer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddObjectType.resx">
+      <DependentUpon>AddObjectType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdjustmentIn.resx">
       <DependentUpon>AdjustmentIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdjustmentIn_Details.resx">
+      <DependentUpon>AdjustmentIn_Details.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdvancePayment.resx">
       <DependentUpon>AdvancePayment.cs</DependentUpon>
@@ -597,6 +627,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObjectType.resx">
+      <DependentUpon>ObjectType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PaymentMethodForm.resx">
       <DependentUpon>PaymentMethodForm.cs</DependentUpon>
@@ -677,6 +710,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="voidForm.resx">
       <DependentUpon>voidForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse.resx">
+      <DependentUpon>Warehouse.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Dataset\dsFinal.xsc">

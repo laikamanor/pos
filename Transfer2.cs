@@ -35,8 +35,8 @@ namespace AB
         {
             cmbStatusTransactions.SelectedIndex = 0;
             loadBranch(cmbBranch);
-            loadWarehouse(cmbWhse, false);
-            loadWarehouse(cmbToWhse, true);
+            loadWarehouse(cmbWhse, this.Text.Equals("Received Transactions") ? true : false);
+            loadWarehouse(cmbToWhse, this.Text.Equals("Received Transactions") ? false : true);
             loadData();
             cBranch = 0;
             cWarehouse = 0;
@@ -52,13 +52,13 @@ namespace AB
             int isAdmin = 0;
             dtBranch = branchc.returnBranches();
             cmb.Items.Clear();
+            string branch = "";
             if (Login.jsonResult != null)
             {
                 foreach (var x in Login.jsonResult)
                 {
                     if (x.Key.Equals("data"))
                     {
-                        string branch = "";
                         JObject jObjectData = JObject.Parse(x.Value.ToString());
                         foreach (var y in jObjectData)
                         {
@@ -117,14 +117,27 @@ namespace AB
             }
             if (cmb.Items.Count > 0)
             {
-                cmb.SelectedIndex = 0;
+                string branchName = "";
+                foreach (DataRow row in dtBranch.Rows)
+                {
+                    if (row["code"].ToString() == branch)
+                    {
+                        branchName = row["name"].ToString();
+                        break;
+                    }
+                    else
+                    {
+                        cmbBranch.SelectedIndex = 0;
+                    }
+                }
+                cmbBranch.SelectedIndex = cmbBranch.Items.IndexOf(branchName);
             }
         }
 
         public void loadWarehouse(ComboBox cmb, bool isTo)
         {
             string warehouse = "";
-            if (isTo)
+            if (isTo )
             {
                 cmb.Items.Add("All");
                 dtWarehouse = warehousec.returnWarehouse("");
@@ -301,7 +314,11 @@ namespace AB
                 {
                     string decodeDocStatus = row["docstatus"].ToString() == "O" ? "Open" : row["docstatus"].ToString() == "C" ? "Closed" : "Cancelled";
                     auto.Add(row["transnumber"].ToString());
-                    dgvTransactions.Rows.Add(row["id"], row["transnumber"], row["reference"], row["remarks"], decodeDocStatus, row["transdate"]);
+
+                    string replaceT = row["transdate"].ToString().Replace("T", "");
+                   DateTime  dtTransDate = Convert.ToDateTime(replaceT);    
+
+                    dgvTransactions.Rows.Add(row["id"], row["transnumber"], row["reference"], row["remarks"], decodeDocStatus, row["sap_number"], dtTransDate.ToString("yyyy-MM-dd hh:mm tt"));
                 }
                 txtsearchTransactions.AutoCompleteCustomSource = auto;
             }
@@ -372,7 +389,7 @@ namespace AB
         {
             if(cBranch <= 0)
             {
-                loadWarehouse(cmbWhse, false);
+                loadWarehouse(cmbWhse, true);
             }
         }
 

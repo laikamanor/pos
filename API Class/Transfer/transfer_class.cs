@@ -25,6 +25,7 @@ namespace AB.API_Class.Transfer
                 dt.Columns.Add("remarks");
                 dt.Columns.Add("docstatus");
                 dt.Columns.Add("transdate");
+                dt.Columns.Add("sap_number");
                 Cursor.Current = Cursors.WaitCursor;
                 string token = "";
                 foreach (var x in Login.jsonResult)
@@ -72,7 +73,7 @@ namespace AB.API_Class.Transfer
                                     {
                                         JObject data = JObject.Parse(jsonArray[i].ToString());
                                         int iD = 0, transNumber = 0;
-                                        string referencenumber = "", remarks = "", docStatus = "";
+                                        string referencenumber = "", remarks = "", docStatus = "", sapNumber = "";
                                         DateTime dtTransDate = new DateTime();
                                         foreach (var q in data)
                                         {
@@ -96,13 +97,17 @@ namespace AB.API_Class.Transfer
                                             {
                                                 docStatus = q.Value.ToString();
                                             }
+                                            else if (q.Key.Equals("sap_number"))
+                                            {
+                                                sapNumber = q.Value.ToString();
+                                            }
                                             else if (q.Key.Equals("transdate"))
                                             {
                                                 string replaceT = q.Value.ToString().Replace("T", "");
                                                 dtTransDate = Convert.ToDateTime(replaceT);
                                             }
                                         }
-                                        dt.Rows.Add(iD, transNumber, referencenumber, remarks, docStatus, dtTransDate.ToString("yyyy-MM-dd"));
+                                        dt.Rows.Add(iD, transNumber, referencenumber, remarks, docStatus, dtTransDate.ToString("yyyy-MM-dd"),sapNumber);
                                     }
                                 }
                             }

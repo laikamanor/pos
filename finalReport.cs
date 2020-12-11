@@ -130,9 +130,17 @@ namespace AB {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PaymentMethodReportrpt_date_report {
+        public CrystalDecisions.Shared.IParameterField Parameter_remarks {
             get {
                 return this.DataDefinition.ParameterFields[3];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_PaymentMethodReportrpt_date_report {
+            get {
+                return this.DataDefinition.ParameterFields[4];
             }
         }
     }

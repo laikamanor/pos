@@ -112,3 +112,8 @@ C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.AddAdju
 C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.AdjustmentIn.resources
 C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.ItemInfo.resources
 C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.SelectedItem.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.ObjectType.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.AddObjectType.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.Warehouse.resources
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.csprojResolveAssemblyReference.cache
+C:\Users\Dell1\Documents\Visual Studio 2019\Projects\AB\obj\x86\Debug\AB.AdjustmentIn_Details.resources

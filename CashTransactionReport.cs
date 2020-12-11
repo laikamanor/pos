@@ -35,6 +35,7 @@ namespace AB
         public void loadBranch()
         {
             int isAdmin = 0;
+            string branch = "";
             dtBranch = branchc.returnBranches();
             cmbBranch.Items.Clear();
             if (Login.jsonResult != null)
@@ -43,7 +44,6 @@ namespace AB
                 {
                     if (x.Key.Equals("data"))
                     {
-                        string branch = "";
                         JObject jObjectData = JObject.Parse(x.Value.ToString());
                         foreach (var y in jObjectData)
                         {
@@ -102,7 +102,20 @@ namespace AB
             }
             if (cmbBranch.Items.Count > 0)
             {
-                cmbBranch.SelectedIndex = 0;
+                string branchName = "";
+                foreach (DataRow row in dtBranch.Rows)
+                {
+                    if (row["code"].ToString() == branch)
+                    {
+                        branchName = row["name"].ToString();
+                        break;
+                    }
+                    else
+                    {
+                        cmbBranch.SelectedIndex = 0;
+                    }
+                }
+                cmbBranch.SelectedIndex = cmbBranch.Items.IndexOf(branchName);
             }
         }
 
@@ -256,7 +269,7 @@ namespace AB
             cmb.Items.Add("All");
             foreach(DataRow r0w in adtUsers.Rows)
             {
-                cmb.Items.Add(r0w["username"].ToString());
+                cmb.Items.Add(r0w["fullname"].ToString());
             }
             if(cmb.Items.Count > 0)
             {
@@ -317,7 +330,7 @@ namespace AB
                     int cashierID = 0;
                     foreach (DataRow r0wSales in dtCashier.Rows)
                     {
-                        if (r0wSales["username"].ToString() == cmbCashier.Text)
+                        if (r0wSales["fullname"].ToString() == cmbCashier.Text)
                         {
                             cashierID = Convert.ToInt32(r0wSales["userid"].ToString());
                         }
@@ -446,7 +459,7 @@ namespace AB
                                                     }
 
                                                 }
-                                                dgv.Rows.Add(referenceNumber, amount.ToString("n2"), salesType,paymentType, dtTransdate.ToString("yyyy-MM-dd"), url);
+                                                dgv.Rows.Add(referenceNumber, amount.ToString("n2"), salesType,paymentType, dtTransdate.ToString("yyyy-MM-dd hh:mm tt"), url);
                                             }
                                         }
                                     }

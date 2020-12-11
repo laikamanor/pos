@@ -451,7 +451,6 @@
             this.dgvOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.Color.White;
             this.dgvOrders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvOrders.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -862,11 +861,14 @@
             // selectt
             // 
             this.selectt.HeaderText = "Select";
+            this.selectt.MinimumWidth = 50;
             this.selectt.Name = "selectt";
+            this.selectt.Width = 50;
             // 
             // base_id
             // 
             this.base_id.HeaderText = "ID";
+            this.base_id.MinimumWidth = 100;
             this.base_id.Name = "base_id";
             this.base_id.ReadOnly = true;
             this.base_id.Visible = false;
@@ -874,6 +876,7 @@
             // transnumber
             // 
             this.transnumber.HeaderText = "Trans. Number";
+            this.transnumber.MinimumWidth = 100;
             this.transnumber.Name = "transnumber";
             this.transnumber.ReadOnly = true;
             this.transnumber.Visible = false;
@@ -881,40 +884,45 @@
             // ordernum
             // 
             this.ordernum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ordernum.FillWeight = 183.8374F;
+            this.ordernum.FillWeight = 309.7052F;
             this.ordernum.HeaderText = "#";
+            this.ordernum.MinimumWidth = 100;
             this.ordernum.Name = "ordernum";
             this.ordernum.ReadOnly = true;
             // 
             // amountdue
             // 
             this.amountdue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.amountdue.FillWeight = 98.94279F;
+            this.amountdue.FillWeight = 63.88947F;
             this.amountdue.HeaderText = "Amt. Due";
+            this.amountdue.MinimumWidth = 100;
             this.amountdue.Name = "amountdue";
             this.amountdue.ReadOnly = true;
             // 
             // salesagent
             // 
             this.salesagent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.salesagent.FillWeight = 85.79887F;
+            this.salesagent.FillWeight = 55.40216F;
             this.salesagent.HeaderText = "User";
+            this.salesagent.MinimumWidth = 100;
             this.salesagent.Name = "salesagent";
             this.salesagent.ReadOnly = true;
             // 
             // tendertype
             // 
             this.tendertype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.tendertype.FillWeight = 75.225F;
+            this.tendertype.FillWeight = 48.57439F;
             this.tendertype.HeaderText = "Sales Type";
+            this.tendertype.MinimumWidth = 100;
             this.tendertype.Name = "tendertype";
             this.tendertype.ReadOnly = true;
             // 
             // cust_code
             // 
             this.cust_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.cust_code.FillWeight = 95.31235F;
+            this.cust_code.FillWeight = 61.54522F;
             this.cust_code.HeaderText = "Customer Code";
+            this.cust_code.MinimumWidth = 100;
             this.cust_code.Name = "cust_code";
             this.cust_code.ReadOnly = true;
             // 
@@ -922,6 +930,7 @@
             // 
             this.tenderamount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.tenderamount.HeaderText = "Tender Amount";
+            this.tenderamount.MinimumWidth = 100;
             this.tenderamount.Name = "tenderamount";
             this.tenderamount.ReadOnly = true;
             this.tenderamount.Visible = false;
@@ -929,6 +938,7 @@
             // aps
             // 
             this.aps.HeaderText = "APs";
+            this.aps.MinimumWidth = 100;
             this.aps.Name = "aps";
             this.aps.ReadOnly = true;
             this.aps.Visible = false;
@@ -937,8 +947,10 @@
             // 
             this.transdate.FillWeight = 54.2846F;
             this.transdate.HeaderText = "Trans. Date";
+            this.transdate.MinimumWidth = 200;
             this.transdate.Name = "transdate";
             this.transdate.ReadOnly = true;
+            this.transdate.Width = 200;
             // 
             // PendingOrder2
             // 
