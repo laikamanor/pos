@@ -219,7 +219,7 @@ namespace AB.API_Class.Reports
             dt.Columns.Add("cash_sales", typeof(double));
             dt.Columns.Add("ar_sales", typeof(double));
             dt.Columns.Add("agent_sales", typeof(double));
-
+            dt.Columns.Add("total", typeof(double));
             utility_class utilityc = new utility_class();
             if (Login.jsonResult != null)
             {
@@ -268,7 +268,7 @@ namespace AB.API_Class.Reports
                                             {
                                                 JArray jsonArray = JArray.Parse(y.Value.ToString());
                                                 string transtype = "";
-                                                double cash_sales = 0.00, ar_sales = 0.00, agent_sales = 0.00;
+                                                double cash_sales = 0.00, ar_sales = 0.00, agent_sales = 0.00, total = 0.00;
                                                 for (int i = 0; i < jsonArray.Count(); i++)
                                                 {
                                                     JObject data = JObject.Parse(jsonArray[i].ToString());
@@ -290,8 +290,12 @@ namespace AB.API_Class.Reports
                                                         {
                                                             agent_sales = Convert.ToDouble(q.Value.ToString());
                                                         }
+                                                        else if (q.Key.Equals("total"))
+                                                        {
+                                                            total = Convert.ToDouble(q.Value.ToString());
+                                                        }
                                                     }
-                                                    dt.Rows.Add(transtype, cash_sales, ar_sales, agent_sales);
+                                                    dt.Rows.Add(transtype, cash_sales, ar_sales, agent_sales,total);
                                                 }
                                             }
                                         }
@@ -315,15 +319,14 @@ namespace AB.API_Class.Reports
             if (Login.jsonResult != null)
             {
                 //CASH
-                dt.Columns.Add("total_cash_on_hand", typeof(double));
-                dt.Columns.Add("cash_sales", typeof(double));
-                dt.Columns.Add("ar_cash_sales", typeof(double));
-                dt.Columns.Add("ar_agent_sales", typeof(double));
-                dt.Columns.Add("deposit", typeof(double));
-                dt.Columns.Add("used_dep", typeof(double));
-                dt.Columns.Add("bank_dep", typeof(double));
-                dt.Columns.Add("epay", typeof(double));
 
+                dt.Columns.Add("total_cash_on_hand", typeof(double));
+                dt.Columns.Add("total_cash_payment", typeof(double));
+                dt.Columns.Add("total_cash_deposit", typeof(double));
+                dt.Columns.Add("total_used_dep_payment", typeof(double));
+                dt.Columns.Add("total_bank_dep_payment", typeof(double));
+                dt.Columns.Add("total_epay_payment", typeof(double));
+                dt.Columns.Add("total_gcert_payment", typeof(double));
                 //SALES
                 dt.Columns.Add("gross", typeof(double));
                 dt.Columns.Add("net_sales", typeof(double));
@@ -362,6 +365,9 @@ namespace AB.API_Class.Reports
                 dt.Columns.Add("BDCashSales", typeof(double));
                 dt.Columns.Add("BDARSales", typeof(double));
                 dt.Columns.Add("BDAgentSales", typeof(double));
+
+                dt.Columns.Add("actual_cash", typeof(double));
+                dt.Columns.Add("remarks", typeof(string));
                 Cursor.Current = Cursors.WaitCursor;
                 string token = "";
                 foreach (var x in Login.jsonResult)
@@ -493,7 +499,7 @@ namespace AB.API_Class.Reports
                                     JObject joData = new JObject();
                                     joData = JObject.Parse(x.Value.ToString());
                                     //CASH
-                                    double totalCashOnHand = 0.00, cashSales = 0.00, arCashSales = 0.00, arAgentSales = 0.00, deposit = 0.00, usedDep = 0.00, bankDep = 0.00, ePay = 0.00;
+                                    double totalCashOnHand = 0.00, totalCashPayment = 0.00, totalCashDeposit = 0.00, totalUsedDepositPayment = 0.00, totalBankDepositPayment = 0.00, totalEpayPayment = 0.00, totalGcPayment = 0.00;
                                     //SALES
                                     double gross = 0.00, netSales = 0.00, discAmount = 0.00, grossCashSales = 0.00, discCashSales = 0.00, netCashSales = 0.00, grossARSales = 0.00, discARSales = 0.00, netARSales = 0.00, grossAgentSales = 0.00, discAgentSales = 0.00, netAgentSales = 0.00;
 
@@ -516,33 +522,33 @@ namespace AB.API_Class.Reports
                                                         {
                                                             totalCashOnHand = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
-                                                        else if (q.Key.Equals("cash_sales"))
+                                                        else if (q.Key.Equals("total_cash_payment"))
                                                         {
-                                                            cashSales = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
+                                                            totalCashPayment = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
-                                                        else if (q.Key.Equals("ar_cash_sales"))
+                                                        else if (q.Key.Equals("total_cash_deposit"))
                                                         {
-                                                            arCashSales = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
+                                                            totalCashDeposit = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
-                                                        else if (q.Key.Equals("ar_agent_sales"))
+                                                        else if (q.Key.Equals("total_cash_deposit"))
                                                         {
-                                                            arAgentSales = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
+                                                            totalCashDeposit = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
-                                                        else if (q.Key.Equals("deposit"))
+                                                        else if (q.Key.Equals("total_used_dep_payment"))
                                                         {
-                                                            deposit = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
+                                                            totalUsedDepositPayment = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
-                                                        else if (q.Key.Equals("used_dep"))
+                                                        else if (q.Key.Equals("total_bank_dep_payment"))
                                                         {
-                                                            usedDep = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
+                                                            totalBankDepositPayment = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
-                                                        else if (q.Key.Equals("bank_dep"))
+                                                        else if (q.Key.Equals("total_epay_payment"))
                                                         {
-                                                            bankDep = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
+                                                            totalEpayPayment = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
-                                                        else if (q.Key.Equals("epay"))
+                                                        else if (q.Key.Equals("total_gcert_payment"))
                                                         {
-                                                            ePay = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
+                                                            totalGcPayment = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
                                                     }
                                                 }
@@ -610,8 +616,8 @@ namespace AB.API_Class.Reports
                                                 }
                                             }
                                         }
-                                        string itemCode = "";
-                                        double actualGood = 0.00, actualPullOut = 0.00, systemBal = 0.00, variance = 0.00, price = 0.00, totalAmount = 0.00;
+                                        string itemCode = "", remarks = "";
+                                        double actualGood = 0.00, actualPullOut = 0.00, systemBal = 0.00, variance = 0.00, price = 0.00, totalAmount = 0.00, actualCash = 0.00;
                                         if (y.Key.Equals("final_inv"))
                                         {
                                             if (y.Value.ToString() != "[]")
@@ -650,8 +656,16 @@ namespace AB.API_Class.Reports
                                                         {
                                                             totalAmount = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
                                                         }
+                                                        else if (q.Key.Equals("actual_cash"))
+                                                        {
+                                                            actualCash = (q.Value.ToString() == "" ? 0.00 : Convert.ToDouble(q.Value.ToString()));
+                                                        }
+                                                        else if (q.Key.Equals("remarks"))
+                                                        {
+                                                            remarks = q.Value.ToString();
+                                                        }
                                                     }
-                                                    dt.Rows.Add(totalCashOnHand, cashSales, arCashSales, arAgentSales, deposit, usedDep, bankDep, ePay, gross, netSales, discAmount, grossCashSales, discCashSales, netCashSales, grossARSales, discARSales, netARSales, grossAgentSales, discAgentSales, netAgentSales, itemCode, actualGood, actualPullOut, systemBal, variance, price, totalAmount,CPTransType, CPCashSales, CPARSales, CPAgentSales, EPAYTransType, EPAYCashSales, EPAYARSales, EPAYAgentSales,  BDTransType, BDCashSales, BDARSales, BDAgentSales);
+                                                    dt.Rows.Add(totalCashOnHand, totalCashPayment, totalCashDeposit, totalUsedDepositPayment, totalBankDepositPayment, totalEpayPayment, totalGcPayment, gross, netSales, discAmount, grossCashSales, discCashSales, netCashSales, grossARSales, discARSales, netARSales, grossAgentSales, discAgentSales, netAgentSales, itemCode, actualGood, actualPullOut, systemBal, variance, price, totalAmount,CPTransType, CPCashSales, CPARSales, CPAgentSales, EPAYTransType, EPAYCashSales, EPAYARSales, EPAYAgentSales,  BDTransType, BDCashSales, BDARSales, BDAgentSales,actualCash,remarks);
                                                 }
                                             }
                                         }

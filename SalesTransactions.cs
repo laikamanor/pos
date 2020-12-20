@@ -12,6 +12,7 @@ using AB.API_Class.Branch;
 using AB.API_Class.Warehouse;
 using RestSharp;
 using AB.UI_Class;
+using ClosedXML.Excel;
 namespace AB
 {
     public partial class SalesTransactions : Form
@@ -47,18 +48,22 @@ namespace AB
             dtWarehouse = new DataTable();
             cmbDocStatus.SelectedIndex = 0;
             dtTransDate.Value = DateTime.Now;
+            dtTransDate.Visible = false;
             loadBranch();
             loadWarehouse();
+            loadData();
             cDocStatus = 0;
             cBranch = 0;
             cWarehouse = 0;
             cDate = 0;
-    
+            btnGenerateExcel.Visible = canGenerateExcel();
+            dgv.Columns["doctotal"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         public void loadBranch()
         {
             int isAdmin = 0;
+            string branch = "";
             dtBranch = branchc.returnBranches();
             cmbBranch.Items.Clear();
             if (Login.jsonResult != null)
@@ -67,7 +72,6 @@ namespace AB
                 {
                     if (x.Key.Equals("data"))
                     {
-                        string branch = "";
                         JObject jObjectData = JObject.Parse(x.Value.ToString());
                         foreach (var y in jObjectData)
                         {
@@ -126,13 +130,27 @@ namespace AB
             }
             if (cmbBranch.Items.Count > 0)
             {
-                cmbBranch.SelectedIndex = 0;
+                string branchName = "";
+                foreach (DataRow row in dtBranch.Rows)
+                {
+                    if (row["code"].ToString() == branch)
+                    {
+                        branchName = row["name"].ToString();
+                        break;
+                    }
+                    else
+                    {
+                        cmbBranch.SelectedIndex = 0;
+                    }
+                }
+                cmbBranch.SelectedIndex = cmbBranch.Items.IndexOf(branchName);
             }
         }
 
         public void loadWarehouse()
         {
             string branchCode = "";
+            string warehouse = "";
             foreach (DataRow row in dtBranch.Rows)
             {
                 if (cmbBranch.Text.Equals(row["name"].ToString()))
@@ -141,21 +159,15 @@ namespace AB
                     break;
                 }
             }
-
-            int isAdmin = 0;
             dtWarehouse = warehousec.returnWarehouse(branchCode);
-            foreach (DataRow row in dtWarehouse.Rows)
-            {
-                cmbWhse.Items.Add(row["whsename"]);
-            }
             cmbWhse.Items.Clear();
+            int isAdmin = 0;
             if (Login.jsonResult != null)
             {
                 foreach (var x in Login.jsonResult)
                 {
                     if (x.Key.Equals("data"))
                     {
-                        string warehouse = "";
                         JObject jObjectData = JObject.Parse(x.Value.ToString());
                         foreach (var y in jObjectData)
                         {
@@ -163,58 +175,39 @@ namespace AB
                             {
                                 warehouse = y.Value.ToString();
                             }
-                            else if (y.Key.Equals("isAdmin"))
+                            else if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager"))
                             {
-
-                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
+                                if (y.Value.ToString().ToLower() == "true")
                                 {
+                                    cmbWhse.Items.Add("All");
                                     foreach (DataRow row in dtWarehouse.Rows)
                                     {
-                                        if (row["whsecode"].ToString() == warehouse)
-                                        {
-                                            cmbWhse.Items.Add(row["whsename"].ToString());
-                                            if (cmbWhse.Items.Count > 0)
-                                            {
-                                                cmbWhse.SelectedIndex = 0;
-                                            }
-                                            return;
-                                        }
+                                        cmbWhse.Items.Add(row["whsename"].ToString());
+                                        cmbWhse.SelectedIndex = 0;
                                     }
+                                    return;
                                 }
                                 else
                                 {
                                     isAdmin += 1;
-                                    break;
-                                }
-                            }
-                            else if (y.Key.Equals("isAccounting"))
-                            {
-                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
-                                {
-                                    foreach (DataRow row in dtWarehouse.Rows)
-                                    {
-                                        if (row["whsecode"].ToString() == warehouse && isAdmin <= 0)
-                                        {
-                                            cmbWhse.Items.Add(row["whsename"].ToString());
-                                            break;
-                                        }
-                                    }
                                 }
                             }
                         }
                     }
                 }
-                if (cmbWhse.Items.Count <= 0)
+            }
+            if (isAdmin > 0)
+            {
+                string whseName = "";
+                foreach (DataRow row in dtWarehouse.Rows)
                 {
-                    foreach (DataRow row in dtWarehouse.Rows)
+                    if (row["whsecode"].ToString() == warehouse)
                     {
-                        cmbWhse.Items.Add(row["whsename"]);
+                        whseName = row["whsename"].ToString();
+                        cmbWhse.Items.Add(whseName);
                     }
                 }
-            }
-            if (cmbWhse.Items.Count > 0)
-            {
-                cmbWhse.SelectedIndex = 0;
+                cmbWhse.SelectedIndex = cmbWhse.Items.IndexOf(whseName);
             }
         }
 
@@ -222,7 +215,7 @@ namespace AB
         {
             if(cBranch <= 0)
             {
-                loadData();
+                loadWarehouse();
             }
         }
 
@@ -242,10 +235,86 @@ namespace AB
             }
         }
 
+        public bool canGenerateExcel()
+        {
+            bool isCanGenerateExcel = false;
+            if (Login.jsonResult != null)
+            {
+                foreach (var x in Login.jsonResult)
+                {
+                    if (x.Key.Equals("data"))
+                    {
+                        JObject jObjectData = JObject.Parse(x.Value.ToString());
+                        foreach (var y in jObjectData)
+                        {
+                            if (y.Key.Equals("isCanAddSap"))
+                            {
+                                if (y.Value.ToString().ToLower() == "true")
+                                {
+                                    isCanGenerateExcel = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return isCanGenerateExcel;
+        }
+
+        private void btnGenerateExcel_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Hand;
+            try
+            {
+                if (canGenerateExcel())
+                {
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("name");
+                    dt.Columns.Add("amount");
+                    dt.Columns.Add("sap_number");
+
+                    for (int i = 0; i < dgv.Rows.Count; i++)
+                    {
+                        string name = dgv.Rows[i].Cells["cust_code"].Value.ToString(),
+                            amount = dgv.Rows[i].Cells["doctotal"].Value.ToString(),
+                            sap_number = dgv.Rows[i].Cells["sap_number"].Value.ToString();
+
+                        dt.Rows.Add(name, amount, sap_number);
+                    }
+
+                    saveFileDialog1.Title = "Save As Excel File";
+                    saveFileDialog1.Filter = "Excel Document (*.xlsx) | *.xlsx";
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+
+                        using (XLWorkbook wb = new XLWorkbook())
+                        {
+                            wb.Worksheets.Add(dt, "Sheet1");
+                            wb.Protect(true, true, "atlantic");
+                            wb.SaveAs(saveFileDialog1.FileName.ToString());
+                        }
+                        string path = System.IO.Path.GetDirectoryName(saveFileDialog1.FileName);
+                        this.Cursor = Cursors.Default;
+                        MessageBox.Show("Saved" + Environment.NewLine + path, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Access Denied", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Default;
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            this.Cursor = Cursors.Default;
+        }
 
         private void checkTransDate_CheckedChanged(object sender, EventArgs e)
         {
-            dtTransDate.Visible = !checkTransDate.Checked;
+            dtTransDate.Visible = checkTransDate.Checked;
             loadData();
         }
 
@@ -342,7 +411,7 @@ namespace AB
                     }
                     string sWarehouse = string.IsNullOrEmpty(warehouseCode) ? "" : "&whsecode=" + warehouseCode;
                     string sBranch = string.IsNullOrEmpty(branchCode) ? "" : "&branch=" + branchCode;
-                    string sTransdate = checkTransDate.Checked ? "&transdate=" : "&transdate=" + dtTransDate.Value.ToString("yyyy-MM-dd");
+                    string sTransdate = !checkTransDate.Checked ? "&transdate=" : "&transdate=" + dtTransDate.Value.ToString("yyyy-MM-dd");
 
                     var request = new RestRequest("/api/sales/get_all" + sDocStatus + sSAPNumber + sBranch + sWarehouse + sTransdate);
                     Console.WriteLine("/api/inv/item_request/get_all" + sDocStatus + sSAPNumber + sBranch + sWarehouse + sTransdate);

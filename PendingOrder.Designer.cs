@@ -87,10 +87,10 @@
             this.tabControl1.Controls.Add(this.tpARSales);
             this.tabControl1.Controls.Add(this.tpAgentSales);
             this.tabControl1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(12, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1206, 507);
+            this.tabControl1.Size = new System.Drawing.Size(1206, 526);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -101,7 +101,7 @@
             this.tpCashSales.Location = new System.Drawing.Point(4, 25);
             this.tpCashSales.Name = "tpCashSales";
             this.tpCashSales.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCashSales.Size = new System.Drawing.Size(1198, 478);
+            this.tpCashSales.Size = new System.Drawing.Size(1198, 497);
             this.tpCashSales.TabIndex = 0;
             this.tpCashSales.Text = "Cash Sales";
             this.tpCashSales.UseVisualStyleBackColor = true;
@@ -117,7 +117,7 @@
             this.tcCashSales.Location = new System.Drawing.Point(6, 6);
             this.tcCashSales.Name = "tcCashSales";
             this.tcCashSales.SelectedIndex = 0;
-            this.tcCashSales.Size = new System.Drawing.Size(1186, 469);
+            this.tcCashSales.Size = new System.Drawing.Size(1186, 488);
             this.tcCashSales.TabIndex = 0;
             this.tcCashSales.SelectedIndexChanged += new System.EventHandler(this.tcCashSales_SelectedIndexChanged);
             // 
@@ -127,7 +127,7 @@
             this.tpCSPayment.Location = new System.Drawing.Point(4, 25);
             this.tpCSPayment.Name = "tpCSPayment";
             this.tpCSPayment.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCSPayment.Size = new System.Drawing.Size(1178, 440);
+            this.tpCSPayment.Size = new System.Drawing.Size(1178, 459);
             this.tpCSPayment.TabIndex = 0;
             this.tpCSPayment.Text = "For Payment";
             this.tpCSPayment.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             this.panelCSPayment.AutoScroll = true;
             this.panelCSPayment.Location = new System.Drawing.Point(6, 6);
             this.panelCSPayment.Name = "panelCSPayment";
-            this.panelCSPayment.Size = new System.Drawing.Size(1166, 428);
+            this.panelCSPayment.Size = new System.Drawing.Size(1166, 447);
             this.panelCSPayment.TabIndex = 0;
             // 
             // tpCSSAP

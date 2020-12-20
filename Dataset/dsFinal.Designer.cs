@@ -281,19 +281,17 @@ namespace AB.Dataset {
             
             private global::System.Data.DataColumn columntotal_cash_on_hand;
             
-            private global::System.Data.DataColumn columncash_sales;
+            private global::System.Data.DataColumn columntotal_cash_payment;
             
-            private global::System.Data.DataColumn columnar_cash_sales;
+            private global::System.Data.DataColumn columntotal_cash_deposit;
             
-            private global::System.Data.DataColumn columnar_agent_sales;
+            private global::System.Data.DataColumn columntotal_used_dep_payment;
             
-            private global::System.Data.DataColumn columndeposit;
+            private global::System.Data.DataColumn columntotal_bank_dep_payment;
             
-            private global::System.Data.DataColumn columnused_dep;
+            private global::System.Data.DataColumn columntotal_epay_payment;
             
-            private global::System.Data.DataColumn columnbank_dep;
-            
-            private global::System.Data.DataColumn columnepay;
+            private global::System.Data.DataColumn columntotal_gcert_payment;
             
             private global::System.Data.DataColumn columngross;
             
@@ -357,6 +355,10 @@ namespace AB.Dataset {
             
             private global::System.Data.DataColumn columnBDAgentSales;
             
+            private global::System.Data.DataColumn columnactual_cash;
+            
+            private global::System.Data.DataColumn columnremarks;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public rowDataTable() {
@@ -400,57 +402,49 @@ namespace AB.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn cash_salesColumn {
+            public global::System.Data.DataColumn total_cash_paymentColumn {
                 get {
-                    return this.columncash_sales;
+                    return this.columntotal_cash_payment;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ar_cash_salesColumn {
+            public global::System.Data.DataColumn total_cash_depositColumn {
                 get {
-                    return this.columnar_cash_sales;
+                    return this.columntotal_cash_deposit;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ar_agent_salesColumn {
+            public global::System.Data.DataColumn total_used_dep_paymentColumn {
                 get {
-                    return this.columnar_agent_sales;
+                    return this.columntotal_used_dep_payment;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn depositColumn {
+            public global::System.Data.DataColumn total_bank_dep_paymentColumn {
                 get {
-                    return this.columndeposit;
+                    return this.columntotal_bank_dep_payment;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn used_depColumn {
+            public global::System.Data.DataColumn total_epay_paymentColumn {
                 get {
-                    return this.columnused_dep;
+                    return this.columntotal_epay_payment;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn bank_depColumn {
+            public global::System.Data.DataColumn total_gcert_paymentColumn {
                 get {
-                    return this.columnbank_dep;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn epayColumn {
-                get {
-                    return this.columnepay;
+                    return this.columntotal_gcert_payment;
                 }
             }
             
@@ -704,6 +698,22 @@ namespace AB.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn actual_cashColumn {
+                get {
+                    return this.columnactual_cash;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn remarksColumn {
+                get {
+                    return this.columnremarks;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -741,13 +751,12 @@ namespace AB.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public rowRow AddrowRow(
                         double total_cash_on_hand, 
-                        double cash_sales, 
-                        double ar_cash_sales, 
-                        double ar_agent_sales, 
-                        double deposit, 
-                        double used_dep, 
-                        double bank_dep, 
-                        double epay, 
+                        double total_cash_payment, 
+                        double total_cash_deposit, 
+                        double total_used_dep_payment, 
+                        double total_bank_dep_payment, 
+                        double total_epay_payment, 
+                        double total_gcert_payment, 
                         double gross, 
                         double net_sales, 
                         double disc_amount, 
@@ -778,17 +787,18 @@ namespace AB.Dataset {
                         string BDTransType, 
                         double BDCashSales, 
                         double BDARSales, 
-                        double BDAgentSales) {
+                        double BDAgentSales, 
+                        double actual_cash, 
+                        string remarks) {
                 rowRow rowrowRow = ((rowRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         total_cash_on_hand,
-                        cash_sales,
-                        ar_cash_sales,
-                        ar_agent_sales,
-                        deposit,
-                        used_dep,
-                        bank_dep,
-                        epay,
+                        total_cash_payment,
+                        total_cash_deposit,
+                        total_used_dep_payment,
+                        total_bank_dep_payment,
+                        total_epay_payment,
+                        total_gcert_payment,
                         gross,
                         net_sales,
                         disc_amount,
@@ -819,7 +829,9 @@ namespace AB.Dataset {
                         BDTransType,
                         BDCashSales,
                         BDARSales,
-                        BDAgentSales};
+                        BDAgentSales,
+                        actual_cash,
+                        remarks};
                 rowrowRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrowRow);
                 return rowrowRow;
@@ -843,13 +855,12 @@ namespace AB.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columntotal_cash_on_hand = base.Columns["total_cash_on_hand"];
-                this.columncash_sales = base.Columns["cash_sales"];
-                this.columnar_cash_sales = base.Columns["ar_cash_sales"];
-                this.columnar_agent_sales = base.Columns["ar_agent_sales"];
-                this.columndeposit = base.Columns["deposit"];
-                this.columnused_dep = base.Columns["used_dep"];
-                this.columnbank_dep = base.Columns["bank_dep"];
-                this.columnepay = base.Columns["epay"];
+                this.columntotal_cash_payment = base.Columns["total_cash_payment"];
+                this.columntotal_cash_deposit = base.Columns["total_cash_deposit"];
+                this.columntotal_used_dep_payment = base.Columns["total_used_dep_payment"];
+                this.columntotal_bank_dep_payment = base.Columns["total_bank_dep_payment"];
+                this.columntotal_epay_payment = base.Columns["total_epay_payment"];
+                this.columntotal_gcert_payment = base.Columns["total_gcert_payment"];
                 this.columngross = base.Columns["gross"];
                 this.columnnet_sales = base.Columns["net_sales"];
                 this.columndisc_amount = base.Columns["disc_amount"];
@@ -881,6 +892,8 @@ namespace AB.Dataset {
                 this.columnBDCashSales = base.Columns["BDCashSales"];
                 this.columnBDARSales = base.Columns["BDARSales"];
                 this.columnBDAgentSales = base.Columns["BDAgentSales"];
+                this.columnactual_cash = base.Columns["actual_cash"];
+                this.columnremarks = base.Columns["remarks"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -888,20 +901,18 @@ namespace AB.Dataset {
             private void InitClass() {
                 this.columntotal_cash_on_hand = new global::System.Data.DataColumn("total_cash_on_hand", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntotal_cash_on_hand);
-                this.columncash_sales = new global::System.Data.DataColumn("cash_sales", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncash_sales);
-                this.columnar_cash_sales = new global::System.Data.DataColumn("ar_cash_sales", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnar_cash_sales);
-                this.columnar_agent_sales = new global::System.Data.DataColumn("ar_agent_sales", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnar_agent_sales);
-                this.columndeposit = new global::System.Data.DataColumn("deposit", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndeposit);
-                this.columnused_dep = new global::System.Data.DataColumn("used_dep", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnused_dep);
-                this.columnbank_dep = new global::System.Data.DataColumn("bank_dep", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnbank_dep);
-                this.columnepay = new global::System.Data.DataColumn("epay", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnepay);
+                this.columntotal_cash_payment = new global::System.Data.DataColumn("total_cash_payment", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_cash_payment);
+                this.columntotal_cash_deposit = new global::System.Data.DataColumn("total_cash_deposit", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_cash_deposit);
+                this.columntotal_used_dep_payment = new global::System.Data.DataColumn("total_used_dep_payment", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_used_dep_payment);
+                this.columntotal_bank_dep_payment = new global::System.Data.DataColumn("total_bank_dep_payment", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_bank_dep_payment);
+                this.columntotal_epay_payment = new global::System.Data.DataColumn("total_epay_payment", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_epay_payment);
+                this.columntotal_gcert_payment = new global::System.Data.DataColumn("total_gcert_payment", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_gcert_payment);
                 this.columngross = new global::System.Data.DataColumn("gross", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columngross);
                 this.columnnet_sales = new global::System.Data.DataColumn("net_sales", typeof(double), null, global::System.Data.MappingType.Element);
@@ -964,6 +975,10 @@ namespace AB.Dataset {
                 base.Columns.Add(this.columnBDARSales);
                 this.columnBDAgentSales = new global::System.Data.DataColumn("BDAgentSales", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBDAgentSales);
+                this.columnactual_cash = new global::System.Data.DataColumn("actual_cash", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnactual_cash);
+                this.columnremarks = new global::System.Data.DataColumn("remarks", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnremarks);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1122,113 +1137,97 @@ namespace AB.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double cash_sales {
+            public double total_cash_payment {
                 get {
                     try {
-                        return ((double)(this[this.tablerow.cash_salesColumn]));
+                        return ((double)(this[this.tablerow.total_cash_paymentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'cash_sales\' in table \'row\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_cash_payment\' in table \'row\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerow.cash_salesColumn] = value;
+                    this[this.tablerow.total_cash_paymentColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double ar_cash_sales {
+            public double total_cash_deposit {
                 get {
                     try {
-                        return ((double)(this[this.tablerow.ar_cash_salesColumn]));
+                        return ((double)(this[this.tablerow.total_cash_depositColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ar_cash_sales\' in table \'row\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_cash_deposit\' in table \'row\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerow.ar_cash_salesColumn] = value;
+                    this[this.tablerow.total_cash_depositColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double ar_agent_sales {
+            public double total_used_dep_payment {
                 get {
                     try {
-                        return ((double)(this[this.tablerow.ar_agent_salesColumn]));
+                        return ((double)(this[this.tablerow.total_used_dep_paymentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ar_agent_sales\' in table \'row\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_used_dep_payment\' in table \'row\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerow.ar_agent_salesColumn] = value;
+                    this[this.tablerow.total_used_dep_paymentColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double deposit {
+            public double total_bank_dep_payment {
                 get {
                     try {
-                        return ((double)(this[this.tablerow.depositColumn]));
+                        return ((double)(this[this.tablerow.total_bank_dep_paymentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'deposit\' in table \'row\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_bank_dep_payment\' in table \'row\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerow.depositColumn] = value;
+                    this[this.tablerow.total_bank_dep_paymentColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double used_dep {
+            public double total_epay_payment {
                 get {
                     try {
-                        return ((double)(this[this.tablerow.used_depColumn]));
+                        return ((double)(this[this.tablerow.total_epay_paymentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'used_dep\' in table \'row\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_epay_payment\' in table \'row\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerow.used_depColumn] = value;
+                    this[this.tablerow.total_epay_paymentColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double bank_dep {
+            public double total_gcert_payment {
                 get {
                     try {
-                        return ((double)(this[this.tablerow.bank_depColumn]));
+                        return ((double)(this[this.tablerow.total_gcert_paymentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'bank_dep\' in table \'row\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_gcert_payment\' in table \'row\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerow.bank_depColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double epay {
-                get {
-                    try {
-                        return ((double)(this[this.tablerow.epayColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'epay\' in table \'row\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablerow.epayColumn] = value;
+                    this[this.tablerow.total_gcert_paymentColumn] = value;
                 }
             }
             
@@ -1730,6 +1729,38 @@ namespace AB.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double actual_cash {
+                get {
+                    try {
+                        return ((double)(this[this.tablerow.actual_cashColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'actual_cash\' in table \'row\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerow.actual_cashColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string remarks {
+                get {
+                    try {
+                        return ((string)(this[this.tablerow.remarksColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'remarks\' in table \'row\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerow.remarksColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Istotal_cash_on_handNull() {
                 return this.IsNull(this.tablerow.total_cash_on_handColumn);
             }
@@ -1742,86 +1773,74 @@ namespace AB.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Iscash_salesNull() {
-                return this.IsNull(this.tablerow.cash_salesColumn);
+            public bool Istotal_cash_paymentNull() {
+                return this.IsNull(this.tablerow.total_cash_paymentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setcash_salesNull() {
-                this[this.tablerow.cash_salesColumn] = global::System.Convert.DBNull;
+            public void Settotal_cash_paymentNull() {
+                this[this.tablerow.total_cash_paymentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isar_cash_salesNull() {
-                return this.IsNull(this.tablerow.ar_cash_salesColumn);
+            public bool Istotal_cash_depositNull() {
+                return this.IsNull(this.tablerow.total_cash_depositColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setar_cash_salesNull() {
-                this[this.tablerow.ar_cash_salesColumn] = global::System.Convert.DBNull;
+            public void Settotal_cash_depositNull() {
+                this[this.tablerow.total_cash_depositColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isar_agent_salesNull() {
-                return this.IsNull(this.tablerow.ar_agent_salesColumn);
+            public bool Istotal_used_dep_paymentNull() {
+                return this.IsNull(this.tablerow.total_used_dep_paymentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setar_agent_salesNull() {
-                this[this.tablerow.ar_agent_salesColumn] = global::System.Convert.DBNull;
+            public void Settotal_used_dep_paymentNull() {
+                this[this.tablerow.total_used_dep_paymentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsdepositNull() {
-                return this.IsNull(this.tablerow.depositColumn);
+            public bool Istotal_bank_dep_paymentNull() {
+                return this.IsNull(this.tablerow.total_bank_dep_paymentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetdepositNull() {
-                this[this.tablerow.depositColumn] = global::System.Convert.DBNull;
+            public void Settotal_bank_dep_paymentNull() {
+                this[this.tablerow.total_bank_dep_paymentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isused_depNull() {
-                return this.IsNull(this.tablerow.used_depColumn);
+            public bool Istotal_epay_paymentNull() {
+                return this.IsNull(this.tablerow.total_epay_paymentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setused_depNull() {
-                this[this.tablerow.used_depColumn] = global::System.Convert.DBNull;
+            public void Settotal_epay_paymentNull() {
+                this[this.tablerow.total_epay_paymentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isbank_depNull() {
-                return this.IsNull(this.tablerow.bank_depColumn);
+            public bool Istotal_gcert_paymentNull() {
+                return this.IsNull(this.tablerow.total_gcert_paymentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setbank_depNull() {
-                this[this.tablerow.bank_depColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsepayNull() {
-                return this.IsNull(this.tablerow.epayColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetepayNull() {
-                this[this.tablerow.epayColumn] = global::System.Convert.DBNull;
+            public void Settotal_gcert_paymentNull() {
+                this[this.tablerow.total_gcert_paymentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2194,6 +2213,30 @@ namespace AB.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetBDAgentSalesNull() {
                 this[this.tablerow.BDAgentSalesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isactual_cashNull() {
+                return this.IsNull(this.tablerow.actual_cashColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setactual_cashNull() {
+                this[this.tablerow.actual_cashColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsremarksNull() {
+                return this.IsNull(this.tablerow.remarksColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetremarksNull() {
+                this[this.tablerow.remarksColumn] = global::System.Convert.DBNull;
             }
         }
         

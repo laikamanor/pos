@@ -32,6 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectAdvancePayment));
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.btnAddAdvancePayment = new System.Windows.Forms.Button();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.selectt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cust_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,8 +43,6 @@
             this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sapnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAddAdvancePayment = new System.Windows.Forms.Button();
-            this.btnSubmit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +55,7 @@
             this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgv.BackgroundColor = System.Drawing.Color.White;
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -79,50 +81,8 @@
             this.dgv.Location = new System.Drawing.Point(24, 92);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(470, 261);
+            this.dgv.Size = new System.Drawing.Size(756, 261);
             this.dgv.TabIndex = 6;
-            // 
-            // selectt
-            // 
-            this.selectt.HeaderText = "Select";
-            this.selectt.Name = "selectt";
-            // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // cust_code
-            // 
-            this.cust_code.HeaderText = "Code";
-            this.cust_code.Name = "cust_code";
-            this.cust_code.ReadOnly = true;
-            // 
-            // amountdue
-            // 
-            this.amountdue.HeaderText = "Amount Due";
-            this.amountdue.Name = "amountdue";
-            this.amountdue.ReadOnly = true;
-            // 
-            // balance
-            // 
-            this.balance.HeaderText = "Balance";
-            this.balance.Name = "balance";
-            this.balance.ReadOnly = true;
-            // 
-            // reference
-            // 
-            this.reference.HeaderText = "Reference";
-            this.reference.Name = "reference";
-            this.reference.ReadOnly = true;
-            // 
-            // sapnumber
-            // 
-            this.sapnumber.HeaderText = "SAP";
-            this.sapnumber.Name = "sapnumber";
-            this.sapnumber.ReadOnly = true;
             // 
             // btnAddAdvancePayment
             // 
@@ -133,7 +93,7 @@
             this.btnAddAdvancePayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddAdvancePayment.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddAdvancePayment.ForeColor = System.Drawing.Color.White;
-            this.btnAddAdvancePayment.Location = new System.Drawing.Point(348, 67);
+            this.btnAddAdvancePayment.Location = new System.Drawing.Point(634, 67);
             this.btnAddAdvancePayment.Name = "btnAddAdvancePayment";
             this.btnAddAdvancePayment.Size = new System.Drawing.Size(146, 22);
             this.btnAddAdvancePayment.TabIndex = 9;
@@ -153,18 +113,107 @@
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
             this.btnSubmit.Location = new System.Drawing.Point(24, 359);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(470, 31);
+            this.btnSubmit.Size = new System.Drawing.Size(756, 31);
             this.btnSubmit.TabIndex = 10;
             this.btnSubmit.Text = "SUBMIT";
             this.btnSubmit.UseVisualStyleBackColor = false;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(229, 67);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(68, 22);
+            this.btnSearch.TabIndex = 12;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(24, 67);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(205, 22);
+            this.txtSearch.TabIndex = 11;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // selectt
+            // 
+            this.selectt.HeaderText = "Select";
+            this.selectt.MinimumWidth = 50;
+            this.selectt.Name = "selectt";
+            this.selectt.Width = 124;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.MinimumWidth = 50;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // cust_code
+            // 
+            this.cust_code.FillWeight = 118.3799F;
+            this.cust_code.HeaderText = "Customer Code";
+            this.cust_code.MinimumWidth = 150;
+            this.cust_code.Name = "cust_code";
+            this.cust_code.ReadOnly = true;
+            this.cust_code.Width = 150;
+            // 
+            // amountdue
+            // 
+            this.amountdue.FillWeight = 92.65804F;
+            this.amountdue.HeaderText = "Amount Due";
+            this.amountdue.MinimumWidth = 100;
+            this.amountdue.Name = "amountdue";
+            this.amountdue.ReadOnly = true;
+            this.amountdue.Width = 109;
+            // 
+            // balance
+            // 
+            this.balance.FillWeight = 91.74239F;
+            this.balance.HeaderText = "Balance";
+            this.balance.MinimumWidth = 100;
+            this.balance.Name = "balance";
+            this.balance.ReadOnly = true;
+            this.balance.Width = 108;
+            // 
+            // reference
+            // 
+            this.reference.FillWeight = 110.0556F;
+            this.reference.HeaderText = "Reference";
+            this.reference.MinimumWidth = 150;
+            this.reference.Name = "reference";
+            this.reference.ReadOnly = true;
+            this.reference.Width = 150;
+            // 
+            // sapnumber
+            // 
+            this.sapnumber.FillWeight = 87.16406F;
+            this.sapnumber.HeaderText = "SAP";
+            this.sapnumber.MinimumWidth = 100;
+            this.sapnumber.Name = "sapnumber";
+            this.sapnumber.ReadOnly = true;
+            this.sapnumber.Width = 103;
             // 
             // SelectAdvancePayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(518, 452);
+            this.ClientSize = new System.Drawing.Size(804, 452);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.btnAddAdvancePayment);
             this.Controls.Add(this.dgv);
@@ -176,6 +225,7 @@
             this.Load += new System.EventHandler(this.SelectAdvancePayment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -184,6 +234,8 @@
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.Button btnAddAdvancePayment;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selectt;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cust_code;

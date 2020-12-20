@@ -44,7 +44,22 @@ namespace AB
             cDate = 0;
             cToWarehouse = 0;
             label5.Visible = (this.Text.Equals("Pullout Transactions") ? false : true);
-            cmbToWhse.Visible= (this.Text.Equals("Pullout Transactions") ? false : true);
+            cmbToWhse.Visible = (this.Text.Equals("Pullout Transactions") ? false : true);
+            cmbStatusTransactions.Visible = this.Text != "Pull Out Transactions" ? false : true;
+            Label2.Visible = this.Text != "Pull Out Transactions" ? false : true;
+            txtsearchTransactions.Visible = this.Text != "Pull Out Transactions" ? false : true;
+            btnsearch.Visible = this.Text != "Pull Out Transactions" ? false : true;
+        }
+
+        public void checkVariance()
+        {
+            for (int i = 0; i < dgvTransactions.Rows.Count; i++)
+            {
+                if (Convert.ToDouble(dgvTransactions.Rows[i].Cells["variance_count"].Value.ToString()) != 0)
+                {
+                    dgvTransactions.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                }
+            }
         }
 
         public void loadBranch(ComboBox cmb)
@@ -137,9 +152,10 @@ namespace AB
         public void loadWarehouse(ComboBox cmb, bool isTo)
         {
             string warehouse = "";
-            if (isTo )
+            cmb.Items.Clear();
+            cmb.Items.Add("All");
+            if (isTo)
             {
-                cmb.Items.Add("All");
                 dtWarehouse = warehousec.returnWarehouse("");
                 foreach (DataRow row in dtWarehouse.Rows)
                 {
@@ -158,12 +174,11 @@ namespace AB
                     }
                 }
                 dtWarehouse = warehousec.returnWarehouse(branchCode);
-
+                int isAdmin = 0;
                 foreach (DataRow row in dtWarehouse.Rows)
                 {
                     cmb.Items.Add(row["whsename"]);
                 }
-                cmb.Items.Clear();
                 if (Login.jsonResult != null)
                 {
                     foreach (var x in Login.jsonResult)
@@ -179,25 +194,53 @@ namespace AB
                                 }
                                 else if (y.Key.Equals("isAdmin"))
                                 {
+
                                     if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
                                     {
-                                        dtWarehouse = warehousec.returnWarehouse("");
                                         foreach (DataRow row in dtWarehouse.Rows)
                                         {
                                             if (row["whsecode"].ToString() == warehouse)
                                             {
-                                                cmb.Items.Add(row["whsename"].ToString());
-                                                break;
+                                                cmbWhse.Items.Add(row["whsename"].ToString());
+                                                if (cmbWhse.Items.Count > 0)
+                                                {
+                                                    cmbWhse.SelectedIndex = 0;
+                                                }
+                                                return;
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        cmb.Items.Add("All");
-                                        dtWarehouse = warehousec.returnWarehouse("");
+                                        isAdmin += 1;
+                                        break;
+                                    }
+                                }
+                                else if (y.Key.Equals("isAccounting"))
+                                {
+                                    if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
+                                    {
                                         foreach (DataRow row in dtWarehouse.Rows)
                                         {
-                                            cmb.Items.Add(row["whsename"]);
+                                            if (row["whsecode"].ToString() == warehouse && isAdmin <= 0)
+                                            {
+                                                cmbWhse.Items.Add(row["whsename"].ToString());
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (y.Key.Equals("isManager"))
+                                {
+                                    if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
+                                    {
+                                        foreach (DataRow row in dtWarehouse.Rows)
+                                        {
+                                            if (row["whsecode"].ToString() == warehouse && isAdmin <= 0)
+                                            {
+                                                cmbWhse.Items.Add(row["whsename"].ToString());
+                                                break;
+                                            }
                                         }
                                     }
                                 }
@@ -266,7 +309,7 @@ namespace AB
                 if (cmbWhse.Text.Equals(row["whsename"].ToString()))
                 {
                     warehouseCode = row["whsecode"].ToString();
-                    break;
+                    break; 
                 }
             }
             //TO WAREHOUSE
@@ -318,11 +361,17 @@ namespace AB
                     string replaceT = row["transdate"].ToString().Replace("T", "");
                    DateTime  dtTransDate = Convert.ToDateTime(replaceT);    
 
-                    dgvTransactions.Rows.Add(row["id"], row["transnumber"], row["reference"], row["remarks"], decodeDocStatus, row["sap_number"], dtTransDate.ToString("yyyy-MM-dd hh:mm tt"));
+                    dgvTransactions.Rows.Add(row["id"], row["transnumber"], row["reference"], row["remarks"], decodeDocStatus, row["sap_number"], dtTransDate.ToString("yyyy-MM-dd"),row["variance_count"].ToString());
                 }
                 txtsearchTransactions.AutoCompleteCustomSource = auto;
             }
             lblNoDataFound.Visible = (dgvTransactions.Rows.Count <= 0 ? true : false);
+
+
+            if (this.Text == "Transfer Transactions")
+            {
+                checkVariance();
+            }
         }
 
         private void btnsearch_Click(object sender, EventArgs e)

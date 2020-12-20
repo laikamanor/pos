@@ -110,7 +110,7 @@
             this.MinimizeBox = false;
             this.Name = "SAP_Remarks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Enter SAP # & Remarks";
+            this.Text = "Please Enter SAP # & Remarks";
             this.Load += new System.EventHandler(this.SAP_Remarks_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

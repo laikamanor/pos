@@ -28,14 +28,37 @@ namespace AB
         public void loadData()
         {
             DataTable dtResponse = new DataTable();
-            dtResponse = advancepaymentc.loadData("O");
+            dtResponse = advancepaymentc.loadData("O", "In Deposit");
             dgv.Rows.Clear();
             if (dtResponse.Rows.Count > 0)
             {
+                AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
                 foreach (DataRow r0w in dtResponse.Rows)
                 {
-                    dgv.Rows.Add(false, r0w["id"], r0w["cust_code"], Convert.ToDouble(r0w["amount"]).ToString("n2"), Convert.ToDouble(r0w["balance"]).ToString("n2"),r0w["reference2"],r0w["sap_number"]);
+                    double amount = Convert.ToDouble(r0w["amount"].ToString());
+                    double balance = Convert.ToDouble(r0w["balance"].ToString());
+
+                    auto.Add(r0w["reference"].ToString());
+                    auto.Add(r0w["cust_code"].ToString());
+                    auto.Add(r0w["remarks"].ToString());
+
+                    if (!string.IsNullOrEmpty(txtSearch.Text.ToString().Trim()))
+                    {
+                        if (txtSearch.Text.ToString().Trim().ToLower().Contains(r0w["reference"].ToString().ToLower()))
+                        {
+                            dgv.Rows.Add(false, r0w["id"], r0w["cust_code"], Convert.ToDecimal(string.Format("{0:0.00}", amount)), Convert.ToDecimal(string.Format("{0:0.00}", balance)), r0w["reference"], r0w["sap_number"]);
+                        }
+                        else if (txtSearch.Text.ToString().Trim().ToLower().Contains(r0w["cust_code"].ToString().ToLower()))
+                        {
+                            dgv.Rows.Add(false, r0w["id"], r0w["cust_code"], Convert.ToDecimal(string.Format("{0:0.00}", amount)), Convert.ToDecimal(string.Format("{0:0.00}", balance)), r0w["reference"], r0w["sap_number"]);
+                        }
+                    }
+                    else
+                    {
+                        dgv.Rows.Add(false, r0w["id"], r0w["cust_code"], Convert.ToDecimal(string.Format("{0:0.00}", amount)), Convert.ToDecimal(string.Format("{0:0.00}", balance)), r0w["reference"], r0w["sap_number"]);
+                    }
                 }
+                txtSearch.AutoCompleteCustomSource = auto;
             }
         }
 
@@ -63,6 +86,19 @@ namespace AB
             AddAdvancePayment addAdvancePayment = new AddAdvancePayment();
             addAdvancePayment.ShowDialog();
             if (AddAdvancePayment.isSubmit)
+            {
+                loadData();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
             {
                 loadData();
             }

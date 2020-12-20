@@ -14,7 +14,7 @@ namespace AB.API_Class.Advance_Payment
     {
         utility_class utilityc = new utility_class();
 
-        public DataTable loadData(string status)
+        public DataTable loadData(string status,string type)
         {
             DataTable result = new DataTable();
             result.Columns.Add("id");
@@ -23,8 +23,10 @@ namespace AB.API_Class.Advance_Payment
             result.Columns.Add("balance");
             result.Columns.Add("remarks");
             result.Columns.Add("sap_number");
-            result.Columns.Add("reference2");
+            result.Columns.Add("reference");
             result.Columns.Add("status");
+            result.Columns.Add("transdate");
+            result.Columns.Add("reference2");
             if (Login.jsonResult != null)
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -40,7 +42,10 @@ namespace AB.API_Class.Advance_Payment
                 {
                     var client = new RestClient(utilityc.URL);
                     client.Timeout = -1;
-                    var request = new RestRequest("/api/deposit/get_all?&status=" + status);
+                    string sUsedDeposit = type.Equals("In Deposit") ? "&used=" : "&used=1";
+                    string sURL = type.Equals("Summary Deposit") ? "/api/deposit/summary" : "/api/deposit/get_all?&status=" + status + sUsedDeposit;
+                    var request = new RestRequest(sURL);
+                    Console.WriteLine(sURL);
                     request.AddHeader("Authorization", "Bearer " + token);
                     var response = client.Execute(request);
                     JObject jObject = new JObject();
@@ -67,8 +72,9 @@ namespace AB.API_Class.Advance_Payment
                                         JObject data = JObject.Parse(jsonArray[i].ToString());
                                         int id = 0;
                                         string custCode = "",
-            remarks = "", referenceNumber = "", aStatus = "", sapNumber = "";
+            remarks = "", referenceNumber = "", aStatus = "", sapNumber = "", referenceNumber2 = "";
                                         double amount = 0.00, balance = 0.00;
+                                        DateTime dtTransDate = new DateTime();
                                         foreach (var q in data)
                                         {
                                             if (q.Key.Equals("id"))
@@ -95,13 +101,22 @@ namespace AB.API_Class.Advance_Payment
                                             {
                                                 remarks = q.Value.ToString();
                                             }
-                                            else if (q.Key.Equals("reference2"))
+                                            else if (q.Key.Equals("reference"))
                                             {
                                                 referenceNumber = q.Value.ToString();
+                                            }
+                                            else if (q.Key.Equals("reference2"))
+                                            {
+                                                referenceNumber2 = q.Value.ToString();
                                             }
                                             else if (q.Key.Equals("status"))
                                             {
                                                 aStatus = q.Value.ToString();
+                                            }
+                                            else if (q.Key.Equals("transdate"))
+                                            {
+                                                string replaceT = q.Value.ToString().Replace("T", "");
+                                                dtTransDate = Convert.ToDateTime(replaceT);
                                             }
                                         }
                                         if (aStatus.Equals("O"))
@@ -116,7 +131,7 @@ namespace AB.API_Class.Advance_Payment
                                         {
                                             aStatus = "Cancelled";
                                         }
-                                        result.Rows.Add(id, custCode, amount, balance, remarks, sapNumber, referenceNumber, aStatus);
+                                        result.Rows.Add(id, custCode, amount, balance, remarks, sapNumber, referenceNumber, aStatus, dtTransDate.ToString("yyyy-MM-dd HH:mm"),referenceNumber2);
                                     }
                                 }
                             }

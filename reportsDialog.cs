@@ -66,12 +66,13 @@ namespace AB
             dt.Columns.Add("cash_sales", typeof(double));
             dt.Columns.Add("ar_sales", typeof(double));
             dt.Columns.Add("agent_sales", typeof(double));
+            dt.Columns.Add("total", typeof(double));
 
             DataTable dtFromAPI = new DataTable();
             dtFromAPI = finalCountc.loadPaymentMethod(EnterDate.dateEntered);
             foreach (DataRow row in dtFromAPI.Rows)
             {
-                dt.Rows.Add(row["transtype"].ToString(), Convert.ToDouble(row["cash_sales"].ToString()), Convert.ToDouble(row["ar_sales"].ToString()), Convert.ToDouble(row["agent_sales"].ToString()));
+                dt.Rows.Add(row["transtype"].ToString(), Convert.ToDouble(row["cash_sales"].ToString()), Convert.ToDouble(row["ar_sales"].ToString()), Convert.ToDouble(row["agent_sales"].ToString()), Convert.ToDouble(row["total"].ToString()));
             }
             return dt;
         }
@@ -81,13 +82,12 @@ namespace AB
             DataTable dt = new DataTable();
             //CASH
             dt.Columns.Add("total_cash_on_hand", typeof(double));
-            dt.Columns.Add("cash_sales", typeof(double));
-            dt.Columns.Add("ar_cash_sales", typeof(double));
-            dt.Columns.Add("ar_agent_sales", typeof(double));
-            dt.Columns.Add("deposit", typeof(double));
-            dt.Columns.Add("used_dep", typeof(double));
-            dt.Columns.Add("bank_dep", typeof(double));
-            dt.Columns.Add("epay", typeof(double));
+            dt.Columns.Add("total_cash_payment", typeof(double));
+            dt.Columns.Add("total_cash_deposit", typeof(double));
+            dt.Columns.Add("total_used_dep_payment", typeof(double));
+            dt.Columns.Add("total_bank_dep_payment", typeof(double));
+            dt.Columns.Add("total_epay_payment", typeof(double));
+            dt.Columns.Add("total_gcert_payment", typeof(double));
             //SALES
             dt.Columns.Add("gross", typeof(double));
             dt.Columns.Add("net_sales", typeof(double));
@@ -110,12 +110,16 @@ namespace AB
             dt.Columns.Add("variance", typeof(double));
             dt.Columns.Add("price", typeof(double));
             dt.Columns.Add("total_amount", typeof(double));
-
+            dt.Columns.Add("actual_cash", typeof(double));
+            dt.Columns.Add("remarks", typeof(string));
             DataTable dtFromAPI = new DataTable();
             dtFromAPI = finalCountc.loadFinal(EnterDate.dateEntered);
             foreach (DataRow row in dtFromAPI.Rows)
             {
-                dt.Rows.Add(Convert.ToDouble(row["total_cash_on_hand"].ToString()).ToString("n2"), Convert.ToDouble(row["cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["ar_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["ar_agent_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["deposit"].ToString()).ToString("n2"), Convert.ToDouble(row["used_dep"].ToString()).ToString("n2"), Convert.ToDouble(row["bank_dep"].ToString()).ToString("n2"), Convert.ToDouble(row["epay"].ToString()).ToString("n2"), Convert.ToDouble(row["gross"].ToString()).ToString("n2"), Convert.ToDouble(row["net_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_amount"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_agent_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_agent_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_agent_sales"].ToString()).ToString("n2"), row["item_code"].ToString(), Convert.ToDouble(row["actual_good"].ToString()).ToString("n2"), Convert.ToDouble(row["actual_pullout"].ToString()).ToString("n2"), Convert.ToDouble(row["system_bal"].ToString()).ToString("n2"), Convert.ToDouble(row["variance"].ToString()).ToString("n2"), Convert.ToDouble(row["price"].ToString()).ToString("n2"), Convert.ToDouble(row["total_amount"].ToString()).ToString("n2"));
+                if (Convert.ToDouble(row["variance"].ToString()) != 0.00)
+                {
+                    dt.Rows.Add(Convert.ToDouble(row["total_cash_on_hand"].ToString()).ToString("n2"), Convert.ToDouble(row["total_cash_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["total_cash_deposit"].ToString()).ToString("n2"), Convert.ToDouble(row["total_used_dep_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["total_bank_dep_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["total_epay_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["total_gcert_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["gross"].ToString()).ToString("n2"), Convert.ToDouble(row["net_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_amount"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_agent_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_agent_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_agent_sales"].ToString()).ToString("n2"), row["item_code"].ToString(), Convert.ToDouble(row["actual_good"].ToString()).ToString("n2"), Convert.ToDouble(row["actual_pullout"].ToString()).ToString("n2"), Convert.ToDouble(row["system_bal"].ToString()).ToString("n2"), Convert.ToDouble(row["variance"].ToString()).ToString("n2"), Convert.ToDouble(row["price"].ToString()).ToString("n2"), Convert.ToDouble(row["total_amount"].ToString()).ToString("n2"), Convert.ToDouble(row["actual_cash"].ToString()), row["remarks"].ToString());
+                }
             }
             return dt;
         }

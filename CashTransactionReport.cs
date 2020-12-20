@@ -131,14 +131,9 @@ namespace AB
                     break;
                 }
             }
-
-            int isAdmin = 0;
             dtWarehouse = warehousec.returnWarehouse(branchCode);
-            foreach (DataRow row in dtWarehouse.Rows)
-            {
-                cmbWhse.Items.Add(row["whsename"]);
-            }
             cmbWhse.Items.Clear();
+            int isAdmin = 0;
             if (Login.jsonResult != null)
             {
                 foreach (var x in Login.jsonResult)
@@ -152,57 +147,28 @@ namespace AB
                             {
                                 warehouse = y.Value.ToString();
                             }
-                            else if (y.Key.Equals("isAdmin"))
+                            else if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager"))
                             {
-
-                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
+                                if (y.Value.ToString().ToLower() == "true")
                                 {
+                                    cmbWhse.Items.Add("All");
                                     foreach (DataRow row in dtWarehouse.Rows)
                                     {
-                                        if (row["whsecode"].ToString() == warehouse)
-                                        {
-                                            cmbWhse.Items.Add(row["whsename"].ToString());
-                                            if (cmbWhse.Items.Count > 0)
-                                            {
-                                                cmbWhse.SelectedIndex = 0;
-                                            }
-                                            return;
-                                        }
+                                        cmbWhse.Items.Add(row["whsename"].ToString());
+                                        cmbWhse.SelectedIndex = 0;
                                     }
+                                    return;
                                 }
                                 else
                                 {
                                     isAdmin += 1;
-                                    break;
-                                }
-                            }
-                            else if (y.Key.Equals("isAccounting"))
-                            {
-                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
-                                {
-                                    foreach (DataRow row in dtWarehouse.Rows)
-                                    {
-                                        if (row["whsecode"].ToString() == warehouse && isAdmin <= 0)
-                                        {
-                                            cmbWhse.Items.Add(row["whsename"].ToString());
-                                            break;
-                                        }
-                                    }
                                 }
                             }
                         }
                     }
                 }
-                if (cmbWhse.Items.Count <= 0)
-                {
-                    cmbWhse.Items.Add("All");
-                    foreach (DataRow row in dtWarehouse.Rows)
-                    {
-                        cmbWhse.Items.Add(row["whsename"]);
-                    }
-                }
             }
-            if (cmbWhse.Items.Count > 0)
+            if (isAdmin > 0)
             {
                 string whseName = "";
                 foreach (DataRow row in dtWarehouse.Rows)
@@ -210,14 +176,10 @@ namespace AB
                     if (row["whsecode"].ToString() == warehouse)
                     {
                         whseName = row["whsename"].ToString();
-                        break;
+                        cmbWhse.Items.Add(whseName);
                     }
                 }
                 cmbWhse.SelectedIndex = cmbWhse.Items.IndexOf(whseName);
-                if (cmbWhse.Text == "")
-                {
-                    cmbWhse.SelectedIndex = 0;
-                }
             }
         }
 
@@ -269,7 +231,7 @@ namespace AB
             cmb.Items.Add("All");
             foreach(DataRow r0w in adtUsers.Rows)
             {
-                cmb.Items.Add(r0w["fullname"].ToString());
+                cmb.Items.Add(r0w["username"].ToString());
             }
             if(cmb.Items.Count > 0)
             {
@@ -328,9 +290,9 @@ namespace AB
                     client.Timeout = -1;
 
                     int cashierID = 0;
-                    foreach (DataRow r0wSales in dtCashier.Rows)
+                    foreach (DataRow r0wSales in dtUsers.Rows)
                     {
-                        if (r0wSales["fullname"].ToString() == cmbCashier.Text)
+                        if (r0wSales["username"].ToString() == cmbCashier.Text)
                         {
                             cashierID = Convert.ToInt32(r0wSales["userid"].ToString());
                         }
@@ -381,20 +343,10 @@ namespace AB
                                                     {
                                                         lblCashOnHand.Text = (z.Value.ToString() != "" ? Convert.ToDouble(z.Value.ToString()).ToString("n2") : "0.00");
                                                     }
-                                                    else if (z.Key.Equals("CashSales"))
+                                                    else if (z.Key.Equals("TotalCashPayment"))
                                                     {
 
                                                         lblCashSales.Text = (z.Value.ToString() != "" ? Convert.ToDouble(z.Value.ToString()).ToString("n2") : "0.00");
-                                                    }
-                                                    else if (z.Key.Equals("ARCash"))
-                                                    {
-
-                                                        lblARCash.Text = (z.Value.ToString() != "" ? Convert.ToDouble(z.Value.ToString()).ToString("n2") : "0.00");
-                                                    }
-                                                    else if (z.Key.Equals("ARAgentCash"))
-                                                    {
-
-                                                        lblARAgentCash.Text = (z.Value.ToString() != "" ? Convert.ToDouble(z.Value.ToString()).ToString("n2") : "0.00");
                                                     }
                                                     else if (z.Key.Equals("DepositCash"))
                                                     {
@@ -415,6 +367,16 @@ namespace AB
                                                     {
 
                                                         lblEpay.Text = (z.Value.ToString() != "" ? Convert.ToDouble(z.Value.ToString()).ToString("n2") : "0.00");
+                                                    }
+                                                    else if (z.Key.Equals("GCert"))
+                                                    {
+
+                                                        lblGCert.Text = (z.Value.ToString() != "" ? Convert.ToDouble(z.Value.ToString()).ToString("n2") : "0.00");
+                                                    }
+                                                    else if (z.Key.Equals("Cashout"))
+                                                    {
+
+                                                        lblCashOut.Text = (z.Value.ToString() != "" ? Convert.ToDouble(z.Value.ToString()).ToString("n2") : "0.00");
                                                     }
                                                 }
                                             }
@@ -459,7 +421,7 @@ namespace AB
                                                     }
 
                                                 }
-                                                dgv.Rows.Add(referenceNumber, amount.ToString("n2"), salesType,paymentType, dtTransdate.ToString("yyyy-MM-dd hh:mm tt"), url);
+                                                dgv.Rows.Add(referenceNumber, Convert.ToDecimal(string.Format("{0:0.00}", amount)), salesType,paymentType, dtTransdate.ToString("yyyy-MM-dd HH:mm"), url);
                                             }
                                         }
                                     }
@@ -508,17 +470,26 @@ namespace AB
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dgv.Rows.Count > 0)
+            if (dgv.Rows.Count > 0)
             {
                 CashTransactionReportItems cashTransactionReportItems = new CashTransactionReportItems();
                 cashTransactionReportItems.URLDetails = dgv.CurrentRow.Cells["url"].Value.ToString();
                 cashTransactionReportItems.ShowDialog();
+                if (CashTransactionReportItems.isSubmit)
+                {
+                    loadData();
+                }
             }
         }
 
         private void btnrefresh_Click(object sender, EventArgs e)
         {
             loadData();
+        }
+
+        private void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void cmbPaymentType_SelectedIndexChanged(object sender, EventArgs e)

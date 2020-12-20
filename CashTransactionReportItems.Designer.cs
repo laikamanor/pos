@@ -57,6 +57,7 @@
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sap_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvitems)).BeginInit();
             this.SuspendLayout();
@@ -323,7 +324,7 @@
             this.dgvitems.Location = new System.Drawing.Point(466, 23);
             this.dgvitems.Name = "dgvitems";
             this.dgvitems.RowHeadersWidth = 10;
-            this.dgvitems.Size = new System.Drawing.Size(602, 505);
+            this.dgvitems.Size = new System.Drawing.Size(602, 453);
             this.dgvitems.TabIndex = 72;
             // 
             // id
@@ -364,12 +365,30 @@
             this.sap_number.Name = "sap_number";
             this.sap_number.ReadOnly = true;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.Firebrick;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(937, 482);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(131, 46);
+            this.btnCancel.TabIndex = 73;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // CashTransactionReportItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1080, 551);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.dgvitems);
             this.Controls.Add(this.Panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -411,5 +430,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn reference;
         private System.Windows.Forms.DataGridViewTextBoxColumn sap_number;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

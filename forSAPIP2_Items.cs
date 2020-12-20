@@ -176,7 +176,7 @@ namespace AB
                                                 totalAmount += amount;
                                             }                                       
                                         }
-                                        dgv.Rows.Add(id, paymentID, paymentType, amount.ToString("n2"));                                        
+                                        dgv.Rows.Add(id, paymentID, paymentType, amount);                                        
                                     }
                                 }
                             }

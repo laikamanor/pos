@@ -44,9 +44,10 @@
             this.uom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblRemarks = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblCreatedBy = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblWhse
@@ -55,7 +56,7 @@
             this.lblWhse.AutoSize = true;
             this.lblWhse.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWhse.ForeColor = System.Drawing.Color.Black;
-            this.lblWhse.Location = new System.Drawing.Point(627, 41);
+            this.lblWhse.Location = new System.Drawing.Point(627, 77);
             this.lblWhse.Name = "lblWhse";
             this.lblWhse.Size = new System.Drawing.Size(59, 16);
             this.lblWhse.TabIndex = 77;
@@ -67,7 +68,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Gray;
-            this.label5.Location = new System.Drawing.Point(518, 41);
+            this.label5.Location = new System.Drawing.Point(518, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 16);
             this.label5.TabIndex = 76;
@@ -135,10 +136,10 @@
             this.dgv.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.Gray;
-            this.dgv.Location = new System.Drawing.Point(12, 96);
+            this.dgv.Location = new System.Drawing.Point(12, 121);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(674, 368);
+            this.dgv.Size = new System.Drawing.Size(674, 343);
             this.dgv.TabIndex = 69;
             // 
             // id
@@ -195,29 +196,27 @@
             this.label3.TabIndex = 78;
             this.label3.Text = "Remarks";
             // 
-            // lblCreatedBy
+            // panel1
             // 
-            this.lblCreatedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreatedBy.AutoSize = true;
-            this.lblCreatedBy.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreatedBy.ForeColor = System.Drawing.Color.Black;
-            this.lblCreatedBy.Location = new System.Drawing.Point(627, 77);
-            this.lblCreatedBy.Name = "lblCreatedBy";
-            this.lblCreatedBy.Size = new System.Drawing.Size(30, 16);
-            this.lblCreatedBy.TabIndex = 81;
-            this.lblCreatedBy.Text = "N/A";
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(153)))));
+            this.panel1.Controls.Add(this.lblCount);
+            this.panel1.Location = new System.Drawing.Point(12, 97);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(674, 28);
+            this.panel1.TabIndex = 80;
             // 
-            // label4
+            // lblCount
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Gray;
-            this.label4.Location = new System.Drawing.Point(518, 77);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 16);
-            this.label4.TabIndex = 80;
-            this.label4.Text = "Created By:";
+            this.lblCount.AutoSize = true;
+            this.lblCount.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.ForeColor = System.Drawing.Color.White;
+            this.lblCount.Location = new System.Drawing.Point(3, 5);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(61, 16);
+            this.lblCount.TabIndex = 79;
+            this.lblCount.Text = "Items (0)";
             // 
             // AdjustmentIn_Details
             // 
@@ -225,8 +224,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(698, 492);
-            this.Controls.Add(this.lblCreatedBy);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblRemarks);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblWhse);
@@ -238,9 +236,10 @@
             this.Name = "AdjustmentIn_Details";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Adjustment In Details";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AdjustmentIn_Details_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,8 +258,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn uom;
         private System.Windows.Forms.Label lblRemarks;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblCreatedBy;
-        private System.Windows.Forms.Label label4;
         public System.Windows.Forms.Label lblReference;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblCount;
     }
 }

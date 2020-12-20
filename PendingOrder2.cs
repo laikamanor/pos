@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AB.UI_Class;
+using AB.API_Class.Branch;
+using AB.API_Class.Warehouse;
 namespace AB
 {
     public partial class PendingOrder2 : Form
@@ -18,6 +20,13 @@ namespace AB
         public static DataTable dtSelectedDeposit;
         DataTable dtPayment = new DataTable();
         string gSalesType = "", gForType = "";
+        int cCheck = 0, cFromTime = 1, cToTime = 1;
+
+        branch_class branchc = new branch_class();
+        warehouse_class warehousec = new warehouse_class();
+        DataTable dtBranches = new DataTable();
+        DataTable dtWarehouse = new DataTable();
+        int cBranch = 1, cDate = 1, cSales = 1;
         public PendingOrder2(string salesType, string forType)
         {
             gSalesType = salesType;
@@ -27,21 +36,12 @@ namespace AB
 
         private void PendingOrder_Load(object sender, EventArgs e)
         {
-
+            dtDate.Visible = true;
+            label1.Visible = true;
+            dtDate.Value = DateTime.Now;
+            cmbFromTime.SelectedIndex = 0;
+            cmbToTime.SelectedIndex = cmbToTime.Items.Count - 1;
             if (gForType == "for Payment")
-            {
-                dtDate.Visible = false;
-                label1.Visible = false;
-                dtDate.Value = DateTime.Now;
-            }
-            else
-            {
-                dtDate.Visible = true;
-                label1.Visible = true;
-                dtDate.Value = DateTime.Now;
-            }
-
-            if(gForType == "for Payment")
             {
                 btnConfirm.Text = "PAY";
                 button1.Visible = true;
@@ -76,8 +76,23 @@ namespace AB
             dtPayment.Columns.Add("sapnum");
             dtPayment.Columns.Add("reference2");
             dtSelectedDeposit.Rows.Clear();
+
+            label7.Visible = true;
+            cmbBranches.Visible = true;
+            loadBranches();
+
             loadSalesAgent();
+            string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
+            loadData(subURL);
+            cBranch = 0;
+            cDate = 0;
+            cSales = 0;
+            cFromTime = 0;
+            cToTime = 0;
+
             counts();
+            dgvitems.Columns["item"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvOrders.Columns["amountdue"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         public void loadSalesAgent()
@@ -139,7 +154,7 @@ namespace AB
                                                 {
                                                     id = Convert.ToInt32(y.Value.ToString());
                                                 }
-                                                else if (y.Key.Equals("fullname"))
+                                                else if (y.Key.Equals("username"))
                                                 {
                                                     username = y.Value.ToString();
                                                 }
@@ -183,6 +198,103 @@ namespace AB
                 }
             }
             Cursor.Current = Cursors.Default;
+        }
+
+        public void loadBranches()
+        {
+            int isAdmin = 0;
+            string branch = "";
+            dtBranches = branchc.returnBranches();
+            cmbBranches.Items.Clear();
+            if (Login.jsonResult != null)
+            {
+                foreach (var x in Login.jsonResult)
+                {
+                    if (x.Key.Equals("data"))
+                    {
+                        JObject jObjectData = JObject.Parse(x.Value.ToString());
+                        foreach (var y in jObjectData)
+                        {
+                            if (y.Key.Equals("branch"))
+                            {
+                                branch = y.Value.ToString();
+                            }
+                            else if (y.Key.Equals("isAdmin"))
+                            {
+
+                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
+                                {
+                                    foreach (DataRow row in dtBranches.Rows)
+                                    {
+                                        if (row["code"].ToString() == branch)
+                                        {
+                                            cmbBranches.Items.Add(row["name"].ToString());
+                                            if (cmbBranches.Items.Count > 0)
+                                            {
+                                                cmbBranches.SelectedIndex = 0;
+                                            }
+                                            return;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    isAdmin += 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (cmbBranches.Items.Count <= 0)
+                {
+                    foreach (DataRow row in dtBranches.Rows)
+                    {
+                        cmbBranches.Items.Add(row["name"]);
+                    }
+                }
+            }
+            if (cmbBranches.Items.Count > 0)
+            {
+                string branchName = "";
+                foreach (DataRow row in dtBranches.Rows)
+                {
+                    if (row["code"].ToString() == branch)
+                    {
+                        branchName = row["name"].ToString();
+                        break;
+                    }
+                }
+                cmbBranches.SelectedIndex = cmbBranches.Items.IndexOf(branchName);
+            }
+        }
+
+        public string findCode(string value, string typee)
+        {
+            string result = "";
+            if (typee.Equals("Warehouse"))
+            {
+                foreach (DataRow row in dtWarehouse.Rows)
+                {
+                    if (row["whsename"].ToString() == value)
+                    {
+                        result = row["whsecode"].ToString();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (DataRow row in dtBranches.Rows)
+                {
+                    if (row["name"].ToString() == value)
+                    {
+                        result = row["code"].ToString();
+                        break;
+                    }
+                }
+            }
+            return result;
         }
 
         public void loadData(string subURL)
@@ -231,24 +343,36 @@ namespace AB
                     string arSalesDate = "";
                     if (gSalesType == "AR Sales" && label1.Visible == true && dtDate.Visible == true)
                     {
-                        arSalesDate = "&date_created=" + dtDate.Value.ToString("yyyy-MM-dd");
+                        arSalesDate = !checkDate.Checked ? "&transdate=" : "&transdate=" + dtDate.Value.ToString("yyyy-MM-dd");
                     }
+                    else if (gForType.ToLower().Equals("for payment"))
+                    {
+                        arSalesDate = !checkDate.Checked  ? "&transdate=" : "&transdate=" + dtDate.Value.ToString("yyyy-MM-dd");
+                    }
+                    string sBranch = "&branch=" + findCode(cmbBranches.Text, "Branch");
 
-                    string forQuery = subURL + "?transtype=" + gSalesType + "&transnum=" + txtsearch.Text + "&user_id=" + sUserID + arSalesDate;
+                    string sFromTime = cFromTime > 0 ? "&from_time=" : "&from_time=" + cmbFromTime.Text;
+
+                    string sToTime = cToTime > 0 ? "&to_time=" : "&to_time=" + cmbToTime.Text;
+
+                    string forQuery = subURL + "?transtype=" + gSalesType + "&transnum=" + txtsearch.Text + "&user_id=" + sUserID + arSalesDate + sBranch + sFromTime + sToTime;
+
                     string resultQuery;
                     if(gForType.Equals("for SAP"))
                     {
-                        resultQuery = "/api/sales/for_sap/get_all?date=" + dtDate.Value.ToString("yyyy-MM-dd") + "&branch=" + branch + "&transtype=" + gSalesType + "&cust_code=" + txtsearch.Text;
+                        resultQuery = "/api/sales/for_sap/get_all?transdate=" + dtDate.Value.ToString("yyyy-MM-dd") + "&transtype=" + gSalesType + "&cust_code=" + txtsearch.Text + "&created_by=" + sUserID + sFromTime + sToTime+ sBranch;
                     }
                     else
                     {
                         resultQuery = forQuery;
                     }
-
                     // 
+                    //Console.WriteLine(resultQuery);
                     var request = new RestRequest(resultQuery);
+                    Console.WriteLine(resultQuery);
                     request.AddHeader("Authorization", "Bearer " + token);            
                     var response = client.Execute(request);
+                    //MessageBox.Show(response.Content.ToString());
                     JObject jObject = new JObject();
 
                     if (response.ErrorMessage == null)
@@ -283,7 +407,7 @@ namespace AB
                                             int id = 0, transNumber = 0;
                                             string referenceNumber = "",
                 transType = "", salesAgent = "N/A", cust_code = "";
-                                            double amountDue = 0.00, tenderAmount = 0.00;
+                                            decimal amountDue = 0, tenderAmount = 0;
                                             DateTime dtTransDate = new DateTime();
                                             foreach (var q in data)
                                             {
@@ -295,9 +419,11 @@ namespace AB
                                                 {
                                                     transType = q.Value.ToString();
                                                 }
+                                                
                                                 if (q.Key.Equals(forSAPAmountColumnName))
                                                 {
-                                                    amountDue = Convert.ToDouble(q.Value.ToString());
+                                                    //Console.WriteLine(q.Value);
+                                                    amountDue = decimal.Round(Convert.ToDecimal(q.Value.ToString()), 2, MidpointRounding.AwayFromZero);
                                                 }
                                                 else if (q.Key.Equals("id"))
                                                 {
@@ -313,7 +439,7 @@ namespace AB
                                                 }
                                                 else if (q.Key.Equals("tenderamt"))
                                                 {
-                                                    tenderAmount = Convert.ToDouble(q.Value.ToString());
+                                                    tenderAmount = decimal.Round(Convert.ToDecimal(q.Value.ToString()), 2, MidpointRounding.AwayFromZero);
                                                 }
                                                 else if (q.Key.Equals("created_user"))
                                                 {
@@ -332,7 +458,7 @@ namespace AB
                                                     dtTransDate = Convert.ToDateTime(replaceT);
                                                 }
                                             }
-                                            dgvOrders.Rows.Add(false, id, transNumber, referenceNumber, amountDue.ToString("n2"), salesAgent, transType, cust_code, tenderAmount, "", dtTransDate.ToString("yyyy-MM-dd hh:mm tt"));
+                                            dgvOrders.Rows.Add(false, id, transNumber, referenceNumber, Convert.ToDecimal(string.Format("{0:0.00}", amountDue)), salesAgent, transType, cust_code, "", dtTransDate.ToString("yyyy-MM-dd HH:mm"), Convert.ToDecimal(string.Format("{0:0.00}", tenderAmount)));
                                             auto.Add(transNumber.ToString());
                                         }
                                         txtsearch.AutoCompleteCustomSource = auto;
@@ -401,7 +527,7 @@ namespace AB
             checkSelectAll.Checked = false;
         }
 
-        public void selectOrders()
+        public void selectOrders(bool value)
         {
             Cursor.Current = Cursors.WaitCursor;
             //DataTable dt = new DataTable();
@@ -418,35 +544,75 @@ namespace AB
                 }
                 if (!token.Equals(""))
                 {
-                    var client = new RestClient(utilityc.URL);
-                    client.Timeout = -1;
-
+                   
                     dgvOrders.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
                     double totalPendingAmount = 0.00;
-                    string ids = "";
+                    //string ids /*= "";*/
+                    //int isCheckAll_int = 0;
+                    if (value)
+                    {
+                        for (int i = 0; i < dgvOrders.Rows.Count; i++)
+                        {
+                            dgvOrders.Rows[i].Cells["selectt"].Value = checkSelectAll.Checked;
+                        }
+                    }
+                    else
+                    {
+                        int isCheckAll_int = 0;
+                        for (int i = 0; i < dgvOrders.Rows.Count; i++)
+                        {
+                            if (Convert.ToBoolean(dgvOrders.Rows[i].Cells["selectt"].Value.ToString()) == true)
+                            {
+                                isCheckAll_int += 1;
+                            }
+                        }
+                        if (checkSelectAll.Checked && !isCheckAll_int.Equals(dgvOrders.Rows.Count))
+                        {
+                            cCheck = 1;
+                            checkSelectAll.Checked = false;
+                        }
+                        else if (!checkSelectAll.Checked && isCheckAll_int.Equals(dgvOrders.Rows.Count))
+                        {
+                            checkSelectAll.Checked = true;
+                        }
+                    }
+
+                    JArray jarrayBody = new JArray();
                     for (int i = 0; i < dgvOrders.Rows.Count; i++)
                     {
                         if (Convert.ToBoolean(dgvOrders.Rows[i].Cells["selectt"].Value.ToString()) == true)
                         {
                             totalPendingAmount += Convert.ToDouble(dgvOrders.Rows[i].Cells["amountdue"].Value.ToString());
-                            ids = ids + "," + dgvOrders.Rows[i].Cells["base_id"].Value.ToString();
+                            //ids += dgvOrders.Rows[i].Cells["base_id"].Value.ToString() + ",";
+                            jarrayBody.Add(Convert.ToInt32(dgvOrders.Rows[i].Cells["base_id"].Value));
+                            //isCheckAll_int += 1;
                         }
                     }
-                  
-                    ids = (string.IsNullOrEmpty(ids) ? "" : ids.Substring(1));
+                    //Console.WriteLine(jarrayBody);
+                    //checkSelectAll.Checked = isCheckAll_int.Equals(dgvOrders.Rows.Count) ? true : false;
+
+                    //MessageBox.Show(isCheckAll_int.ToString() + "/" + dgvOrders.Rows.Count.ToString());
+
+                    //ids = (string.IsNullOrEmpty(ids) ? "" : ids.Substring(0, ids.Length - 1));
                     lblpendingamount.Text = "Pending Amount: " + totalPendingAmount.ToString("n2");
                     dgvitems.Rows.Clear();
-                    var request = new RestRequest("/api/sales/summary_trans?ids=%5B" + ids + "%5D");
-                    //MessageBox.Show("/api/sales/summary_trans?ids=%5B" + ids + "%5D");
+                    string sDate = gForType.Equals("for Payment") ? "&transdate=" : "&transdate=" + dtDate.Value.ToString("yyyy-MM-dd");
+                    JObject jsonObjectBody = new JObject();  
+                    jsonObjectBody.Add("ids", jarrayBody);
+                    var client = new RestClient(utilityc.URL);
+                    client.Timeout = -1;
+                    var request = new RestRequest("/api/sales/summary_trans?transtype=" +  gSalesType + sDate);
                     request.AddHeader("Authorization", "Bearer " + token);
+                    request.AddParameter("application/json", jsonObjectBody, ParameterType.RequestBody);
+                    request.Method = Method.PUT;
                     var response = client.Execute(request);
-
-                    if(response.ErrorMessage == null)
+                    Console.WriteLine("/api/sales/summary_trans?transtype=" + gSalesType + sDate);
+                    Console.WriteLine(jsonObjectBody);
+                    if (response.ErrorMessage == null)
                     {
                         JObject jObject = new JObject();
                         jObject = JObject.Parse(response.Content.ToString());
-
                         bool isSuccess = false;
                         foreach (var x in jObject)
                         {
@@ -457,6 +623,7 @@ namespace AB
                         }
                         if (isSuccess)
                         {
+                            string forSAPAmountColumnName = (gForType.Equals("for SAP") ? "doctotal" : "amount_due");
                             foreach (var x in jObject)
                             {
                                 if (x.Key.Equals("data"))
@@ -484,7 +651,7 @@ namespace AB
                                                     {
                                                         txtDiscountAmount.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
                                                     }
-                                                    else if (z.Key.Equals("amount_due"))
+                                                    else if (z.Key.Equals(forSAPAmountColumnName))
                                                     {
                                                         txtlAmountPayable.Text = string.IsNullOrEmpty(z.Value.ToString()) ? "0.00" : Convert.ToDouble(z.Value.ToString()).ToString("n2");
                                                     }
@@ -539,7 +706,7 @@ namespace AB
                                                             discamt = Convert.ToDouble(z.Value.ToString());
                                                         }
                                                     }
-                                                    dgvitems.Rows.Add(itemName, quantity.ToString("n2"), price.ToString("n2"), discountPercent.ToString("n2"), discamt.ToString("n2"), totalPrice.ToString("n2"), free);
+                                                    dgvitems.Rows.Add(itemName, Convert.ToDecimal(string.Format("{0:0.00}", quantity)), Convert.ToDecimal(string.Format("{0:0.00}", price)), Convert.ToDecimal(string.Format("{0:0.00}", discountPercent)), Convert.ToDecimal(string.Format("{0:0.00}", discamt)), Convert.ToDecimal(string.Format("{0:0.00}", totalPrice)), free);
                                                 }
                                             }
                                         }
@@ -580,27 +747,27 @@ namespace AB
             Cursor.Current = Cursors.Default;
             computeChange();
 
-            int int_selectAll = 0;
-            for (int i = 0; i < dgvOrders.Rows.Count; i++)
-            {
-                if (Convert.ToBoolean(dgvOrders.Rows[i].Cells["selectt"].Value.ToString()) == true)
-                {
-                    int_selectAll += 1;
-                }
-            }
-            if (int_selectAll <= 0 && checkSelectAll.Checked)
-            {
-                checkSelectAll.Checked = false;
-            }
+            //int int_selectAll = 0;
+            //for (int i = 0; i < dgvOrders.Rows.Count; i++)
+            //{
+            //    if (Convert.ToBoolean(dgvOrders.Rows[i].Cells["selectt"].Value.ToString()) == true)
+            //    {
+            //        int_selectAll += 1;
+            //    }
+            //}
+            //if (int_selectAll <= 0 && checkSelectAll.Checked)
+            //{
+            //    checkSelectAll.Checked = false;
+            //}
         }
 
         private void dgvOrders_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvOrders.Rows.Count > 0)
             {
-                if (e.ColumnIndex == 0 && e.RowIndex >= 0)
+                if (e.ColumnIndex == 0)
                 {
-                    selectOrders();
+                    selectOrders(false);
                 }
             }
         }
@@ -956,6 +1123,7 @@ namespace AB
                             }
                         }
                     }
+                    Console.WriteLine("body: " + jArrayBody);
                     request.AddParameter("application/json", jArrayBody, ParameterType.RequestBody);
                     var response = client.Execute(request);
                     JObject jObjectResponse = JObject.Parse(response.Content);
@@ -1026,8 +1194,11 @@ namespace AB
 
         private void cmbsales_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
-            loadData(subURL);
+            if (cSales <= 0)
+            {
+                string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
+                loadData(subURL);
+            }
         }
 
         private void btnrefresh_Click(object sender, EventArgs e)
@@ -1091,7 +1262,7 @@ namespace AB
 
         private void dtDate_ValueChanged(object sender, EventArgs e)
         {
-            if (gSalesType == "AR Sales")
+          if(cDate <= 0)
             {
                 string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
                 loadData(subURL);
@@ -1117,11 +1288,110 @@ namespace AB
             }
             txtTotalPayment.Text = totalPayment.ToString("n2");
             double num1 = totalPayment + (string.IsNullOrEmpty(txtTenderAmount.Text) ? 0.00 : Convert.ToDouble(txtTenderAmount.Text));
-            double amountDue = (string.IsNullOrEmpty(txtlAmountPayable.Text) ? 0.00 : Convert.ToDouble(txtlAmountPayable.Text)); ;
+            //MessageBox.Show(num1.ToString("n2"));
+            double amountDue = (string.IsNullOrEmpty(txtlAmountPayable.Text) ? 0.00 : Convert.ToDouble(txtlAmountPayable.Text)); 
             double change = num1 - amountDue;
             txtChange.Text = (change > 0 ? change : 0.00).ToString("n2");
         }
 
+        private void cmbFromTime_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(cFromTime <= 0)
+            {
+                string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
+                loadData(subURL);
+            }
+        }
+
+        private void cmbToTime_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cToTime <= 0)
+            {
+                string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
+                loadData(subURL);
+            }
+        }
+
+        private void cmbBranches_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dgvitems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvitems.Rows.Count > 0 && dgvOrders.Rows.Count > 0)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    try
+                    {
+                        JArray jarrayBody = new JArray();
+                        for (int i = 0; i < dgvOrders.Rows.Count; i++)
+                        {
+                            if (Convert.ToBoolean(dgvOrders.Rows[i].Cells["selectt"].Value.ToString()) == true)
+                            {
+                                jarrayBody.Add(Convert.ToInt32(dgvOrders.Rows[i].Cells["base_id"].Value));
+                            }
+                        }
+
+                        Cursor.Current = Cursors.WaitCursor;
+                        if (Login.jsonResult != null)
+                        {
+                            string token = "";
+                            foreach (var x in Login.jsonResult)
+                            {
+                                if (x.Key.Equals("token"))
+                                {
+                                    token = x.Value.ToString();
+                                }
+                            }
+                            if (!token.Equals(""))
+                            {
+                                var client = new RestClient(utilityc.URL);
+                                client.Timeout = -1;
+                                JObject jsonObjectBody = new JObject();
+                                jsonObjectBody.Add("ids", jarrayBody);
+                                jsonObjectBody.Add("discount", Convert.ToDouble(dgvitems.CurrentRow.Cells["discpercent"].Value.ToString()));
+                                jsonObjectBody.Add("item_code", dgvitems.CurrentRow.Cells["item"].Value.ToString());
+                                var request = new RestRequest("/api/sales/item/transaction/details");
+                                request.AddHeader("Authorization", "Bearer " + token);
+                                Console.WriteLine(jsonObjectBody);
+                                request.AddParameter("application/json", jsonObjectBody, ParameterType.RequestBody);
+                                request.Method = Method.PUT;
+                                var response = client.Execute(request);
+                                ItemDiscount itemDisc = new ItemDiscount();
+                                if (response.ErrorMessage == null)
+                                {
+                                    itemDisc.jsonResponse = response.Content.ToString();
+                                }
+                                else
+                                {
+                                    itemDisc.jsonResponse = response.ErrorMessage;
+                                }
+                                itemDisc.ShowDialog();
+                                Cursor.Current = Cursors.Default;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+        }
+
+        private void checkDate_CheckedChanged(object sender, EventArgs e)
+        {
+            dtDate.Visible = checkDate.Checked;
+            string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
+            loadData(subURL);
+        }
 
         public void pay(JObject jObjectPay, DataTable dtDeposit)
         {
@@ -1166,6 +1436,15 @@ namespace AB
                     }
                 }
                 break;
+            }
+        }
+
+        private void cmbBranches_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(cBranch <= 0)
+            {
+                string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
+                loadData(subURL);
             }
         }
 
@@ -1225,18 +1504,17 @@ namespace AB
         {
             if (dgvOrders.Rows.Count > 0)
             {
-                toggleSelectAll(checkSelectAll.Checked);
-                selectOrders();
+                //toggleSelectAll(checkSelectAll.Checked);
+                //MessageBox.Show(cCheck.ToString());
+                if (cCheck == 0)
+                {
+                    selectOrders(true);
+                }
+                else
+                {
+                    cCheck = 0;
+                }
             }
         }
-
-        public void toggleSelectAll(bool value)
-        {
-            for (int i = 0; i < dgvOrders.Rows.Count; i++)
-            {
-                dgvOrders.Rows[i].Cells["selectt"].Value = value;
-            }
-        }
-
     }
 }

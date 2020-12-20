@@ -51,6 +51,8 @@
             this.lblNoDataFound = new System.Windows.Forms.Label();
             this.checkSAP = new System.Windows.Forms.CheckBox();
             this.checkTransDate = new System.Windows.Forms.CheckBox();
+            this.btnGenerateExcel = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +122,6 @@
             this.cmbBranch.Name = "cmbBranch";
             this.cmbBranch.Size = new System.Drawing.Size(154, 24);
             this.cmbBranch.TabIndex = 38;
-            //this.cmbBranch.SelectedIndexChanged += new System.EventHandler(this.cmbBranch_SelectedIndexChanged);
             this.cmbBranch.SelectedValueChanged += new System.EventHandler(this.cmbBranch_SelectedValueChanged);
             // 
             // cmbDocStatus
@@ -188,7 +189,7 @@
             this.dgv.Location = new System.Drawing.Point(27, 128);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(660, 323);
+            this.dgv.Size = new System.Drawing.Size(660, 269);
             this.dgv.TabIndex = 35;
             this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
             // 
@@ -271,9 +272,9 @@
             this.checkSAP.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkSAP.Location = new System.Drawing.Point(27, 62);
             this.checkSAP.Name = "checkSAP";
-            this.checkSAP.Size = new System.Drawing.Size(100, 20);
+            this.checkSAP.Size = new System.Drawing.Size(91, 20);
             this.checkSAP.TabIndex = 45;
-            this.checkSAP.Text = "have SAP #";
+            this.checkSAP.Text = "have AR #";
             this.checkSAP.UseVisualStyleBackColor = true;
             this.checkSAP.CheckedChanged += new System.EventHandler(this.checkSAP_CheckedChanged);
             // 
@@ -289,12 +290,29 @@
             this.checkTransDate.UseVisualStyleBackColor = true;
             this.checkTransDate.CheckedChanged += new System.EventHandler(this.checkTransDate_CheckedChanged);
             // 
+            // btnGenerateExcel
+            // 
+            this.btnGenerateExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerateExcel.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnGenerateExcel.FlatAppearance.BorderSize = 0;
+            this.btnGenerateExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerateExcel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerateExcel.ForeColor = System.Drawing.Color.White;
+            this.btnGenerateExcel.Location = new System.Drawing.Point(536, 403);
+            this.btnGenerateExcel.Name = "btnGenerateExcel";
+            this.btnGenerateExcel.Size = new System.Drawing.Size(151, 36);
+            this.btnGenerateExcel.TabIndex = 47;
+            this.btnGenerateExcel.Text = "Generate Excel";
+            this.btnGenerateExcel.UseVisualStyleBackColor = false;
+            this.btnGenerateExcel.Click += new System.EventHandler(this.btnGenerateExcel_Click);
+            // 
             // SalesTransactions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(711, 498);
+            this.Controls.Add(this.btnGenerateExcel);
             this.Controls.Add(this.checkTransDate);
             this.Controls.Add(this.checkSAP);
             this.Controls.Add(this.lblNoDataFound);
@@ -340,5 +358,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sap_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn docstatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn transdate;
+        private System.Windows.Forms.Button btnGenerateExcel;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

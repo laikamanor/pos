@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using AB.UI_Class;
+﻿using AB.UI_Class;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace AB
 {
@@ -17,6 +11,8 @@ namespace AB
     {
         utility_class utilityc = new utility_class();
         public string URLDetails = "";
+        public int selectedID = 0;
+        public static bool isSubmit = false;
         public CashTransactionReportItems()
         {
             InitializeComponent();
@@ -24,6 +20,7 @@ namespace AB
 
         private void CashTransactionReportItems_Load(object sender, EventArgs e)
         {
+            btnCancel.Visible = canCancel();
             loadData();
         }
 
@@ -104,7 +101,7 @@ namespace AB
                                                 }
 
                                             }
-                                            dgvitems.Rows.Add(ID,paymentID,paymentType,amountt.ToString("n2"),referenceNumber,sapNumber);
+                                            dgvitems.Rows.Add(ID,paymentID,paymentType, Convert.ToDecimal(string.Format("{0:0.00}", amountt)), referenceNumber,sapNumber);
                                         }
                                     }
                                     else if (w.Key.Equals("reference"))
@@ -137,6 +134,119 @@ namespace AB
                     }
                 }
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (canCancel())
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    JObject jObject = new JObject();
+                    string id = URLDetails.Replace("/api/payment/details/", "");
+                    apiPUT(jObject, "/api/payment/void/" + id.Trim());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void apiPUT(JObject body, string URL)
+        {
+            if (Login.jsonResult != null)
+            {
+                string token = "";
+                foreach (var x in Login.jsonResult)
+                {
+                    if (x.Key.Equals("token"))
+                    {
+                        token = x.Value.ToString();
+                    }
+                }
+                if (!token.Equals(""))
+                {
+                    var client = new RestClient(utilityc.URL);
+                    client.Timeout = -1;
+                    var request = new RestRequest(URL);
+                    Console.WriteLine(URL);
+                    request.AddHeader("Authorization", "Bearer " + token);
+                    request.Method = Method.PUT;
+
+                    Console.WriteLine(body);
+                    request.AddParameter("application/json", body, ParameterType.RequestBody);
+                    var response = client.Execute(request);
+                    if (response.ErrorMessage == null)
+                    {
+                        if (response.Content.ToString().Substring(0, 1).Equals("{"))
+                        {
+                            JObject jObjectResponse = JObject.Parse(response.Content);
+
+                            foreach (var x in jObjectResponse)
+                            {
+                                if (x.Key.Equals("success"))
+                                {
+                                    isSubmit = true;
+                                }
+                            }
+
+                            string msg = "No message response found";
+                            foreach (var x in jObjectResponse)
+                            {
+                                if (x.Key.Equals("message"))
+                                {
+                                    msg = x.Value.ToString();
+                                }
+                            }
+                            MessageBox.Show(msg, "Message", MessageBoxButtons.OK, isSubmit ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+
+                            if (isSubmit)
+                            {
+                                this.Dispose();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(response.Content.ToString(), "Error", MessageBoxButtons.OK, isSubmit ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+                        }
+                       
+                    }
+                    else
+                    {
+                        MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                }
+            }
+        }
+
+        public bool canCancel()
+        {
+            bool isCanGenerateExcel = false;
+            if (Login.jsonResult != null)
+            {
+                foreach (var x in Login.jsonResult)
+                {
+                    if (x.Key.Equals("data"))
+                    {
+                        JObject jObjectData = JObject.Parse(x.Value.ToString());
+                        foreach (var y in jObjectData)
+                        {
+                            if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager"))
+                            {
+                                if (y.Value.ToString().ToLower() == "true")
+                                {
+                                    isCanGenerateExcel = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return isCanGenerateExcel;
         }
     }
 }

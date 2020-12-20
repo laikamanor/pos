@@ -349,13 +349,13 @@ namespace AB
                                             {
                                                 amount = Convert.ToDouble(y.Value.ToString());
                                             }
-                                            else if (y.Key.Equals("reference2"))
+                                            else if (y.Key.Equals("reference"))
                                             {
                                                 paymentReference = y.Value.ToString();
                                             }
                                         }
                                         auto.Add(customerCode);
-                                        dgv.Rows.Add(false, id, paymentID, customerCode, paymentType, amount.ToString("n2"), paymentReference);
+                                        dgv.Rows.Add(false, id, paymentID, customerCode, paymentType, amount, paymentReference);
                                     }
                                 }
                             }

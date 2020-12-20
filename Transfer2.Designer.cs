@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Transfer2));
             this.label3 = new System.Windows.Forms.Label();
             this.dtDate = new System.Windows.Forms.DateTimePicker();
@@ -52,6 +51,7 @@
             this.docstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sap_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.variance_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +61,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Gray;
-            this.label3.Location = new System.Drawing.Point(581, 98);
+            this.label3.Location = new System.Drawing.Point(581, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 16);
             this.label3.TabIndex = 41;
@@ -73,7 +73,7 @@
             this.dtDate.CustomFormat = "yyyy-MM-dd";
             this.dtDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDate.Location = new System.Drawing.Point(676, 93);
+            this.dtDate.Location = new System.Drawing.Point(676, 124);
             this.dtDate.Name = "dtDate";
             this.dtDate.Size = new System.Drawing.Size(117, 22);
             this.dtDate.TabIndex = 40;
@@ -124,7 +124,7 @@
             this.Label2.AutoSize = true;
             this.Label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label2.ForeColor = System.Drawing.Color.DimGray;
-            this.Label2.Location = new System.Drawing.Point(581, 127);
+            this.Label2.Location = new System.Drawing.Point(581, 101);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(75, 15);
             this.Label2.TabIndex = 36;
@@ -144,7 +144,7 @@
             "Open",
             "Closed",
             "Cancelled"});
-            this.cmbStatusTransactions.Location = new System.Drawing.Point(662, 121);
+            this.cmbStatusTransactions.Location = new System.Drawing.Point(662, 95);
             this.cmbStatusTransactions.Name = "cmbStatusTransactions";
             this.cmbStatusTransactions.Size = new System.Drawing.Size(131, 23);
             this.cmbStatusTransactions.TabIndex = 35;
@@ -154,8 +154,6 @@
             // 
             this.dgvTransactions.AllowUserToAddRows = false;
             this.dgvTransactions.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -163,14 +161,14 @@
             this.dgvTransactions.BackgroundColor = System.Drawing.Color.White;
             this.dgvTransactions.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvTransactions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(153)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTransactions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(153)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTransactions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTransactions.ColumnHeadersHeight = 40;
             this.dgvTransactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -179,7 +177,8 @@
             this.remarks,
             this.docstatus,
             this.sap_number,
-            this.transdate});
+            this.transdate,
+            this.variance_count});
             this.dgvTransactions.EnableHeadersVisualStyles = false;
             this.dgvTransactions.GridColor = System.Drawing.Color.DarkGray;
             this.dgvTransactions.Location = new System.Drawing.Point(9, 150);
@@ -311,6 +310,13 @@
             this.transdate.Name = "transdate";
             this.transdate.ReadOnly = true;
             // 
+            // variance_count
+            // 
+            this.variance_count.HeaderText = "Variance";
+            this.variance_count.Name = "variance_count";
+            this.variance_count.ReadOnly = true;
+            this.variance_count.Visible = false;
+            // 
             // Transfer2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,5 +371,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn docstatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn sap_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn transdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn variance_count;
     }
 }

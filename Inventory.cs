@@ -18,10 +18,10 @@ namespace AB
     {
         utility_class utilityc = new utility_class();
         branch_class branchc = new branch_class();
+        warehouse_class warehousec = new warehouse_class();
         DataTable dtBranches = new DataTable();
         DataTable dtWarehouse = new DataTable();
         int cBranch = 0, cWarehouse = 0, cDate = 0;
-        warehouse_class warehousec = new warehouse_class();
         public Inventory()
         {
             InitializeComponent();
@@ -30,7 +30,6 @@ namespace AB
         private void Inventory_Load(object sender, EventArgs e)
         {
             loadBranches();
-            loadWarehouse();
             dtDate.Value = DateTime.Now;
             cBranch = 0;
             cWarehouse = 0;
@@ -151,6 +150,8 @@ namespace AB
         {
             string branchCode = "";
             string warehouse = "";
+            cmbWarehouse.Items.Clear();
+            cmbWarehouse.Items.Add("All");
             foreach (DataRow row in dtBranches.Rows)
             {
                 if (cmbBranches.Text.Equals(row["name"].ToString()))
@@ -159,76 +160,10 @@ namespace AB
                     break;
                 }
             }
-
-            int isAdmin = 0;
             dtWarehouse = warehousec.returnWarehouse(branchCode);
             foreach (DataRow row in dtWarehouse.Rows)
             {
                 cmbWarehouse.Items.Add(row["whsename"]);
-            }
-            cmbWarehouse.Items.Clear();
-            if (Login.jsonResult != null)
-            {
-                foreach (var x in Login.jsonResult)
-                {
-                    if (x.Key.Equals("data"))
-                    {
-
-                        JObject jObjectData = JObject.Parse(x.Value.ToString());
-                        foreach (var y in jObjectData)
-                        {
-                            if (y.Key.Equals("whse"))
-                            {
-                                warehouse = y.Value.ToString();
-                            }
-                            else if (y.Key.Equals("isAdmin"))
-                            {
-
-                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
-                                {
-                                    foreach (DataRow row in dtWarehouse.Rows)
-                                    {
-                                        if (row["whsecode"].ToString() == warehouse)
-                                        {
-                                            cmbWarehouse.Items.Add(row["whsename"].ToString());
-                                            if (cmbWarehouse.Items.Count > 0)
-                                            {
-                                                cmbWarehouse.SelectedIndex = 0;
-                                            }
-                                            return;
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    isAdmin += 1;
-                                    break;
-                                }
-                            }
-                            else if (y.Key.Equals("isAccounting"))
-                            {
-                                if (y.Value.ToString().ToLower() == "false" || y.Value.ToString() == "")
-                                {
-                                    foreach (DataRow row in dtWarehouse.Rows)
-                                    {
-                                        if (row["whsecode"].ToString() == warehouse && isAdmin <= 0)
-                                        {
-                                            cmbWarehouse.Items.Add(row["whsename"].ToString());
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (cmbWarehouse.Items.Count <= 0)
-                {
-                    foreach (DataRow row in dtWarehouse.Rows)
-                    {
-                        cmbWarehouse.Items.Add(row["whsename"]);
-                    }
-                }
             }
             if (cmbWarehouse.Items.Count > 0)
             {
@@ -355,12 +290,13 @@ namespace AB
                                         {
                                             if (txtSearch.Text.ToString().Trim().Contains(itemCode))
                                             {
-                                                dgv.Rows.Add(itemCode, beginning.ToString("N0"), received.ToString("N0"), transferIn.ToString("N0"), adjin.ToString("N0"), totalIn.ToString("N0"), transferred.ToString("N0"), adjout.ToString("N0"), pullout.ToString("N0"), sold.ToString("N0"), totalOut.ToString("N0"), available.ToString("N0"));
+                                            
+                                                dgv.Rows.Add(itemCode, Convert.ToDecimal(string.Format("{0:0.00}", beginning)), Convert.ToDecimal(string.Format("{0:0.00}", received)), Convert.ToDecimal(string.Format("{0:0.00}", transferIn)), Convert.ToDecimal(string.Format("{0:0.00}", adjin)), Convert.ToDecimal(string.Format("{0:0.00}", totalIn)), Convert.ToDecimal(string.Format("{0:0.00}", transferred)), Convert.ToDecimal(string.Format("{0:0.00}", adjout)), Convert.ToDecimal(string.Format("{0:0.00}", pullout)), Convert.ToDecimal(string.Format("{0:0.00}", sold)), Convert.ToDecimal(string.Format("{0:0.00}", totalOut)), Convert.ToDecimal(string.Format("{0:0.00}", available)));
                                             }
                                         }
                                         else
                                         {
-                                            dgv.Rows.Add(itemCode, beginning.ToString("N0"), received.ToString("N0"), transferIn.ToString("N0"), adjin.ToString("N0"), totalIn.ToString("N0"), transferred.ToString("N0"), adjout.ToString("N0"), pullout.ToString("N0"), sold.ToString("N0"), totalOut.ToString("N0"), available.ToString("N0"));
+                                            dgv.Rows.Add(itemCode, Convert.ToDecimal(string.Format("{0:0.00}", beginning)), Convert.ToDecimal(string.Format("{0:0.00}", received)), Convert.ToDecimal(string.Format("{0:0.00}", transferIn)), Convert.ToDecimal(string.Format("{0:0.00}", adjin)), Convert.ToDecimal(string.Format("{0:0.00}",totalIn)), Convert.ToDecimal(string.Format("{0:0.00}", transferred)), Convert.ToDecimal(string.Format("{0:0.00}", adjout)), Convert.ToDecimal(string.Format("{0:0.00}", pullout)), Convert.ToDecimal(string.Format("{0:0.00}", sold)), Convert.ToDecimal(string.Format("{0:0.00}", totalOut)), Convert.ToDecimal(string.Format("{0:0.00}", available)));
                                         }
                                     }
                                 }

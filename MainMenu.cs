@@ -17,7 +17,7 @@ namespace AB
         }
         private void MainMenu_Load(object sender, EventArgs e)
         {
-
+            this.Text = "Atlantic Bakery - " + Login.fullName + " - v1.4";
         }
 
         public void showForm(Form form)
@@ -169,6 +169,12 @@ namespace AB
         {
             ObjectType adjustmentIn = new ObjectType();
             showForm(adjustmentIn);
+        }
+
+        private void warehouseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Warehouse warehouse = new Warehouse();
+            showForm(warehouse);
         }
     }
 }

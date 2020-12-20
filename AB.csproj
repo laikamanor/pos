@@ -64,7 +64,7 @@
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -79,10 +79,24 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Debug\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Visual Studio 2015\Projects\ARED DOOR KITCHEN\AK POS\bin\x64\Debug\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat">
+      <HintPath>..\..\..\Visual Studio 2015\Projects\ARED DOOR KITCHEN\AK POS\bin\x64\Debug\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember">
+      <HintPath>..\..\..\Visual Studio 2015\Projects\ARED DOOR KITCHEN\AK POS\bin\x64\Debug\FastMember.dll</HintPath>
+    </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -197,6 +211,12 @@
     <Compile Include="AddAdjustmentIn.Designer.cs">
       <DependentUpon>AddAdjustmentIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddWarehouse.Designer.cs">
+      <DependentUpon>AddWarehouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdjustmentIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +234,18 @@
     </Compile>
     <Compile Include="AdvancePayment.Designer.cs">
       <DependentUpon>AdvancePayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancePayment2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancePayment2.Designer.cs">
+      <DependentUpon>AdvancePayment2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AmountRemaks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AmountRemaks.Designer.cs">
+      <DependentUpon>AmountRemaks.cs</DependentUpon>
     </Compile>
     <Compile Include="API Class\Advance Payment\advancepayment_class.cs" />
     <Compile Include="API Class\Branch\branch_class.cs" />
@@ -343,6 +375,18 @@
     </Compile>
     <Compile Include="Inventory.Designer.cs">
       <DependentUpon>Inventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemDeposit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemDeposit.Designer.cs">
+      <DependentUpon>ItemDeposit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemDiscount.Designer.cs">
+      <DependentUpon>ItemDiscount.cs</DependentUpon>
     </Compile>
     <Compile Include="ItemInfo.cs">
       <SubType>Form</SubType>
@@ -478,6 +522,12 @@
     <Compile Include="SAPNumber.Designer.cs">
       <DependentUpon>SAPNumber.cs</DependentUpon>
     </Compile>
+    <Compile Include="SAPWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SAPWarehouse.Designer.cs">
+      <DependentUpon>SAPWarehouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="SAP_Remarks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -495,6 +545,12 @@
     </Compile>
     <Compile Include="SelectedItem.Designer.cs">
       <DependentUpon>SelectedItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SummaryDeposit_Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SummaryDeposit_Details.Designer.cs">
+      <DependentUpon>SummaryDeposit_Details.cs</DependentUpon>
     </Compile>
     <Compile Include="Transfer.cs">
       <SubType>Form</SubType>
@@ -551,6 +607,9 @@
     <EmbeddedResource Include="AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddWarehouse.resx">
+      <DependentUpon>AddWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdjustmentIn.resx">
       <DependentUpon>AdjustmentIn.cs</DependentUpon>
     </EmbeddedResource>
@@ -559,6 +618,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdvancePayment.resx">
       <DependentUpon>AdvancePayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdvancePayment2.resx">
+      <DependentUpon>AdvancePayment2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AmountRemaks.resx">
+      <DependentUpon>AmountRemaks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Branches.resx">
       <DependentUpon>Branches.cs</DependentUpon>
@@ -609,6 +674,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemDeposit.resx">
+      <DependentUpon>ItemDeposit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemDiscount.resx">
+      <DependentUpon>ItemDiscount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemInfo.resx">
       <DependentUpon>ItemInfo.cs</DependentUpon>
@@ -687,6 +758,9 @@
     <EmbeddedResource Include="SAPNumber.resx">
       <DependentUpon>SAPNumber.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SAPWarehouse.resx">
+      <DependentUpon>SAPWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SAP_Remarks.resx">
       <DependentUpon>SAP_Remarks.cs</DependentUpon>
     </EmbeddedResource>
@@ -695,6 +769,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectedItem.resx">
       <DependentUpon>SelectedItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SummaryDeposit_Details.resx">
+      <DependentUpon>SummaryDeposit_Details.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Transfer.resx">
       <DependentUpon>Transfer.cs</DependentUpon>

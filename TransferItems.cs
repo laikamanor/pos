@@ -32,6 +32,23 @@ namespace AB
             loadData();
         }
 
+        public void checkVariance()
+        {
+            for (int i = 0; i < dgvitems.Rows.Count; i++)
+            {
+                if (Convert.ToDouble(dgvitems.Rows[i].Cells["variance"].Value.ToString()) == 0)
+                {
+                    //dgvitems.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                }
+                else if(Convert.ToDouble(dgvitems.Rows[i].Cells["variance"].Value.ToString()) < 0){
+                    dgvitems.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(248, 255, 43);
+                }
+                else if (Convert.ToDouble(dgvitems.Rows[i].Cells["variance"].Value.ToString()) > 0){
+                    dgvitems.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(0, 227, 76);
+                }
+            }
+        }
+
         public void loadData()
         {
             DataTable dtItems = new DataTable();
@@ -55,14 +72,16 @@ namespace AB
                 foreach(DataRow row in dtItems.Rows)
                 {
                     string decodeDocStatus = row["docstatus"].ToString() == "O" ? "Open" : row["docstatus"].ToString() == "C" ? "Closed" : "Cancelled";
-                    if (URL.Equals("inv/trfr") || URL.Equals("pullout"))
+                    double quantity = Convert.ToDouble(row["quantity"].ToString());
+                    if (URL.Equals("pullout"))
                     {
-                        dgvitems.Rows.Add(row["id"], row["transfer_id"], row["item_code"], Convert.ToDouble(row["quantity"]).ToString("n2"));
+                        dgvitems.Rows.Add(row["id"], row["transfer_id"], row["item_code"], Convert.ToDecimal(string.Format("{0:0.00}", quantity)));
                     }
                     else
                     {
-                        double variance = (Convert.ToDouble(row["actualrec"].ToString()) - Convert.ToDouble(row["quantity"].ToString()));
-                        dgvitems.Rows.Add(row["id"], row["transfer_id"], row["item_code"], Convert.ToDouble(row["quantity"]).ToString("n2"),Convert.ToDouble(row["actualrec"].ToString()).ToString("n2"),variance.ToString("n2"));
+                        double actualRec = Convert.ToDouble(row["actualrec"].ToString());
+                        double variance = (actualRec - quantity);
+                        dgvitems.Rows.Add(row["id"], row["transfer_id"], row["item_code"], Convert.ToDecimal(string.Format("{0:0.00}", quantity)), Convert.ToDecimal(string.Format("{0:0.00}", actualRec)), Convert.ToDecimal(string.Format("{0:0.00}", variance)));
                     }
                     lblDocumentStatus.Text =decodeDocStatus;
                     lblReference.Text = row["reference"].ToString();
@@ -90,11 +109,11 @@ namespace AB
                     }
                 }
             }
-            if (gForType.Equals("For Transactions") && !this.Text.Equals("Pullout Items"))
+            if (gForType.Equals("For Transactions") && this.Text.Equals("Pullout Items"))
             {
                 btnCancel.Visible = true;
-                btnCancel.Text = "Cancel";
-                btnCancel.BackColor = Color.Firebrick;
+                btnCancel.Text = "Confirm";
+                btnCancel.BackColor = Color.DodgerBlue;
             }
             else if(gForType.Equals("For SAP") && this.Text.Equals("Received Items"))
             {
@@ -112,8 +131,12 @@ namespace AB
             {
                 btnCancel.Visible = false;
             }
-            dgvitems.Columns["actualrec"].Visible= (this.Text.Equals("Transfer Items") || this.Text.Equals("Pullout Items") ? false : true);
-            dgvitems.Columns["variance"].Visible = (this.Text.Equals("Transfer Items") || this.Text.Equals("Pullout Items") ? false : true);
+            dgvitems.Columns["actualrec"].Visible= (this.Text.Equals("Pullout Items") ? false : true);
+            dgvitems.Columns["variance"].Visible = ( this.Text.Equals("Pullout Items") ? false : true);
+            if (this.Text == "Transfer Items")
+            {
+                checkVariance();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -131,39 +154,40 @@ namespace AB
         public void forUpdatingSAP()
         {
             JObject jObjectBody = new JObject();
-            if(this.Text.Equals("Pullout Items"))
+            if (this.Text.Equals("Pullout Items"))
             {
-                SAP_Remarks sAP_Remarks = new SAP_Remarks();
-                sAP_Remarks.ShowDialog();
-                int sap_number = SAP_Remarks.sap_number;
-                string remarks = SAP_Remarks.rem;
-                if (sap_number.Equals(0))
+                SAPWarehouse sAPWarehouse = new SAPWarehouse();
+                sAPWarehouse.ShowDialog();
+                if (SAPWarehouse.isSubmit)
                 {
-                    jObjectBody.Add("sap_number", null);
+                    int sapNumber = SAPWarehouse.sapNumber;
+                    string warehouseCode = SAPWarehouse.warehouseCode;
+                    jObjectBody.Add("sap_number", sapNumber);
+                    jObjectBody.Add("to_whse", warehouseCode);
+                    string URL = "/api/pullout/transfer/" + selectedID;
+                    apiPUT(jObjectBody, URL);
                 }
-                else
-                {
-                    jObjectBody.Add("sap_number", sap_number);
-                }
-                jObjectBody.Add("remarks", remarks.Trim());
             }
             else
             {
                 SAPNumber sAPNumber = new SAPNumber();
                 sAPNumber.ShowDialog();
-                int sap_number = SAPNumber.sap_number;
+                if (SAPNumber.isSubmit)
+                {
+                    int sap_number = SAPNumber.sap_number;
 
-                if (sap_number.Equals(0))
-                {
-                    jObjectBody.Add("sap_number", null);
+                    if (sap_number.Equals(0))
+                    {
+                        jObjectBody.Add("sap_number", null);
+                    }
+                    else
+                    {
+                        jObjectBody.Add("sap_number", sap_number);
+                    }
                 }
-                else
-                {
-                    jObjectBody.Add("sap_number", sap_number);
-                }
+                string URL = (this.Text.Equals("Pullout Items") ? "/api/sap_num/pullout/update?ids=" + "%5B" + selectedID + "%5D" : "/api/inv/recv/update/" + selectedID);
+                apiPUT(jObjectBody, URL);
             }
-            string URL = (this.Text.Equals("Pullout Items") ? "/api/sap_num/pullout/update?ids=" + "%5B" + selectedID + "%5D"  : "/api/inv/recv/update/" + selectedID);
-            apiPUT(jObjectBody, URL);
         }
 
         public void apiPUT(JObject body, string URL)
@@ -187,54 +211,23 @@ namespace AB
                     request.AddHeader("Authorization", "Bearer " + token);
                     request.Method = Method.PUT;
 
-
+                    Console.WriteLine(body);
                     request.AddParameter("application/json", body, ParameterType.RequestBody);
                     var response = client.Execute(request);
-                    Console.WriteLine(response.Content);
-                    JObject jObjectResponse = JObject.Parse(response.Content);
-
-                    foreach (var x in jObjectResponse)
+                    if (response.ErrorMessage == null)
                     {
-                        if (x.Key.Equals("success"))
+                        JObject jObjectResponse = JObject.Parse(response.Content);
+
+                        foreach (var x in jObjectResponse)
                         {
-                            isSubmit = true;
-                            break;
+                            if (x.Key.Equals("success"))
+                            {
+                                isSubmit = true;
+                                break;
+                            }
                         }
-                    }
 
-                    string msg = "No message response found";
-                    foreach (var x in jObjectResponse)
-                    {
-                        if (x.Key.Equals("message"))
-                        {
-                            msg = x.Value.ToString();
-                        }
-                    }
-                    MessageBox.Show(msg, "", MessageBoxButtons.OK, isSubmit ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
-
-                    if (isSubmit)
-                    {
-                        this.Dispose();
-                    }
-                }
-            }
-        }
-
-        public void forCancel()
-        {
-            if (lblDocumentStatus.Text.Equals("Open") && this.Text.Equals("Transfer Items"))
-            {
-                Remarks remarkss = new Remarks();
-                remarkss.ShowDialog();
-                string remarks = Remarks.rem;
-                if (!string.IsNullOrEmpty(remarks))
-                {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        string sResponse = transferc.cancelTransfer(selectedID, remarks);
-                        JObject jObjectResponse = JObject.Parse(sResponse);
-                        string msg = "";
+                        string msg = "No message response found";
                         foreach (var x in jObjectResponse)
                         {
                             if (x.Key.Equals("message"))
@@ -242,13 +235,65 @@ namespace AB
                                 msg = x.Value.ToString();
                             }
                         }
-                        if (!string.IsNullOrEmpty(msg))
+                        MessageBox.Show(msg, "", MessageBoxButtons.OK, isSubmit ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+
+                        if (isSubmit)
                         {
-                            MessageBox.Show(msg, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            isSubmit = true;
                             this.Dispose();
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
+                }
+            }
+        }
+
+        public void forCancel()
+        {
+            if (this.Text.Equals("Received Items") || this.Text.Equals("Transfer Items"))
+            {
+                if (lblDocumentStatus.Text.Equals("Open"))
+                {
+                    Remarks remarkss = new Remarks();
+                    remarkss.ShowDialog();
+                    string remarks = Remarks.rem;
+                    if (!string.IsNullOrEmpty(remarks))
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            string type = this.Text.Equals("Received Items") ? "recv" : "trfr";
+                            string sResponse = transferc.cancelTransfer(selectedID, remarks, type);
+                            JObject jObjectResponse = JObject.Parse(sResponse);
+                            string msg = "";
+                            foreach (var x in jObjectResponse)
+                            {
+                                if (x.Key.Equals("message"))
+                                {
+                                    msg = x.Value.ToString();
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(msg))
+                            {
+                                MessageBox.Show(msg, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                isSubmit = true;
+                                this.Dispose();
+                            }
+                        }
+                    }
+                }
+            }
+            else if (this.Text == "Pullout Items")
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to confirm?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    JObject jObjectBody = new JObject();
+                    string URL = "/api/pullout/confirm/" + selectedID;
+                    apiPUT(jObjectBody, URL);
                 }
             }
         }

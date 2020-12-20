@@ -30,9 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdjustmentIn));
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbBranch = new System.Windows.Forms.ComboBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.cmbWhse = new System.Windows.Forms.ComboBox();
             this.btnAddUser = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
@@ -48,58 +46,35 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.dtDate = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 48);
+            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Gray;
+            this.label1.Location = new System.Drawing.Point(28, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 16);
+            this.label1.Size = new System.Drawing.Size(84, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Warehouse:";
             // 
-            // cmbBranch
+            // cmbWhse
             // 
-            this.cmbBranch.BackColor = System.Drawing.SystemColors.Control;
-            this.cmbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBranch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbBranch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbBranch.ForeColor = System.Drawing.Color.Black;
-            this.cmbBranch.FormattingEnabled = true;
-            this.cmbBranch.Location = new System.Drawing.Point(112, 45);
-            this.cmbBranch.Name = "cmbBranch";
-            this.cmbBranch.Size = new System.Drawing.Size(158, 24);
-            this.cmbBranch.TabIndex = 7;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(236, 85);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(68, 22);
-            this.btnSearch.TabIndex = 10;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(31, 85);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(205, 22);
-            this.txtSearch.TabIndex = 9;
-            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            this.cmbWhse.BackColor = System.Drawing.SystemColors.Control;
+            this.cmbWhse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWhse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbWhse.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbWhse.ForeColor = System.Drawing.Color.Black;
+            this.cmbWhse.FormattingEnabled = true;
+            this.cmbWhse.Location = new System.Drawing.Point(112, 47);
+            this.cmbWhse.Name = "cmbWhse";
+            this.cmbWhse.Size = new System.Drawing.Size(158, 24);
+            this.cmbWhse.TabIndex = 7;
+            this.cmbWhse.SelectedValueChanged += new System.EventHandler(this.cmbWhse_SelectedValueChanged);
             // 
             // btnAddUser
             // 
@@ -273,18 +248,41 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "A1 - ADJIN - 0000001";
             // 
+            // dtDate
+            // 
+            this.dtDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtDate.CustomFormat = "yyyy-MM-dd";
+            this.dtDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDate.Location = new System.Drawing.Point(75, 83);
+            this.dtDate.Name = "dtDate";
+            this.dtDate.Size = new System.Drawing.Size(139, 22);
+            this.dtDate.TabIndex = 14;
+            this.dtDate.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Gray;
+            this.label9.Location = new System.Drawing.Point(28, 88);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(41, 16);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Date:";
+            // 
             // AdjustmentIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.dtDate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnAddUser);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cmbBranch);
+            this.Controls.Add(this.cmbWhse);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdjustmentIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -301,9 +299,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbBranch;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.ComboBox cmbWhse;
         private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label8;
@@ -319,5 +315,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dtDate;
+        private System.Windows.Forms.Label label9;
     }
 }

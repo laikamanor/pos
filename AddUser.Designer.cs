@@ -109,11 +109,11 @@
             // cmbBranch
             // 
             this.cmbBranch.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbBranch.BackColor = System.Drawing.Color.DodgerBlue;
+            this.cmbBranch.BackColor = System.Drawing.SystemColors.Control;
             this.cmbBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBranch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbBranch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbBranch.ForeColor = System.Drawing.Color.White;
+            this.cmbBranch.ForeColor = System.Drawing.Color.Black;
             this.cmbBranch.FormattingEnabled = true;
             this.cmbBranch.Location = new System.Drawing.Point(27, 295);
             this.cmbBranch.Name = "cmbBranch";
@@ -395,11 +395,11 @@
             // cmbWarehouse
             // 
             this.cmbWarehouse.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbWarehouse.BackColor = System.Drawing.Color.DodgerBlue;
+            this.cmbWarehouse.BackColor = System.Drawing.SystemColors.Control;
             this.cmbWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWarehouse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbWarehouse.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbWarehouse.ForeColor = System.Drawing.Color.White;
+            this.cmbWarehouse.ForeColor = System.Drawing.Color.Black;
             this.cmbWarehouse.FormattingEnabled = true;
             this.cmbWarehouse.Location = new System.Drawing.Point(27, 353);
             this.cmbWarehouse.Name = "cmbWarehouse";
@@ -479,7 +479,6 @@
             this.Name = "AddUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add User";
-            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddUser_FormClosing);
             this.Load += new System.EventHandler(this.AddUser_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

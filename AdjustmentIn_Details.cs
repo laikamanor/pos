@@ -25,6 +25,7 @@ namespace AB
         private void AdjustmentIn_Details_Load(object sender, EventArgs e)
         {
             loadData();
+            lblCount.Text = "Items (" + dgv.Rows.Count.ToString("N0") + ")";
         }
 
         public void loadData()
@@ -48,6 +49,7 @@ namespace AB
                     request.AddHeader("Authorization", "Bearer " + token);
                     var response = client.Execute(request);
                     JObject jObject = JObject.Parse(response.Content.ToString());
+                    Console.WriteLine(response.Content.ToString());
                     if (response.ErrorMessage == null)
                     {
                         bool isSuccess = false;
@@ -71,43 +73,58 @@ namespace AB
                             {
                                 if (x.Key.Equals("data"))
                                 {
-                                    if (x.Value.ToString() != "[]")
+                                    if (x.Value.ToString() != "{}")
                                     {
-                                        JArray jsonArray = JArray.Parse(x.Value.ToString());
-                                        for (int i = 0; i < jsonArray.Count(); i++)
+                                        JObject data = JObject.Parse(x.Value.ToString());
+                                        foreach (var q in data)
                                         {
-                                            JObject data = JObject.Parse(jsonArray[i].ToString());
-                                            int id = 0, adjusmentid = 0;
-                                            string itemCode = "", uOm = "";
-                                            double quantity = 0.00;
-                                            foreach (var q in data)
+                                            if (q.Key.Equals("rows"))
                                             {
-                                                if (q.Key.Equals("id"))
+                                                if (q.Value.ToString() != "[]")
                                                 {
-                                                    id = Convert.ToInt32(q.Value.ToString());
-                                                }
-                                                else if (q.Key.Equals("adjustin_id"))
-                                                {
-                                                    adjusmentid = Convert.ToInt32(q.Value.ToString());
-                                                }
-                                                else if (q.Key.Equals("item_code"))
-                                                {
-                                                    itemCode = q.Value.ToString();
-                                                }
-                                                else if (q.Key.Equals("uom"))
-                                                {
-                                                    uOm = q.Value.ToString();
-                                                }
-                                                else if (q.Key.Equals("quantity"))
-                                                {
-                                                    quantity = Convert.ToDouble(q.Value.ToString());
-                                                }
-                                                else if (q.Key.Equals("whsecode"))
-                                                {
-                                                    lblWhse.Text = q.Value.ToString();
+                                                    JArray jsonArrayRows = JArray.Parse(q.Value.ToString());
+                                                    for (int ii = 0; ii < jsonArrayRows.Count(); ii++)
+                                                    {
+                                                        JObject rows = JObject.Parse(jsonArrayRows[ii].ToString());
+                                                        int id = 0, adjusmentid = 0;
+                                                        string itemCode = "", uOm = "";
+                                                        double quantity = 0.00;
+                                                        foreach (var w in rows)
+                                                        {
+
+                                                            if (w.Key.Equals("id"))
+                                                            {
+                                                                id = Convert.ToInt32(w.Value.ToString());
+                                                            }
+                                                            else if (w.Key.Equals("adjustin_id"))
+                                                            {
+                                                                adjusmentid = Convert.ToInt32(w.Value.ToString());
+                                                            }
+                                                            else if (w.Key.Equals("item_code"))
+                                                            {
+                                                                itemCode = w.Value.ToString();
+                                                            }
+                                                            else if (w.Key.Equals("uom"))
+                                                            {
+                                                                uOm = w.Value.ToString();
+                                                            }
+                                                            else if (w.Key.Equals("quantity"))
+                                                            {
+                                                                quantity = Convert.ToDouble(w.Value.ToString());
+                                                            }
+                                                            else if (w.Key.Equals("whsecode"))
+                                                            {
+                                                                lblWhse.Text = w.Value.ToString();
+                                                            }
+                                                        }
+                                                        dgv.Rows.Add(id, adjusmentid, itemCode, quantity, uOm);
+                                                    }
                                                 }
                                             }
-                                            dgv.Rows.Add(id, adjusmentid, itemCode, quantity, uOm);                                       
+                                            else if (q.Key.Equals("remarks"))
+                                            {
+                                                lblRemarks.Text = q.Value.ToString();
+                                            }
                                         }
                                     }
                                 }

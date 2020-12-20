@@ -26,6 +26,7 @@ namespace AB.API_Class.Transfer
                 dt.Columns.Add("docstatus");
                 dt.Columns.Add("transdate");
                 dt.Columns.Add("sap_number");
+                dt.Columns.Add("variance_count");
                 Cursor.Current = Cursors.WaitCursor;
                 string token = "";
                 foreach (var x in Login.jsonResult)
@@ -42,14 +43,13 @@ namespace AB.API_Class.Transfer
                     client.Timeout = -1;
      
                     string sforType = (forType.Equals("For SAP") ? "&sap_number=" : "");
-                   
-                    //MessageBox.Show("class: " + URL);
-                    var request = new RestRequest(URL + "?docstatus=" + status + "&transnumber=" + transnum + "&transdate=" + transDate + sforType + branch + whse + (!URL.Equals("/api/pullout/get_all") ? towhse : ""));
+
+                    var request = new RestRequest(URL + "?transdate=" + transDate + branch + whse + (!URL.Equals("/api/pullout/get_all") ? towhse : "") + (!URL.Equals("/api/pullout/get_all") ? "&docstatus=" + status + "&transnumber=" + transnum + sforType : forType.Equals("For SAP") ? "&confirm=1&for_sap=" : "&confirm="));
                     //Console.WriteLine(URL + "?docstatus=" + status + "&transnumber=" + transnum + "&transdate=" + transDate + sforType + branch + whse + (!URL.Equals("/api/pullout/get_all") ? towhse : ""));
                     //Console.WriteLine(URL + "?docstatus=" + status + "&transnumber=" + transnum + "&transdate=" + transDate + sforType + branch + whse + (!URL.Equals("pullout") ? towhse : ""));
-                    Console.WriteLine(URL + "?docstatus=" + status + "&transnumber=" + transnum + "&transdate=" + transDate + sforType + branch + whse + (!URL.Equals("/api/pullout/get_all") ? towhse : ""));
+                    Console.WriteLine(URL + "?transdate=" + transDate + branch + whse + (!URL.Equals("/api/pullout/get_all") ? towhse : "") + (!URL.Equals("/api/pullout/get_all") ? "&docstatus=" + status + "&transnumber=" + transnum + sforType : forType.Equals("For SAP") ? "confirm=1&for_sap=" : "&confirm="));
                     request.AddHeader("Authorization", "Bearer " + token);
-                    var response = client.Execute(request);
+                    var response = client.Execute(request); 
                     JObject jObject = new JObject();
                     jObject = JObject.Parse(response.Content.ToString());
                     bool isSuccess = false;
@@ -74,9 +74,11 @@ namespace AB.API_Class.Transfer
                                         JObject data = JObject.Parse(jsonArray[i].ToString());
                                         int iD = 0, transNumber = 0;
                                         string referencenumber = "", remarks = "", docStatus = "", sapNumber = "";
+                                        double varianceCount = 0.00;
                                         DateTime dtTransDate = new DateTime();
                                         foreach (var q in data)
                                         {
+                                            
                                             if (q.Key.Equals("id"))
                                             {
                                                 iD = Convert.ToInt32(q.Value.ToString());
@@ -106,8 +108,12 @@ namespace AB.API_Class.Transfer
                                                 string replaceT = q.Value.ToString().Replace("T", "");
                                                 dtTransDate = Convert.ToDateTime(replaceT);
                                             }
+                                            else if (q.Key.Equals("variance_count"))
+                                            {
+                                                varianceCount = Convert.ToDouble(q.Value.ToString());
+                                            }
                                         }
-                                        dt.Rows.Add(iD, transNumber, referencenumber, remarks, docStatus, dtTransDate.ToString("yyyy-MM-dd"),sapNumber);
+                                        dt.Rows.Add(iD, transNumber, referencenumber, remarks, docStatus, dtTransDate.ToString("yyyy-MM-dd"),sapNumber,varianceCount);
                                     }
                                 }
                             }
@@ -152,7 +158,7 @@ namespace AB.API_Class.Transfer
                 dt.Columns.Add("quantity");
                 dt.Columns.Add("to_whse");
 
-                if (URL.Equals("inv/recv"))
+                if (URL.Equals("inv/recv") || URL.Equals("inv/trfr"))
                 {
                     dt.Columns.Add("actualrec");
                 }
@@ -252,8 +258,12 @@ namespace AB.API_Class.Transfer
                                                         {
                                                             actualRec = Convert.ToDouble(y.Value.ToString());
                                                         }
+                                                        else if (y.Key.Equals("actualrec") && URL.Equals("inv/trfr"))
+                                                        {
+                                                            actualRec = String.IsNullOrEmpty(y.Value.ToString()) ? 0.00 : Convert.ToDouble(y.Value.ToString());
+                                                        }
                                                     }
-                                                    if (URL.Equals("inv/trfr") || URL.Equals("pullout"))
+                                                    if (URL.Equals("pullout"))
                                                     {
                                                         dt.Rows.Add(referenceNumber, docStatus, dtTransDate.ToString("yyyy-MM-dd"), iD, transfer_id, itemName, quantity, toWhse);
                                                     }
@@ -296,7 +306,7 @@ namespace AB.API_Class.Transfer
         }
 
 
-        public string cancelTransfer(int id,string remarks)
+        public string cancelTransfer(int id,string remarks, string type)
         {
             string result = "";
             if (Login.jsonResult != null)
@@ -315,48 +325,16 @@ namespace AB.API_Class.Transfer
                     Cursor.Current = Cursors.WaitCursor;
                     var client = new RestClient(utilityc.URL);
                     client.Timeout = -1;
-                    var request = new RestRequest("/api/inv/trfr/cancel/" + id);
+                    var request = new RestRequest("/api/inv/" + type + "/cancel/" + id);
+                    Console.WriteLine("/api/inv/recv/cancel/" + id);
                     request.Method = Method.PUT;
                     request.AddHeader("Authorization", "Bearer " + token);
                     JObject jObject = new JObject();
                     jObject.Add("remarks", remarks);
                     request.AddParameter("application/json", jObject, ParameterType.RequestBody);
                     var response = client.Execute(request);
-                    JObject jObjectResponse = new JObject();
-                    jObjectResponse = JObject.Parse(response.Content.ToString());
-
-                    bool isSuccess = false;
-                    foreach (var x in jObjectResponse)
-                    {
-                        if (x.Key.Equals("success"))
-                        {
-                            isSuccess = Convert.ToBoolean(x.Value.ToString());
-                        }
-                    }
-                    if (isSuccess)
-                    {
-                       
-                        result = jObjectResponse.ToString();
-                    }
-                    else
-                    {
-                        string msg = "No message response found";
-                        foreach (var x in jObject)
-                        {
-                            if (x.Key.Equals("message"))
-                            {
-                                msg = x.Value.ToString();
-                            }
-                        }
-                        if (msg.Equals("Token is invalid"))
-                        {
-                            MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else
-                        {
-                            MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
+                    JObject jObjectResponse = JObject.Parse(response.Content.ToString());
+                    result = jObjectResponse.ToString();
                     Cursor.Current = Cursors.Default;
                 }
             }

@@ -28,271 +28,129 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancePayment));
-            this.btnAddUser = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.dgv = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cust_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountdue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.referencenum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sap_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEdit = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnCancel = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.lblNoDataFound = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tpInDeposit = new System.Windows.Forms.TabPage();
+            this.panelInDeposit = new System.Windows.Forms.Panel();
+            this.tpUsedDeposit = new System.Windows.Forms.TabPage();
+            this.panelUsedDeposit = new System.Windows.Forms.Panel();
+            this.tpSummary = new System.Windows.Forms.TabPage();
+            this.panelSummaryDeposit = new System.Windows.Forms.Panel();
+            this.tabControl1.SuspendLayout();
+            this.tpInDeposit.SuspendLayout();
+            this.tpUsedDeposit.SuspendLayout();
+            this.tpSummary.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnAddUser
+            // tabControl1
             // 
-            this.btnAddUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddUser.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddUser.FlatAppearance.BorderSize = 0;
-            this.btnAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddUser.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddUser.ForeColor = System.Drawing.Color.White;
-            this.btnAddUser.Location = new System.Drawing.Point(453, 64);
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(146, 22);
-            this.btnAddUser.TabIndex = 8;
-            this.btnAddUser.Text = "Add Deposit";
-            this.btnAddUser.UseVisualStyleBackColor = false;
-            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(217, 64);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(68, 22);
-            this.btnSearch.TabIndex = 7;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(12, 64);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(205, 22);
-            this.txtSearch.TabIndex = 6;
-            // 
-            // dgv
-            // 
-            this.dgv.AllowUserToAddRows = false;
-            this.dgv.AllowUserToDeleteRows = false;
-            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.BackgroundColor = System.Drawing.Color.White;
-            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(153)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgv.ColumnHeadersHeight = 40;
-            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.cust_code,
-            this.amountdue,
-            this.balance,
-            this.remarks,
-            this.referencenum,
-            this.sap_number,
-            this.status,
-            this.btnEdit,
-            this.btnCancel});
-            this.dgv.EnableHeadersVisualStyles = false;
-            this.dgv.GridColor = System.Drawing.Color.Gray;
-            this.dgv.Location = new System.Drawing.Point(12, 88);
-            this.dgv.Name = "dgv";
-            this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(587, 261);
-            this.dgv.TabIndex = 5;
-            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
+            this.tabControl1.Controls.Add(this.tpInDeposit);
+            this.tabControl1.Controls.Add(this.tpUsedDeposit);
+            this.tabControl1.Controls.Add(this.tpSummary);
+            this.tabControl1.Location = new System.Drawing.Point(4, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(794, 426);
+            this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // id
+            // tpInDeposit
             // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
+            this.tpInDeposit.Controls.Add(this.panelInDeposit);
+            this.tpInDeposit.Location = new System.Drawing.Point(4, 22);
+            this.tpInDeposit.Name = "tpInDeposit";
+            this.tpInDeposit.Padding = new System.Windows.Forms.Padding(3);
+            this.tpInDeposit.Size = new System.Drawing.Size(786, 400);
+            this.tpInDeposit.TabIndex = 0;
+            this.tpInDeposit.Text = "In Deposit";
+            this.tpInDeposit.UseVisualStyleBackColor = true;
             // 
-            // cust_code
+            // panelInDeposit
             // 
-            this.cust_code.HeaderText = "Code";
-            this.cust_code.Name = "cust_code";
-            this.cust_code.ReadOnly = true;
+            this.panelInDeposit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelInDeposit.AutoScroll = true;
+            this.panelInDeposit.Location = new System.Drawing.Point(6, 6);
+            this.panelInDeposit.Name = "panelInDeposit";
+            this.panelInDeposit.Size = new System.Drawing.Size(774, 388);
+            this.panelInDeposit.TabIndex = 0;
             // 
-            // amountdue
+            // tpUsedDeposit
             // 
-            this.amountdue.HeaderText = "Amount Due";
-            this.amountdue.Name = "amountdue";
-            this.amountdue.ReadOnly = true;
+            this.tpUsedDeposit.Controls.Add(this.panelUsedDeposit);
+            this.tpUsedDeposit.Location = new System.Drawing.Point(4, 22);
+            this.tpUsedDeposit.Name = "tpUsedDeposit";
+            this.tpUsedDeposit.Padding = new System.Windows.Forms.Padding(3);
+            this.tpUsedDeposit.Size = new System.Drawing.Size(786, 400);
+            this.tpUsedDeposit.TabIndex = 1;
+            this.tpUsedDeposit.Text = "Used Deposit";
+            this.tpUsedDeposit.UseVisualStyleBackColor = true;
             // 
-            // balance
+            // panelUsedDeposit
             // 
-            this.balance.HeaderText = "Balance";
-            this.balance.Name = "balance";
-            this.balance.ReadOnly = true;
+            this.panelUsedDeposit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelUsedDeposit.AutoScroll = true;
+            this.panelUsedDeposit.Location = new System.Drawing.Point(6, 6);
+            this.panelUsedDeposit.Name = "panelUsedDeposit";
+            this.panelUsedDeposit.Size = new System.Drawing.Size(774, 388);
+            this.panelUsedDeposit.TabIndex = 1;
             // 
-            // remarks
+            // tpSummary
             // 
-            this.remarks.HeaderText = "Remarks";
-            this.remarks.Name = "remarks";
-            this.remarks.ReadOnly = true;
+            this.tpSummary.Controls.Add(this.panelSummaryDeposit);
+            this.tpSummary.Location = new System.Drawing.Point(4, 22);
+            this.tpSummary.Name = "tpSummary";
+            this.tpSummary.Size = new System.Drawing.Size(786, 400);
+            this.tpSummary.TabIndex = 2;
+            this.tpSummary.Text = "Summary Deposit";
+            this.tpSummary.UseVisualStyleBackColor = true;
             // 
-            // referencenum
+            // panelSummaryDeposit
             // 
-            this.referencenum.HeaderText = "Reference #";
-            this.referencenum.Name = "referencenum";
-            this.referencenum.ReadOnly = true;
-            // 
-            // sap_number
-            // 
-            this.sap_number.HeaderText = "SAP";
-            this.sap_number.Name = "sap_number";
-            this.sap_number.ReadOnly = true;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Status";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            // 
-            // btnEdit
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.DefaultCellStyle = dataGridViewCellStyle2;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.HeaderText = "Action";
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.ReadOnly = true;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseColumnTextForButtonValue = true;
-            // 
-            // btnCancel
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Firebrick;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.DefaultCellStyle = dataGridViewCellStyle3;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.HeaderText = "Action";
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ReadOnly = true;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseColumnTextForButtonValue = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 16);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Status:";
-            // 
-            // cmbStatus
-            // 
-            this.cmbStatus.BackColor = System.Drawing.Color.DodgerBlue;
-            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbStatus.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbStatus.ForeColor = System.Drawing.Color.White;
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
-            "All",
-            "Open",
-            "Closed",
-            "Cancelled"});
-            this.cmbStatus.Location = new System.Drawing.Point(68, 22);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(158, 24);
-            this.cmbStatus.TabIndex = 9;
-            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbBranch_SelectedIndexChanged);
-            // 
-            // lblNoDataFound
-            // 
-            this.lblNoDataFound.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblNoDataFound.AutoSize = true;
-            this.lblNoDataFound.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoDataFound.ForeColor = System.Drawing.Color.DimGray;
-            this.lblNoDataFound.Location = new System.Drawing.Point(264, 153);
-            this.lblNoDataFound.Name = "lblNoDataFound";
-            this.lblNoDataFound.Size = new System.Drawing.Size(105, 18);
-            this.lblNoDataFound.TabIndex = 11;
-            this.lblNoDataFound.Text = "No data found";
+            this.panelSummaryDeposit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelSummaryDeposit.AutoScroll = true;
+            this.panelSummaryDeposit.Location = new System.Drawing.Point(6, 6);
+            this.panelSummaryDeposit.Name = "panelSummaryDeposit";
+            this.panelSummaryDeposit.Size = new System.Drawing.Size(774, 388);
+            this.panelSummaryDeposit.TabIndex = 2;
             // 
             // AdvancePayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(612, 378);
-            this.Controls.Add(this.lblNoDataFound);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cmbStatus);
-            this.Controls.Add(this.btnAddUser);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.dgv);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdvancePayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Deposit";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AdvancePayment_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tpInDeposit.ResumeLayout(false);
+            this.tpUsedDeposit.ResumeLayout(false);
+            this.tpSummary.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnAddUser;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.DataGridView dgv;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cust_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountdue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn balance;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remarks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn referencenum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sap_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.DataGridViewButtonColumn btnEdit;
-        private System.Windows.Forms.DataGridViewButtonColumn btnCancel;
-        private System.Windows.Forms.Label lblNoDataFound;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tpInDeposit;
+        private System.Windows.Forms.TabPage tpUsedDeposit;
+        private System.Windows.Forms.Panel panelInDeposit;
+        private System.Windows.Forms.Panel panelUsedDeposit;
+        private System.Windows.Forms.TabPage tpSummary;
+        private System.Windows.Forms.Panel panelSummaryDeposit;
     }
 }

@@ -21,6 +21,8 @@ namespace AB.API_Class.Warehouse
             {
                 dt.Columns.Add("whsecode");
                 dt.Columns.Add("whsename");
+                dt.Columns.Add("id");
+                dt.Columns.Add("branch");
                 Cursor.Current = Cursors.WaitCursor;
                 string token = "";
                 foreach (var x in Login.jsonResult)
@@ -62,24 +64,36 @@ namespace AB.API_Class.Warehouse
                         {
                             if (x.Key.Equals("data"))
                             {
-                                if(x.Value.ToString() != "[]")
+                                if (x.Value.ToString() != "[]")
                                 {
                                     JArray jsonArray = JArray.Parse(x.Value.ToString());
                                     for (int i = 0; i < jsonArray.Count(); i++)
                                     {
                                         JObject data = JObject.Parse(jsonArray[i].ToString());
-                                        string warehouse = "", warehouseName = "";
+                                        int id = 0;
+                                        string warehouse = "", warehouseName = "",
+                                        branchCode = "";
                                         foreach (var q in data)
                                         {
-                                            if (q.Key.Equals("whsecode"))
+
+                                            if (q.Key.Equals("id"))
+                                            {
+                                                id = Convert.ToInt32(q.Value.ToString());
+                                            }
+                                            else if (q.Key.Equals("whsecode"))
                                             {
                                                 warehouse = q.Value.ToString();
-                                            }else if (q.Key.Equals("whsename"))
+                                            }
+                                            else if (q.Key.Equals("whsename"))
                                             {
                                                 warehouseName = q.Value.ToString();
                                             }
+                                            else if (q.Key.Equals("branch"))
+                                            {
+                                                branchCode = q.Value.ToString();
+                                            }
                                         }
-                                        dt.Rows.Add(warehouse,warehouseName);
+                                        dt.Rows.Add(warehouse, warehouseName,id,branchCode);
                                     }
                                 }
                             }

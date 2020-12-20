@@ -119,7 +119,7 @@ namespace AB
                                                     free = Convert.ToBoolean(e.Value.ToString());
                                                 }
                                             }
-                                            dgvitems.Rows.Add(itemCode, quantity.ToString("n2"), price.ToString("n2"), discprcnt.ToString("n2"), disc_amount.ToString("n2"), totalPrice.ToString("n2"), free);
+                                            dgvitems.Rows.Add(itemCode, Convert.ToDecimal(string.Format("{0:0.00}", quantity)), Convert.ToDecimal(string.Format("{0:0.00}", price)), Convert.ToDecimal(string.Format("{0:0.00}", discprcnt)), Convert.ToDecimal(string.Format("{0:0.00}", disc_amount)), Convert.ToDecimal(string.Format("{0:0.00}", totalPrice)), free);
                                         }
                                     }
                                     else if (w.Key.Equals("gross"))

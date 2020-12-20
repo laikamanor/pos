@@ -106,7 +106,7 @@ namespace AB {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_actual_cash {
+        public CrystalDecisions.Shared.IParameterField Parameter_date_report {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -114,7 +114,7 @@ namespace AB {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_date_report {
+        public CrystalDecisions.Shared.IParameterField Parameter_printed_by {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -122,25 +122,9 @@ namespace AB {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_printed_by {
-            get {
-                return this.DataDefinition.ParameterFields[2];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_remarks {
-            get {
-                return this.DataDefinition.ParameterFields[3];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.Shared.IParameterField Parameter_PaymentMethodReportrpt_date_report {
             get {
-                return this.DataDefinition.ParameterFields[4];
+                return this.DataDefinition.ParameterFields[2];
             }
         }
     }

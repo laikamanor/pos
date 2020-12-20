@@ -287,6 +287,8 @@ namespace AB.Dataset {
             
             private global::System.Data.DataColumn columnagent_sales;
             
+            private global::System.Data.DataColumn columntotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public payment_methodDataTable() {
@@ -354,6 +356,14 @@ namespace AB.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn totalColumn {
+                get {
+                    return this.columntotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +399,14 @@ namespace AB.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public payment_methodRow Addpayment_methodRow(string transtype, double cash_sales, double ar_sales, double agent_sales) {
+            public payment_methodRow Addpayment_methodRow(string transtype, double cash_sales, double ar_sales, double agent_sales, double total) {
                 payment_methodRow rowpayment_methodRow = ((payment_methodRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         transtype,
                         cash_sales,
                         ar_sales,
-                        agent_sales};
+                        agent_sales,
+                        total};
                 rowpayment_methodRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowpayment_methodRow);
                 return rowpayment_methodRow;
@@ -422,6 +433,7 @@ namespace AB.Dataset {
                 this.columncash_sales = base.Columns["cash_sales"];
                 this.columnar_sales = base.Columns["ar_sales"];
                 this.columnagent_sales = base.Columns["agent_sales"];
+                this.columntotal = base.Columns["total"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -435,6 +447,8 @@ namespace AB.Dataset {
                 base.Columns.Add(this.columnar_sales);
                 this.columnagent_sales = new global::System.Data.DataColumn("agent_sales", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnagent_sales);
+                this.columntotal = new global::System.Data.DataColumn("total", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -641,6 +655,22 @@ namespace AB.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double total {
+                get {
+                    try {
+                        return ((double)(this[this.tablepayment_method.totalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'total\' in table \'payment_method\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablepayment_method.totalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IstranstypeNull() {
                 return this.IsNull(this.tablepayment_method.transtypeColumn);
             }
@@ -685,6 +715,18 @@ namespace AB.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setagent_salesNull() {
                 this[this.tablepayment_method.agent_salesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IstotalNull() {
+                return this.IsNull(this.tablepayment_method.totalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SettotalNull() {
+                this[this.tablepayment_method.totalColumn] = global::System.Convert.DBNull;
             }
         }
         

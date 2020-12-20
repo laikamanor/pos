@@ -23,11 +23,26 @@ namespace AB
         {
             foreach (TabPage tp in tabControl1.TabPages)
             {
+                if (tp.Name.Equals("tabPage1"))
+                {
+                    if (this.Text == "Pullout Transactions")
+                    {
+                        tp.Text = "For Confirmation";
+                    }
+                    else
+                    {
+                        tp.Text = "Transactions";
+                    }
+                }
                 if (tp.Name.Equals("tabPage2"))
                 {
                     if (this.Text == "Received Transactions")
                     {
                         tp.Text = "For SAP";
+                    }
+                    else if (this.Text == "Pullout Transactions")
+                    {
+                        tp.Text = "For SAP IT and Transfer";
                     }
                     else
                     {
