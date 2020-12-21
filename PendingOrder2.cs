@@ -39,6 +39,7 @@ namespace AB
             dtDate.Visible = true;
             label1.Visible = true;
             dtDate.Value = DateTime.Now;
+            checkDate.Checked = true;
             cmbFromTime.SelectedIndex = 0;
             cmbToTime.SelectedIndex = cmbToTime.Items.Count - 1;
             if (gForType == "for Payment")

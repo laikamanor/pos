@@ -43,6 +43,8 @@
             this.checkSelectAll = new System.Windows.Forms.CheckBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblCount = new System.Windows.Forms.Label();
             this.selectt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.payment_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,7 +52,9 @@
             this.payment_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reference2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv
@@ -82,13 +86,14 @@
             this.cust_code,
             this.payment_type,
             this.amount,
-            this.reference2});
+            this.reference2,
+            this.transdate});
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.Gray;
-            this.dgv.Location = new System.Drawing.Point(10, 78);
+            this.dgv.Location = new System.Drawing.Point(10, 107);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(675, 255);
+            this.dgv.Size = new System.Drawing.Size(675, 226);
             this.dgv.TabIndex = 2;
             this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
             this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
@@ -247,6 +252,29 @@
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.ForestGreen;
+            this.panel1.Controls.Add(this.lblCount);
+            this.panel1.Location = new System.Drawing.Point(10, 78);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(675, 30);
+            this.panel1.TabIndex = 69;
+            // 
+            // lblCount
+            // 
+            this.lblCount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblCount.AutoSize = true;
+            this.lblCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.ForeColor = System.Drawing.Color.White;
+            this.lblCount.Location = new System.Drawing.Point(301, 8);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(65, 15);
+            this.lblCount.TabIndex = 15;
+            this.lblCount.Text = "COUNT (0)";
+            // 
             // selectt
             // 
             this.selectt.HeaderText = "Select";
@@ -290,6 +318,12 @@
             this.reference2.Name = "reference2";
             this.reference2.ReadOnly = true;
             // 
+            // transdate
+            // 
+            this.transdate.HeaderText = "Trans. Date";
+            this.transdate.Name = "transdate";
+            this.transdate.ReadOnly = true;
+            // 
             // forSAPIP2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,6 +331,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(707, 428);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.checkSelectAll);
@@ -316,6 +351,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.forSAPIP2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,6 +373,8 @@
         private System.Windows.Forms.CheckBox checkSelectAll;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.Label lblCount;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selectt;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn payment_id;
@@ -343,5 +382,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn payment_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn reference2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transdate;
     }
 }

@@ -29,7 +29,7 @@ namespace AB
 
         private void checkTransDate_CheckedChanged(object sender, EventArgs e)
         {
-            dtTransDate.Visible = !checkTransDate.Checked;
+            dtTransDate.Visible = checkTransDate.Checked;
             loadData();
         }
 
@@ -276,10 +276,10 @@ namespace AB
                 {
                     var client = new RestClient(utilityc.URL);
                     client.Timeout = -1;
-                    string sTransDate = checkTransDate.Checked ? "?transdate=" : "?transdate=" + dtTransDate.Value.ToString("yyyy-MM-dd");
+                    string sTransDate = !checkTransDate.Checked ? "?transdate=" : "?transdate=" + dtTransDate.Value.ToString("yyyy-MM-dd");
                     string sSalesType = string.IsNullOrEmpty(gSalesType) ? "" : "&sales_type=" + gSalesType;
 
-                    
+
                     string paymentCode = "";
                     foreach (DataRow row in dtPaymentTypes.Rows)
                     {
@@ -296,71 +296,107 @@ namespace AB
                     string sPaymentType = string.IsNullOrEmpty(paymentCode) ? "&payment_type=" : "&payment_type=" + paymentCode;
                     string sSearch = "&search=" + txtSearch.Text.Trim();
                     string sSAPNumber = "&sap_number=";
-                    var request = new RestRequest("/api/sap_num/payment/update" + sTransDate + sSalesType + sSalesType + sPaymentType + sSearch + sSAPNumber);
-                    Console.WriteLine("/api/sap_num/payment/update" + sTransDate + sSalesType + sSalesType + sPaymentType + sSearch + sSAPNumber);
+                    var request = new RestRequest("/api/sap_num/payment/update" + sTransDate + sSalesType + sPaymentType + sSearch + sSAPNumber);
+                    Console.WriteLine("/api/sap_num/payment/update" + sTransDate + sSalesType + sPaymentType + sSearch + sSAPNumber);
                     //Console.WriteLine("/api/sap_num/payment/update" + sTransDate + sSalesType + sSalesType + sPaymentType + sSearch);
                     request.AddHeader("Authorization", "Bearer " + token);
                     var response = client.Execute(request);
-                    JObject jObjectResponse = JObject.Parse(response.Content);
-                    bool isSuccess = false;
-                    AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
-                    dgv.Rows.Clear();
-                    foreach (var x in jObjectResponse)
+                    if (response.ErrorMessage == null)
                     {
-                        if (x.Key.Equals("success"))
+                        if (response.Content.Substring(0, 1).Equals("{"))
                         {
-                            isSuccess = Convert.ToBoolean(x.Value.ToString());
-                        }
-                    }
-                    if (isSuccess)
-                    {
-                        foreach (var z in jObjectResponse)
-                        {
-                            if (z.Key.Equals("data"))
+                            JObject jObjectResponse = JObject.Parse(response.Content);
+                            bool isSuccess = false;
+                            AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
+                            dgv.Rows.Clear();
+                            foreach (var x in jObjectResponse)
                             {
-                                if (z.Value.ToString() != "[]")
+                                if (x.Key.Equals("success"))
                                 {
-                                    JArray jsonArray = JArray.Parse(z.Value.ToString());
-                                    for (int i = 0; i < jsonArray.Count(); i++)
+                                    isSuccess = Convert.ToBoolean(x.Value.ToString());
+                                }
+                            }
+                            if (isSuccess)
+                            {
+                                foreach (var z in jObjectResponse)
+                                {
+                                    if (z.Key.Equals("data"))
                                     {
-                                        JObject jObjectData = JObject.Parse(jsonArray[i].ToString());
-                                        int id = 0, paymentID = 0;
-                                        string paymentType = "", customerCode = "", paymentReference = "";
-                                        double amount = 0.00;
-                                        foreach (var y in jObjectData)
+                                        if (z.Value.ToString() != "[]")
                                         {
-                                            if (y.Key.Equals("id"))
+                                            JArray jsonArray = JArray.Parse(z.Value.ToString());
+                                            for (int i = 0; i < jsonArray.Count(); i++)
                                             {
-                                                id = Convert.ToInt32(y.Value.ToString());
-                                            }
-                                            else if (y.Key.Equals("payment_id"))
-                                            {
-                                                paymentID = Convert.ToInt32(y.Value.ToString());
-                                            }
-                                            else if (y.Key.Equals("payment_type"))
-                                            {
-                                                paymentType = y.Value.ToString();
-                                            }
-                                            else if (y.Key.Equals("cust_code"))
-                                            {
-                                                customerCode = y.Value.ToString();
-                                            }
-                                            else if (y.Key.Equals("amount"))
-                                            {
-                                                amount = Convert.ToDouble(y.Value.ToString());
-                                            }
-                                            else if (y.Key.Equals("reference"))
-                                            {
-                                                paymentReference = y.Value.ToString();
+                                                JObject jObjectData = JObject.Parse(jsonArray[i].ToString());
+                                                int id = 0, paymentID = 0;
+                                                string paymentType = "", customerCode = "", paymentReference = "";
+                                                double amount = 0.00;
+                                                DateTime dtTransDatee = new DateTime();
+                                                foreach (var y in jObjectData)
+                                                {
+                                                    if (y.Key.Equals("id"))
+                                                    {
+                                                        id = Convert.ToInt32(y.Value.ToString());
+                                                    }
+                                                    else if (y.Key.Equals("payment_id"))
+                                                    {
+                                                        paymentID = Convert.ToInt32(y.Value.ToString());
+                                                    }
+                                                    else if (y.Key.Equals("payment_type"))
+                                                    {
+                                                        paymentType = y.Value.ToString();
+                                                    }
+                                                    else if (y.Key.Equals("cust_code"))
+                                                    {
+                                                        customerCode = y.Value.ToString();
+                                                    }
+                                                    else if (y.Key.Equals("amount"))
+                                                    {
+                                                        amount = Convert.ToDouble(y.Value.ToString());
+                                                    }
+                                                    else if (y.Key.Equals("reference"))
+                                                    {
+                                                        paymentReference = y.Value.ToString();
+                                                    }
+                                                    else if (y.Key.Equals("transdate"))
+                                                    {
+                                                        string replaceT = y.Value.ToString().Replace("T", "");
+                                                        dtTransDatee = Convert.ToDateTime(replaceT);
+                                                    }
+                                                }
+                                                auto.Add(customerCode);
+                                                dgv.Rows.Add(false, id, paymentID, customerCode, paymentType, Convert.ToDecimal(string.Format("{0:0.00}", amount)), paymentReference, dtTransDatee.ToString("yyyy-MM-dd"));
                                             }
                                         }
-                                        auto.Add(customerCode);
-                                        dgv.Rows.Add(false, id, paymentID, customerCode, paymentType, amount, paymentReference);
                                     }
+                                }
+                                txtSearch.AutoCompleteCustomSource = auto;
+                                lblCount.Text = "COUNT (" + dgv.Rows.Count.ToString("N0") + ")";
+                            }
+                            else
+                            {
+                                string msg = "";
+                                foreach (var x in jObjectResponse)
+                                {
+                                    if (x.Key.Equals("msg"))
+                                    {
+                                        msg = x.Value.ToString();
+                                    }
+                                }
+                                if (!msg.Trim().Equals(""))
+                                {
+                                    MessageBox.Show(msg, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
                         }
-                        txtSearch.AutoCompleteCustomSource = auto;
+                        else
+                        {
+                            MessageBox.Show(response.Content.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(response.ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }

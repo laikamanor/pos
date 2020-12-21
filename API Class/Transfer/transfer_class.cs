@@ -246,7 +246,7 @@ namespace AB.API_Class.Transfer
                                                         {
                                                             itemName = y.Value.ToString();
                                                         }
-                                                        else if (y.Key.Equals((URL.Equals("recv") ? "from_whse" : "to_whse")))
+                                                        else if (y.Key.Equals((URL.Equals("inv/recv") ? "from_whse" : "to_whse")))
                                                         {
                                                             toWhse = y.Value.ToString();
                                                         }

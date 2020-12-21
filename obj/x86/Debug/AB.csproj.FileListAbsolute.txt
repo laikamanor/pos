@@ -252,3 +252,8 @@ C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\bin\x86\Debug\CrystalDec
 C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\bin\x86\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll
 C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\bin\x86\Debug\ShockwaveFlashObjects.dll
 C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\bin\x86\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
+C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\obj\x86\Debug\AB.Items.resources
+C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\obj\x86\Debug\AB.AddItem.resources
+C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\obj\x86\Debug\AB.AdjustmentIn2.resources
+C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\obj\x86\Debug\AB.SalesPerCustomer.resources
+C:\Users\admin\Documents\Visual Studio 2015\Projects\AB\obj\x86\Debug\AB.SalesPerCustomer_Details.resources

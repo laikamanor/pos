@@ -118,6 +118,11 @@ namespace AB
                 PendingOrder2 pendingOrder = new PendingOrder2("Agent AR Sales", "for Confirmation");
                 showForm(panelAgentSalesConfirmation, pendingOrder);
             }
+            else if (tabControl1.SelectedIndex.Equals(3))
+            {
+                SalesPerCustomer salesCustomer = new SalesPerCustomer();
+                showForm(panelPerCustomer, salesCustomer);
+            }
         }
     }
 }

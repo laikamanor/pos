@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using AB.UI_Class;
 namespace AB
 {
     public partial class MainMenu : Form
@@ -15,9 +15,10 @@ namespace AB
         {
             InitializeComponent();
         }
+        utility_class utilityc = new utility_class();
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            this.Text = "Atlantic Bakery - " + Login.fullName + " - v1.4";
+            this.Text = "Atlantic Bakery - " + Login.fullName + " - v1.5 - " + utilityc.URL.Replace("http://", "");
         }
 
         public void showForm(Form form)
@@ -175,6 +176,12 @@ namespace AB
         {
             Warehouse warehouse = new Warehouse();
             showForm(warehouse);
+        }
+
+        private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Items items = new Items();
+            showForm(items);
         }
     }
 }

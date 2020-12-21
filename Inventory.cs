@@ -151,7 +151,7 @@ namespace AB
             string branchCode = "";
             string warehouse = "";
             cmbWarehouse.Items.Clear();
-            cmbWarehouse.Items.Add("All");
+            cmbWarehouse.Items.Add("All-Good");
             foreach (DataRow row in dtBranches.Rows)
             {
                 if (cmbBranches.Text.Equals(row["name"].ToString()))

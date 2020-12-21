@@ -46,6 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblCount = new System.Windows.Forms.Label();
+            this.btnUpdateSAP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -139,7 +140,7 @@
             this.dgv.Location = new System.Drawing.Point(12, 121);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(674, 343);
+            this.dgv.Size = new System.Drawing.Size(674, 288);
             this.dgv.TabIndex = 69;
             // 
             // id
@@ -218,12 +219,30 @@
             this.lblCount.TabIndex = 79;
             this.lblCount.Text = "Items (0)";
             // 
+            // btnUpdateSAP
+            // 
+            this.btnUpdateSAP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateSAP.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnUpdateSAP.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdateSAP.FlatAppearance.BorderSize = 0;
+            this.btnUpdateSAP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateSAP.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateSAP.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateSAP.Location = new System.Drawing.Point(555, 415);
+            this.btnUpdateSAP.Name = "btnUpdateSAP";
+            this.btnUpdateSAP.Size = new System.Drawing.Size(131, 40);
+            this.btnUpdateSAP.TabIndex = 81;
+            this.btnUpdateSAP.Text = "Update SAP #";
+            this.btnUpdateSAP.UseVisualStyleBackColor = false;
+            this.btnUpdateSAP.Click += new System.EventHandler(this.btnUpdateSAP_Click);
+            // 
             // AdjustmentIn_Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(698, 492);
+            this.Controls.Add(this.btnUpdateSAP);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblRemarks);
             this.Controls.Add(this.label3);
@@ -261,5 +280,6 @@
         public System.Windows.Forms.Label lblReference;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblCount;
+        private System.Windows.Forms.Button btnUpdateSAP;
     }
 }

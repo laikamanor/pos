@@ -87,7 +87,7 @@ namespace AB
                     lblReference.Text = row["reference"].ToString();
                     lblTransDate.Text = row["transdate"].ToString();
                     lblToWhse.Text = row["to_whse"].ToString();
-                    label5.Text= (URL.Equals("recv") ? "From Warehouse:" : "To Warehouse");
+                    label5.Text= (URL.Equals("inv/recv") ? "From Warehouse:" : "To Warehouse");
                 }
             }
             if(this.Text=="Received Items")
@@ -115,11 +115,17 @@ namespace AB
                 btnCancel.Text = "Confirm";
                 btnCancel.BackColor = Color.DodgerBlue;
             }
-            else if(gForType.Equals("For SAP") && this.Text.Equals("Received Items"))
+            else if (gForType.Equals("For SAP") && this.Text.Equals("Received Items"))
             {
                 btnCancel.Visible = true;
                 btnCancel.Text = "Update SAP #";
                 btnCancel.BackColor = Color.DodgerBlue;
+            }
+            else if(gForType.Equals("For Transactions") && this.Text.Equals("Received Items"))
+            {
+                btnCancel.Visible = true;
+                btnCancel.Text = "Cancel";
+                btnCancel.BackColor = Color.Firebrick;
             }
             else if (gForType.Equals("For SAP") && this.Text.Equals("Pullout Items"))
             {   
@@ -255,33 +261,31 @@ namespace AB
         {
             if (this.Text.Equals("Received Items") || this.Text.Equals("Transfer Items"))
             {
-                if (lblDocumentStatus.Text.Equals("Open"))
-                {
                     Remarks remarkss = new Remarks();
                     remarkss.ShowDialog();
                     string remarks = Remarks.rem;
-                    if (!string.IsNullOrEmpty(remarks))
+                if (Remarks.isSubmit)
+                {
+
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
                     {
-                        DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (dialogResult == DialogResult.Yes)
+                        string type = this.Text.Equals("Received Items") ? "recv" : "trfr";
+                        string sResponse = transferc.cancelTransfer(selectedID, remarks, type);
+                        JObject jObjectResponse = JObject.Parse(sResponse);
+                        string msg = "";
+                        foreach (var x in jObjectResponse)
                         {
-                            string type = this.Text.Equals("Received Items") ? "recv" : "trfr";
-                            string sResponse = transferc.cancelTransfer(selectedID, remarks, type);
-                            JObject jObjectResponse = JObject.Parse(sResponse);
-                            string msg = "";
-                            foreach (var x in jObjectResponse)
+                            if (x.Key.Equals("message"))
                             {
-                                if (x.Key.Equals("message"))
-                                {
-                                    msg = x.Value.ToString();
-                                }
+                                msg = x.Value.ToString();
                             }
-                            if (!string.IsNullOrEmpty(msg))
-                            {
-                                MessageBox.Show(msg, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                isSubmit = true;
-                                this.Dispose();
-                            }
+                        }
+                        if (!string.IsNullOrEmpty(msg))
+                        {
+                            MessageBox.Show(msg, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            isSubmit = true;
+                            this.Dispose();
                         }
                     }
                 }

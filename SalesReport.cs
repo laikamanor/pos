@@ -382,6 +382,7 @@ namespace AB
                                 }
                             }
                         }
+                        lblOrderCount.Text = "ORDERS (" + dgv.Rows.Count.ToString("N0") + ")";
                     }
                     else
                     {
@@ -658,6 +659,7 @@ namespace AB
                                         }
                                     }
                                 }
+                                lblItemsCount.Text = "ITEMS (" + dgvitems.Rows.Count.ToString("N0") + ")";
                             }
                             else
                             {

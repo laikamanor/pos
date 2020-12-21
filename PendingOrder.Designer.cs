@@ -58,6 +58,8 @@
             this.panelAgentSalesSAP = new System.Windows.Forms.Panel();
             this.tpAgentSalesSAPIP = new System.Windows.Forms.TabPage();
             this.panelAgentSalesSAPIP = new System.Windows.Forms.Panel();
+            this.tpSalesSummaryCustomer = new System.Windows.Forms.TabPage();
+            this.panelPerCustomer = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tpCashSales.SuspendLayout();
             this.tcCashSales.SuspendLayout();
@@ -76,6 +78,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tpAgentSalesSAPIP.SuspendLayout();
+            this.tpSalesSummaryCustomer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -86,6 +89,7 @@
             this.tabControl1.Controls.Add(this.tpCashSales);
             this.tabControl1.Controls.Add(this.tpARSales);
             this.tabControl1.Controls.Add(this.tpAgentSales);
+            this.tabControl1.Controls.Add(this.tpSalesSummaryCustomer);
             this.tabControl1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(12, 5);
             this.tabControl1.Name = "tabControl1";
@@ -149,7 +153,7 @@
             this.tpCSSAP.Location = new System.Drawing.Point(4, 25);
             this.tpCSSAP.Name = "tpCSSAP";
             this.tpCSSAP.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCSSAP.Size = new System.Drawing.Size(1178, 440);
+            this.tpCSSAP.Size = new System.Drawing.Size(1178, 459);
             this.tpCSSAP.TabIndex = 2;
             this.tpCSSAP.Text = "For SAP AR";
             this.tpCSSAP.UseVisualStyleBackColor = true;
@@ -162,7 +166,7 @@
             this.panelCSSAP.AutoScroll = true;
             this.panelCSSAP.Location = new System.Drawing.Point(6, 6);
             this.panelCSSAP.Name = "panelCSSAP";
-            this.panelCSSAP.Size = new System.Drawing.Size(1166, 428);
+            this.panelCSSAP.Size = new System.Drawing.Size(1166, 447);
             this.panelCSSAP.TabIndex = 0;
             // 
             // tpCSSAPIP
@@ -170,7 +174,7 @@
             this.tpCSSAPIP.Controls.Add(this.panelCSIP);
             this.tpCSSAPIP.Location = new System.Drawing.Point(4, 25);
             this.tpCSSAPIP.Name = "tpCSSAPIP";
-            this.tpCSSAPIP.Size = new System.Drawing.Size(1178, 440);
+            this.tpCSSAPIP.Size = new System.Drawing.Size(1178, 459);
             this.tpCSSAPIP.TabIndex = 3;
             this.tpCSSAPIP.Text = "For SAP IP";
             this.tpCSSAPIP.UseVisualStyleBackColor = true;
@@ -183,7 +187,7 @@
             this.panelCSIP.AutoScroll = true;
             this.panelCSIP.Location = new System.Drawing.Point(6, 6);
             this.panelCSIP.Name = "panelCSIP";
-            this.panelCSIP.Size = new System.Drawing.Size(1166, 428);
+            this.panelCSIP.Size = new System.Drawing.Size(1166, 447);
             this.panelCSIP.TabIndex = 1;
             // 
             // tpARSales
@@ -193,7 +197,7 @@
             this.tpARSales.Location = new System.Drawing.Point(4, 25);
             this.tpARSales.Name = "tpARSales";
             this.tpARSales.Padding = new System.Windows.Forms.Padding(3);
-            this.tpARSales.Size = new System.Drawing.Size(1198, 478);
+            this.tpARSales.Size = new System.Drawing.Size(1198, 497);
             this.tpARSales.TabIndex = 1;
             this.tpARSales.Text = "AR Sales";
             this.tpARSales.UseVisualStyleBackColor = true;
@@ -306,7 +310,7 @@
             this.tpAgentSales.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpAgentSales.Location = new System.Drawing.Point(4, 25);
             this.tpAgentSales.Name = "tpAgentSales";
-            this.tpAgentSales.Size = new System.Drawing.Size(1198, 478);
+            this.tpAgentSales.Size = new System.Drawing.Size(1198, 497);
             this.tpAgentSales.TabIndex = 2;
             this.tpAgentSales.Text = "Agent Sales";
             this.tpAgentSales.UseVisualStyleBackColor = true;
@@ -413,6 +417,27 @@
             this.panelAgentSalesSAPIP.Size = new System.Drawing.Size(1166, 428);
             this.panelAgentSalesSAPIP.TabIndex = 1;
             // 
+            // tpSalesSummaryCustomer
+            // 
+            this.tpSalesSummaryCustomer.Controls.Add(this.panelPerCustomer);
+            this.tpSalesSummaryCustomer.Location = new System.Drawing.Point(4, 25);
+            this.tpSalesSummaryCustomer.Name = "tpSalesSummaryCustomer";
+            this.tpSalesSummaryCustomer.Size = new System.Drawing.Size(1198, 497);
+            this.tpSalesSummaryCustomer.TabIndex = 3;
+            this.tpSalesSummaryCustomer.Text = "Sales Summary Per Customer";
+            this.tpSalesSummaryCustomer.UseVisualStyleBackColor = true;
+            // 
+            // panelPerCustomer
+            // 
+            this.panelPerCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelPerCustomer.AutoScroll = true;
+            this.panelPerCustomer.Location = new System.Drawing.Point(12, 12);
+            this.panelPerCustomer.Name = "panelPerCustomer";
+            this.panelPerCustomer.Size = new System.Drawing.Size(1174, 477);
+            this.panelPerCustomer.TabIndex = 1;
+            // 
             // PendingOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,6 +469,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tpAgentSalesSAPIP.ResumeLayout(false);
+            this.tpSalesSummaryCustomer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -479,5 +505,7 @@
         private System.Windows.Forms.Panel panelARSalesSAPIP;
         private System.Windows.Forms.TabPage tpAgentSalesSAPIP;
         private System.Windows.Forms.Panel panelAgentSalesSAPIP;
+        private System.Windows.Forms.TabPage tpSalesSummaryCustomer;
+        private System.Windows.Forms.Panel panelPerCustomer;
     }
 }

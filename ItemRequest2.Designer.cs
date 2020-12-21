@@ -115,7 +115,6 @@
             this.cmbToWhse.Name = "cmbToWhse";
             this.cmbToWhse.Size = new System.Drawing.Size(154, 24);
             this.cmbToWhse.TabIndex = 30;
-            //this.cmbToWhse.SelectedIndexChanged += new System.EventHandler(this.cmbToWhse_SelectedIndexChanged);
             this.cmbToWhse.SelectedValueChanged += new System.EventHandler(this.cmbToWhse_SelectedValueChanged);
             // 
             // label3
@@ -144,6 +143,7 @@
             this.cmbFromWhse.Name = "cmbFromWhse";
             this.cmbFromWhse.Size = new System.Drawing.Size(154, 24);
             this.cmbFromWhse.TabIndex = 28;
+            this.cmbFromWhse.SelectedIndexChanged += new System.EventHandler(this.cmbFromWhse_SelectedIndexChanged);
             this.cmbFromWhse.SelectedValueChanged += new System.EventHandler(this.cmbFromWhse_SelectedValueChanged);
             // 
             // cmbDocStatus

@@ -17,13 +17,17 @@ namespace AB
     {
         utility_class utilityc = new utility_class();
         public int selectedID = 0;
-        public AdjustmentIn_Details()
+        public static bool isSubmit=false;
+        string gAdjTrans = "";
+        public AdjustmentIn_Details(string adjTrans)
         {
+            gAdjTrans = adjTrans;
             InitializeComponent();
         }
 
         private void AdjustmentIn_Details_Load(object sender, EventArgs e)
         {
+            btnUpdateSAP.Visible = gAdjTrans.Equals("For SAP") ? true : false;
             loadData();
             lblCount.Text = "Items (" + dgv.Rows.Count.ToString("N0") + ")";
         }
@@ -140,6 +144,99 @@ namespace AB
                     {
                         MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
+                }
+            }
+        }
+
+        private void btnUpdateSAP_Click(object sender, EventArgs e)
+        {
+            if (this.Text == "Adjustment In Details")
+            {
+                if (gAdjTrans.Equals("For SAP"))
+                {
+                    SAP_Remarks sapRemarks = new SAP_Remarks();
+                    sapRemarks.isOptional = false;
+                    sapRemarks.ShowDialog();
+                    int sapNumber = SAP_Remarks.sap_number;
+                    string remarks = SAP_Remarks.rem;
+                    if (SAP_Remarks.isSubmit)
+                    {
+                        JObject jObjectBody = new JObject();
+                        JArray jArrayID = new JArray();
+                        jArrayID.Add(selectedID);
+                        jObjectBody.Add("ids", jArrayID);
+                        jObjectBody.Add("sap_number", sapNumber);
+                        jObjectBody.Add("remarks", remarks);
+                        apiPUT(jObjectBody, "/api/sap_num/adj_in/update");
+                        if (isSubmit)
+                        {
+                            this.Dispose();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void apiPUT(JObject body, string URL)
+        {
+            if (Login.jsonResult != null)
+            {
+                string token = "";
+                foreach (var x in Login.jsonResult)
+                {
+                    if (x.Key.Equals("token"))
+                    {
+                        token = x.Value.ToString();
+                    }
+                }
+                if (!token.Equals(""))
+                {
+                    var client = new RestClient(utilityc.URL);
+                    client.Timeout = -1;
+                    var request = new RestRequest(URL);
+                    Console.WriteLine(URL);
+                    request.AddHeader("Authorization", "Bearer " + token);
+                    request.Method = Method.PUT;
+
+                    Console.WriteLine(body);
+                    request.AddParameter("application/json", body, ParameterType.RequestBody);
+                    var response = client.Execute(request);
+                    if (response.ErrorMessage == null)
+                    {
+                        JObject jObjectResponse = JObject.Parse(response.Content);
+
+                        foreach (var x in jObjectResponse)
+                        {
+                            if (x.Key.Equals("success"))
+                            {
+                                isSubmit = true;
+                                break;
+                            }
+                        }
+
+                        string msg = "No message response found";
+                        foreach (var x in jObjectResponse)
+                        {
+                            if (x.Key.Equals("message"))
+                            {
+                                msg = x.Value.ToString();
+                            }
+                        }
+                        MessageBox.Show(msg, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
                 }
             }
         }

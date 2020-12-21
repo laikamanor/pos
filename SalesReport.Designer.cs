@@ -92,11 +92,17 @@
             this.Label9 = new System.Windows.Forms.Label();
             this.Label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.lblOrderCount = new System.Windows.Forms.Label();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.lblItemsCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvitems)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv
@@ -132,10 +138,10 @@
             this.processed_by});
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.Gray;
-            this.dgv.Location = new System.Drawing.Point(15, 126);
+            this.dgv.Location = new System.Drawing.Point(15, 162);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(382, 295);
+            this.dgv.Size = new System.Drawing.Size(382, 259);
             this.dgv.TabIndex = 3;
             this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
             this.dgv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
@@ -217,7 +223,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.DimGray;
-            this.label21.Location = new System.Drawing.Point(119, 76);
+            this.label21.Location = new System.Drawing.Point(119, 87);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(41, 16);
             this.label21.TabIndex = 23;
@@ -229,7 +235,7 @@
             this.dtFromDate.CustomFormat = "yyyy-MM-dd";
             this.dtFromDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFromDate.Location = new System.Drawing.Point(166, 72);
+            this.dtFromDate.Location = new System.Drawing.Point(166, 83);
             this.dtFromDate.Name = "dtFromDate";
             this.dtFromDate.Size = new System.Drawing.Size(96, 22);
             this.dtFromDate.TabIndex = 22;
@@ -241,7 +247,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.DimGray;
-            this.label15.Location = new System.Drawing.Point(174, 47);
+            this.label15.Location = new System.Drawing.Point(174, 48);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(37, 15);
             this.label15.TabIndex = 21;
@@ -256,7 +262,7 @@
             this.cmbsales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbsales.ForeColor = System.Drawing.Color.Black;
             this.cmbsales.FormattingEnabled = true;
-            this.cmbsales.Location = new System.Drawing.Point(266, 44);
+            this.cmbsales.Location = new System.Drawing.Point(266, 45);
             this.cmbsales.Name = "cmbsales";
             this.cmbsales.Size = new System.Drawing.Size(131, 23);
             this.cmbsales.TabIndex = 20;
@@ -268,7 +274,7 @@
             this.lblNoDataFound.AutoSize = true;
             this.lblNoDataFound.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoDataFound.ForeColor = System.Drawing.Color.DimGray;
-            this.lblNoDataFound.Location = new System.Drawing.Point(157, 194);
+            this.lblNoDataFound.Location = new System.Drawing.Point(157, 227);
             this.lblNoDataFound.Name = "lblNoDataFound";
             this.lblNoDataFound.Size = new System.Drawing.Size(105, 18);
             this.lblNoDataFound.TabIndex = 25;
@@ -279,7 +285,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(12, 71);
+            this.label2.Location = new System.Drawing.Point(12, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 15);
             this.label2.TabIndex = 29;
@@ -293,7 +299,7 @@
             this.cmbTransType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTransType.ForeColor = System.Drawing.Color.Black;
             this.cmbTransType.FormattingEnabled = true;
-            this.cmbTransType.Location = new System.Drawing.Point(104, 68);
+            this.cmbTransType.Location = new System.Drawing.Point(104, 80);
             this.cmbTransType.Name = "cmbTransType";
             this.cmbTransType.Size = new System.Drawing.Size(131, 23);
             this.cmbTransType.TabIndex = 28;
@@ -330,7 +336,7 @@
             this.dtToDate.CustomFormat = "yyyy-MM-dd";
             this.dtToDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtToDate.Location = new System.Drawing.Point(301, 72);
+            this.dtToDate.Location = new System.Drawing.Point(301, 83);
             this.dtToDate.Name = "dtToDate";
             this.dtToDate.Size = new System.Drawing.Size(96, 22);
             this.dtToDate.TabIndex = 32;
@@ -342,7 +348,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.DimGray;
-            this.label5.Location = new System.Drawing.Point(268, 77);
+            this.label5.Location = new System.Drawing.Point(268, 88);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(27, 16);
             this.label5.TabIndex = 33;
@@ -388,10 +394,10 @@
             this.dgvitems.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvitems.EnableHeadersVisualStyles = false;
             this.dgvitems.GridColor = System.Drawing.Color.Gray;
-            this.dgvitems.Location = new System.Drawing.Point(3, 3);
+            this.dgvitems.Location = new System.Drawing.Point(3, 32);
             this.dgvitems.Name = "dgvitems";
             this.dgvitems.RowHeadersWidth = 10;
-            this.dgvitems.Size = new System.Drawing.Size(505, 191);
+            this.dgvitems.Size = new System.Drawing.Size(505, 162);
             this.dgvitems.TabIndex = 55;
             this.dgvitems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvitems_CellClick);
             // 
@@ -451,13 +457,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.panel11);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.cmbWarehouse);
             this.panel1.Controls.Add(this.cmbToTime);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.cmbFromTime);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.checkSelectAll);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.lblNoDataFound);
             this.panel1.Controls.Add(this.dgv);
@@ -493,10 +499,10 @@
             this.cmbWarehouse.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWarehouse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbWarehouse.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbWarehouse.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbWarehouse.ForeColor = System.Drawing.Color.Black;
             this.cmbWarehouse.FormattingEnabled = true;
-            this.cmbWarehouse.Location = new System.Drawing.Point(104, 42);
+            this.cmbWarehouse.Location = new System.Drawing.Point(104, 44);
             this.cmbWarehouse.Name = "cmbWarehouse";
             this.cmbWarehouse.Size = new System.Drawing.Size(154, 24);
             this.cmbWarehouse.TabIndex = 71;
@@ -538,7 +544,7 @@
             "22:00",
             "23:00",
             "23:59"});
-            this.cmbToTime.Location = new System.Drawing.Point(337, 100);
+            this.cmbToTime.Location = new System.Drawing.Point(337, 111);
             this.cmbToTime.Name = "cmbToTime";
             this.cmbToTime.Size = new System.Drawing.Size(60, 23);
             this.cmbToTime.TabIndex = 70;
@@ -550,7 +556,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.DimGray;
-            this.label12.Location = new System.Drawing.Point(318, 104);
+            this.label12.Location = new System.Drawing.Point(318, 115);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(20, 15);
             this.label12.TabIndex = 69;
@@ -592,7 +598,7 @@
             "22:00",
             "23:00",
             "23:59"});
-            this.cmbFromTime.Location = new System.Drawing.Point(258, 100);
+            this.cmbFromTime.Location = new System.Drawing.Point(258, 111);
             this.cmbFromTime.Name = "cmbFromTime";
             this.cmbFromTime.Size = new System.Drawing.Size(60, 23);
             this.cmbFromTime.TabIndex = 68;
@@ -604,7 +610,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.DimGray;
-            this.label4.Location = new System.Drawing.Point(197, 102);
+            this.label4.Location = new System.Drawing.Point(208, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 16);
             this.label4.TabIndex = 67;
@@ -614,8 +620,8 @@
             // 
             this.checkSelectAll.AutoSize = true;
             this.checkSelectAll.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkSelectAll.ForeColor = System.Drawing.Color.Black;
-            this.checkSelectAll.Location = new System.Drawing.Point(15, 103);
+            this.checkSelectAll.ForeColor = System.Drawing.Color.White;
+            this.checkSelectAll.Location = new System.Drawing.Point(4, 6);
             this.checkSelectAll.Name = "checkSelectAll";
             this.checkSelectAll.Size = new System.Drawing.Size(77, 18);
             this.checkSelectAll.TabIndex = 66;
@@ -636,6 +642,7 @@
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.panel12);
             this.panel3.Controls.Add(this.panel2);
             this.panel3.Controls.Add(this.dgvitems);
             this.panel3.Location = new System.Drawing.Point(415, 25);
@@ -891,6 +898,53 @@
             this.label1.TabIndex = 46;
             this.label1.Text = "BILLS";
             // 
+            // panel11
+            // 
+            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(117)))), ((int)(((byte)(32)))));
+            this.panel11.Controls.Add(this.lblOrderCount);
+            this.panel11.Controls.Add(this.checkSelectAll);
+            this.panel11.Location = new System.Drawing.Point(15, 137);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(382, 27);
+            this.panel11.TabIndex = 73;
+            // 
+            // lblOrderCount
+            // 
+            this.lblOrderCount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblOrderCount.AutoSize = true;
+            this.lblOrderCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderCount.ForeColor = System.Drawing.Color.White;
+            this.lblOrderCount.Location = new System.Drawing.Point(159, 6);
+            this.lblOrderCount.Name = "lblOrderCount";
+            this.lblOrderCount.Size = new System.Drawing.Size(65, 15);
+            this.lblOrderCount.TabIndex = 67;
+            this.lblOrderCount.Text = "Orders (0)";
+            // 
+            // panel12
+            // 
+            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel12.BackColor = System.Drawing.Color.ForestGreen;
+            this.panel12.Controls.Add(this.lblItemsCount);
+            this.panel12.Location = new System.Drawing.Point(3, 10);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(505, 29);
+            this.panel12.TabIndex = 65;
+            // 
+            // lblItemsCount
+            // 
+            this.lblItemsCount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblItemsCount.AutoSize = true;
+            this.lblItemsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblItemsCount.ForeColor = System.Drawing.Color.White;
+            this.lblItemsCount.Location = new System.Drawing.Point(233, 8);
+            this.lblItemsCount.Name = "lblItemsCount";
+            this.lblItemsCount.Size = new System.Drawing.Size(57, 15);
+            this.lblItemsCount.TabIndex = 15;
+            this.lblItemsCount.Text = "Items (0)";
+            // 
             // SalesReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -912,6 +966,10 @@
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -977,5 +1035,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbWarehouse;
+        private System.Windows.Forms.Panel panel11;
+        internal System.Windows.Forms.Label lblOrderCount;
+        private System.Windows.Forms.Panel panel12;
+        internal System.Windows.Forms.Label lblItemsCount;
     }
 }

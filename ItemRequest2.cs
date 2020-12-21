@@ -19,6 +19,7 @@ namespace AB
         warehouse_class wahousesc = new warehouse_class();
         string gForType = "";
         DataTable dtWarehouse;
+        int cStatus = 1, cfromWhse = 1, cToWhse = 1, cDueDate = 1, cCheck = 1;
         public ItemRequest2(string forType)
         {
             gForType = forType;
@@ -30,7 +31,7 @@ namespace AB
             cmbToWhse.Items.Clear();
             string ownWhse = "", branch = "";
             dtWarehouse = new DataTable();
-            
+
             if (value)
             {
                 cmb.Items.Add("All");
@@ -55,7 +56,7 @@ namespace AB
                                 if (y.Key.Equals("whse"))
                                 {
                                     ownWhse = y.Value.ToString();
-                                }else if (y.Key.Equals("branch"))
+                                } else if (y.Key.Equals("branch"))
                                 {
                                     branch = value.ToString();
                                 }
@@ -105,7 +106,7 @@ namespace AB
                     cmb.SelectedIndex = 0;
                 }
             }
-            else if(cmb.Items.Count > 0 && value)
+            else if (cmb.Items.Count > 0 && value)
             {
                 cmb.SelectedIndex = 0;
             }
@@ -116,19 +117,26 @@ namespace AB
             loadWarehouses(false, cmbFromWhse);
             loadWarehouses(true, cmbToWhse);
             fillDocStatus();
-            cmbDocStatus.SelectedIndex = 0;
+            dtDueDate.Visible = checkDueDate.Checked;
             cmbDocStatus.Visible = gForType.Equals("For Confirmation") || gForType.Equals("For SAP") ? false : true;
             label1.Visible = gForType.Equals("For Confirmation") || gForType.Equals("For SAP") ? false : true;
-            if(gForType.Equals("For Confirmation") || gForType.Equals("For SAP"))
+
+            if (gForType.Equals("For Confirmation") || gForType.Equals("For SAP"))
             {
                 checkDueDate.Checked = true;
             }
+            loadData();
+            cStatus = 0;
+            cfromWhse = 0;
+            cToWhse = 0;
+            cDueDate = 0;
+            cCheck = 0;
         }
 
         public void fillDocStatus()
         {
             cmbDocStatus.Items.Clear();
-            if(gForType.Equals("For Confirmation") || gForType.Equals("For SAP"))
+            if (gForType.Equals("For Confirmation") || gForType.Equals("For SAP"))
             {
                 cmbDocStatus.Items.Add("Open");
             }
@@ -136,6 +144,10 @@ namespace AB
             {
                 cmbDocStatus.Items.Add("Closed");
                 cmbDocStatus.Items.Add("Cancelled");
+            }
+            if(cmbDocStatus.Items.Count > 0)
+            {
+                cmbDocStatus.SelectedIndex = 0;
             }
         }
 
@@ -170,7 +182,7 @@ namespace AB
 
                     string sDocStatus = (cmbDocStatus.Text.Equals("Open") ? "?docstatus=O" : cmbDocStatus.Text.Equals("Closed") ? "?docstatus=C" : "?docstatus=N");
                     string sConfirmed = (gForType.Equals("For SAP") ? "&confirm=1" : gForType.Equals("Logs") ? "" : "&confirm=");
-                    string sDueDate = (checkDueDate.Checked ? "&duedate=" : "&duedate=" + dtDueDate.Value.ToString("yyyy-MM-dd"));
+                    string sDueDate = (!checkDueDate.Checked ? "&duedate=" : "&duedate=" + dtDueDate.Value.ToString("yyyy-MM-dd"));
                     string sSAPNumber = (gForType.Equals("For SAP") ? "&sap_number=" : "");
                     string sfromWarehouse = (cmbFromWhse.SelectedIndex.Equals(-1) ? "" : cmbFromWhse.SelectedIndex.Equals(0) || cmbFromWhse.Text.ToLower() == "all" ? "&from_whse=" : "&from_whse=" + findWarehouseName(cmbFromWhse.Text));
                     string stoWarehouse = (cmbToWhse.SelectedIndex.Equals(-1) ? "" : cmbToWhse.SelectedIndex.Equals(0) || cmbToWhse.Text.ToLower() == "all" ? "&to_whse=" : "&to_whse=" + findWarehouseName(cmbToWhse.Text));
@@ -267,9 +279,9 @@ namespace AB
         public string findWarehouseName(string value)
         {
             string result = "";
-            foreach(DataRow row in dtWarehouse.Rows)
+            foreach (DataRow row in dtWarehouse.Rows)
             {
-                if(row["whsename"].ToString() == value)
+                if (row["whsename"].ToString() == value)
                 {
                     result = row["whsecode"].ToString();
                     break;
@@ -281,28 +293,48 @@ namespace AB
 
         private void checkDueDate_CheckedChanged(object sender, EventArgs e)
         {
-            dtDueDate.Visible = !checkDueDate.Checked;
-            loadData();
+            dtDueDate.Visible = checkDueDate.Checked;
+            if (cCheck <= 0)
+            {
+                loadData();
+            }
         }
 
         private void cmbDocStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadData();
+            if (cStatus <= 0)
+            {
+                loadData();
+            }
         }
 
         private void dtDueDate_ValueChanged(object sender, EventArgs e)
         {
-            loadData();
+            if (cDueDate <= 0)
+            {
+                loadData();
+            }
+        }
+
+        private void cmbFromWhse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void cmbFromWhse_SelectedValueChanged(object sender, EventArgs e)
         {
-            loadData();
+            if (cfromWhse <= 0)
+            {
+                loadData();
+            }
         }
 
         private void cmbToWhse_SelectedValueChanged(object sender, EventArgs e)
         {
-            loadData();
+            if (cToWhse <= 0)
+            {
+                loadData();
+            }
         }
 
         private void dgv_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

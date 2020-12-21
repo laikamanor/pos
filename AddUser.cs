@@ -31,19 +31,22 @@ namespace AB
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if(txtUsername.Text.ToString().Trim() == "")
+            if (txtUsername.Text.ToString().Trim() == "")
             {
                 MessageBox.Show("Username is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtUsername.Focus();
-            }else if(txtFullName.Text.ToString().Trim() == "")
+            }
+            else if (txtFullName.Text.ToString().Trim() == "")
             {
                 MessageBox.Show("Full Name is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtFullName.Focus();
-            }else if(txtPassword.Text.ToString().Trim() == "" && this.Text == "Add User")
+            }
+            else if (txtPassword.Text.ToString().Trim() == "" && this.Text == "Add User")
             {
                 MessageBox.Show("Password is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPassword.Focus();
-            }else if(txtPassword.Text.ToString().Trim() != txtConfirmPassword.Text.ToString().Trim() && this.Text == "Add User")
+            }
+            else if (txtPassword.Text.ToString().Trim() != txtConfirmPassword.Text.ToString().Trim() && this.Text == "Add User")
             {
                 MessageBox.Show("Password did not match", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtConfirmPassword.Focus();
@@ -52,15 +55,19 @@ namespace AB
             {
                 MessageBox.Show("Branch is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbBranch.Focus();
-            }else if (cmbWarehouse.SelectedIndex == -1)
+            }
+            else if (cmbWarehouse.SelectedIndex == -1)
             {
                 MessageBox.Show("Warehouse is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbWarehouse.Focus();
-            }else if (cmbStatus.SelectedIndex == -1)
+            }
+            else if (cmbStatus.SelectedIndex == -1)
             {
                 MessageBox.Show("Status is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbStatus.Focus();
-            }else if(!string.IsNullOrEmpty(txtPassword.Text.Trim()) && txtPassword.Text.Trim() != txtConfirmPassword.Text.Trim() &&  this.Text=="Edit User"){
+            }
+            else if (!string.IsNullOrEmpty(txtPassword.Text.Trim()) && txtPassword.Text.Trim() != txtConfirmPassword.Text.Trim() && this.Text == "Edit User")
+            {
                 MessageBox.Show("Password did not match", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtConfirmPassword.Focus();
             }

@@ -492,9 +492,9 @@
             this.lblOrderCount.ForeColor = System.Drawing.Color.White;
             this.lblOrderCount.Location = new System.Drawing.Point(391, 8);
             this.lblOrderCount.Name = "lblOrderCount";
-            this.lblOrderCount.Size = new System.Drawing.Size(65, 15);
+            this.lblOrderCount.Size = new System.Drawing.Size(73, 15);
             this.lblOrderCount.TabIndex = 14;
-            this.lblOrderCount.Text = "Orders (0)";
+            this.lblOrderCount.Text = "ORDERS (0)";
             // 
             // btnrefresh
             // 
@@ -734,9 +734,9 @@
             this.lblItemsCount.ForeColor = System.Drawing.Color.White;
             this.lblItemsCount.Location = new System.Drawing.Point(236, 8);
             this.lblItemsCount.Name = "lblItemsCount";
-            this.lblItemsCount.Size = new System.Drawing.Size(57, 15);
+            this.lblItemsCount.Size = new System.Drawing.Size(60, 15);
             this.lblItemsCount.TabIndex = 15;
-            this.lblItemsCount.Text = "Items (0)";
+            this.lblItemsCount.Text = "ITEMS (0)";
             // 
             // Panel3
             // 

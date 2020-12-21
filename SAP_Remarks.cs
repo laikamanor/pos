@@ -55,6 +55,7 @@ namespace AB
             label1.Text = isOptional ? "Remarks:" : "*Remarks";
             this.Text = isOptional ? "Enter SAP # & Remarks (Optional)" : "Enter SAP # & Remarks";
             isSubmit = false;
+            isOptional = false;
         }
     }
 }

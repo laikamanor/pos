@@ -33,7 +33,7 @@ namespace AB
             label1.Visible = gType.Equals("Summary Deposit") ? false : true;
             txtSearch.Visible = gType.Equals("Summary Deposit") ? false : true;
             btnSearch.Visible = gType.Equals("Summary Deposit") ? false : true;
-            btnAddUser.Visible = gType.Equals("Summary Deposit") ? false : true;
+            btnAddUser.Visible = gType.Equals("Summary Deposit") || gType.Equals("Used Deposit") ? false : true;
             dgv.Columns["amountdue"].Visible = gType.Equals("Summary Deposit") ? false : true;
             dgv.Columns["remarks"].Visible = gType.Equals("Summary Deposit") ? false : true;
             dgv.Columns["referencenum"].Visible = gType.Equals("Summary Deposit") ? false : true;

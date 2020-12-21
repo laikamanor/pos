@@ -193,6 +193,12 @@
     <Compile Include="AddCustomer.Designer.cs">
       <DependentUpon>AddCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddItem.Designer.cs">
+      <DependentUpon>AddItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddObjectType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,12 @@
     </Compile>
     <Compile Include="AdjustmentIn.Designer.cs">
       <DependentUpon>AdjustmentIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdjustmentIn2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdjustmentIn2.Designer.cs">
+      <DependentUpon>AdjustmentIn2.cs</DependentUpon>
     </Compile>
     <Compile Include="AdjustmentIn_Details.cs">
       <SubType>Form</SubType>
@@ -412,6 +424,12 @@
     <Compile Include="ItemRequest_Items.Designer.cs">
       <DependentUpon>ItemRequest_Items.cs</DependentUpon>
     </Compile>
+    <Compile Include="Items.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Items.Designer.cs">
+      <DependentUpon>Items.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +509,18 @@
     </Compile>
     <Compile Include="reportsDialog.Designer.cs">
       <DependentUpon>reportsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesPerCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesPerCustomer.Designer.cs">
+      <DependentUpon>SalesPerCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesPerCustomer_Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesPerCustomer_Details.Designer.cs">
+      <DependentUpon>SalesPerCustomer_Details.cs</DependentUpon>
     </Compile>
     <Compile Include="SalesReportItems.cs">
       <SubType>Form</SubType>
@@ -601,6 +631,9 @@
     <EmbeddedResource Include="AddCustomer.resx">
       <DependentUpon>AddCustomer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddItem.resx">
+      <DependentUpon>AddItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddObjectType.resx">
       <DependentUpon>AddObjectType.cs</DependentUpon>
     </EmbeddedResource>
@@ -612,6 +645,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdjustmentIn.resx">
       <DependentUpon>AdjustmentIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdjustmentIn2.resx">
+      <DependentUpon>AdjustmentIn2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdjustmentIn_Details.resx">
       <DependentUpon>AdjustmentIn_Details.cs</DependentUpon>
@@ -693,6 +729,9 @@
     <EmbeddedResource Include="ItemRequest_Items.resx">
       <DependentUpon>ItemRequest_Items.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Items.resx">
+      <DependentUpon>Items.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -742,6 +781,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="reportsDialog.resx">
       <DependentUpon>reportsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesPerCustomer.resx">
+      <DependentUpon>SalesPerCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesPerCustomer_Details.resx">
+      <DependentUpon>SalesPerCustomer_Details.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesReportItems.resx">
       <DependentUpon>SalesReportItems.cs</DependentUpon>
