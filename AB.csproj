@@ -173,6 +173,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tulpep.NotificationWindow, Version=1.1.37.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Tulpep.NotificationWindow.1.1.37\lib\net40\Tulpep.NotificationWindow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddAdvancePayment.cs">
@@ -193,6 +197,12 @@
     <Compile Include="AddCustomer.Designer.cs">
       <DependentUpon>AddCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddCustomer_Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCustomer_Details.Designer.cs">
+      <DependentUpon>AddCustomer_Details.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +214,18 @@
     </Compile>
     <Compile Include="AddObjectType.Designer.cs">
       <DependentUpon>AddObjectType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddPriceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddPriceList.Designer.cs">
+      <DependentUpon>AddPriceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSeries.Designer.cs">
+      <DependentUpon>AddSeries.cs</DependentUpon>
     </Compile>
     <Compile Include="AddUser.cs">
       <SubType>Form</SubType>
@@ -280,6 +302,18 @@
     <Compile Include="CashTransactionReportItems.Designer.cs">
       <DependentUpon>CashTransactionReportItems.cs</DependentUpon>
     </Compile>
+    <Compile Include="CashVariance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CashVariance.Designer.cs">
+      <DependentUpon>CashVariance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CashVariance2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CashVariance2.Designer.cs">
+      <DependentUpon>CashVariance2.cs</DependentUpon>
+    </Compile>
     <Compile Include="countReports.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -305,6 +339,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsFinal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\dsFinalReport_SubQuery1.cs">
+      <DependentUpon>dsFinalReport_SubQuery1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Dataset\dsFinalReport_SubQuery1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsFinalReport_SubQuery1.xsd</DependentUpon>
     </Compile>
     <Compile Include="Dataset\dsPullOut.cs">
       <DependentUpon>dsPullOut.xsd</DependentUpon>
@@ -339,6 +381,12 @@
     </Compile>
     <Compile Include="EnterDate.Designer.cs">
       <DependentUpon>EnterDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinalReport_SubQuery1.cs">
+      <DependentUpon>FinalReport_SubQuery1.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="finalReport.cs">
       <AutoGen>True</AutoGen>
@@ -388,6 +436,12 @@
     <Compile Include="Inventory.Designer.cs">
       <DependentUpon>Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPRemarks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IPRemarks.Designer.cs">
+      <DependentUpon>IPRemarks.cs</DependentUpon>
+    </Compile>
     <Compile Include="ItemDeposit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,6 +483,18 @@
     </Compile>
     <Compile Include="Items.Designer.cs">
       <DependentUpon>Items.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemSalesReport.Designer.cs">
+      <DependentUpon>ItemSalesReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemSalesReport_Details.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemSalesReport_Details.Designer.cs">
+      <DependentUpon>ItemSalesReport_Details.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -483,6 +549,24 @@
     </Compile>
     <Compile Include="forSAPAR.Designer.cs">
       <DependentUpon>forSAPAR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceList.Designer.cs">
+      <DependentUpon>PriceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceList_Items.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceList_Items.Designer.cs">
+      <DependentUpon>PriceList_Items.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceList_Row.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceList_Row.Designer.cs">
+      <DependentUpon>PriceList_Row.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -576,6 +660,12 @@
     <Compile Include="SelectedItem.Designer.cs">
       <DependentUpon>SelectedItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Series.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Series.Designer.cs">
+      <DependentUpon>Series.cs</DependentUpon>
+    </Compile>
     <Compile Include="SummaryDeposit_Details.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -631,11 +721,20 @@
     <EmbeddedResource Include="AddCustomer.resx">
       <DependentUpon>AddCustomer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddCustomer_Details.resx">
+      <DependentUpon>AddCustomer_Details.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddItem.resx">
       <DependentUpon>AddItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddObjectType.resx">
       <DependentUpon>AddObjectType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddPriceList.resx">
+      <DependentUpon>AddPriceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSeries.resx">
+      <DependentUpon>AddSeries.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
@@ -667,6 +766,12 @@
     <EmbeddedResource Include="CashTransactionReportItems.resx">
       <DependentUpon>CashTransactionReportItems.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CashVariance.resx">
+      <DependentUpon>CashVariance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CashVariance2.resx">
+      <DependentUpon>CashVariance2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="countReports.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>countReports.cs</LastGenOutput>
@@ -685,6 +790,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnterDate.resx">
       <DependentUpon>EnterDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinalReport_SubQuery1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FinalReport_SubQuery1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="finalReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -711,6 +820,9 @@
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IPRemarks.resx">
+      <DependentUpon>IPRemarks.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ItemDeposit.resx">
       <DependentUpon>ItemDeposit.cs</DependentUpon>
     </EmbeddedResource>
@@ -732,6 +844,12 @@
     <EmbeddedResource Include="Items.resx">
       <DependentUpon>Items.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ItemSalesReport.resx">
+      <DependentUpon>ItemSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemSalesReport_Details.resx">
+      <DependentUpon>ItemSalesReport_Details.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -747,6 +865,17 @@
     <EmbeddedResource Include="PaymentMethodList.resx">
       <DependentUpon>PaymentMethodList.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Dataset\dsFinalReport_SubQuery1.xsc">
+      <DependentUpon>dsFinalReport_SubQuery1.xsd</DependentUpon>
+    </None>
+    <None Include="Dataset\dsFinalReport_SubQuery1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsFinalReport_SubQuery1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Dataset\dsFinalReport_SubQuery1.xss">
+      <DependentUpon>dsFinalReport_SubQuery1.xsd</DependentUpon>
+    </None>
     <EmbeddedResource Include="PaymentMethodReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PaymentMethodReport.cs</LastGenOutput>
@@ -759,6 +888,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forSAPAR.resx">
       <DependentUpon>forSAPAR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceList.resx">
+      <DependentUpon>PriceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceList_Items.resx">
+      <DependentUpon>PriceList_Items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceList_Row.resx">
+      <DependentUpon>PriceList_Row.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -814,6 +952,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectedItem.resx">
       <DependentUpon>SelectedItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Series.resx">
+      <DependentUpon>Series.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SummaryDeposit_Details.resx">
       <DependentUpon>SummaryDeposit_Details.cs</DependentUpon>
@@ -883,6 +1024,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="abc logo.ico" />
+    <None Include="Resources\TSHIRT.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

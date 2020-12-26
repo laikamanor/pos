@@ -20,6 +20,7 @@ namespace AB
 
         private void CashTransactionReportItems_Load(object sender, EventArgs e)
         {
+            dgvitems.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             btnCancel.Visible = canCancel();
             loadData();
         }

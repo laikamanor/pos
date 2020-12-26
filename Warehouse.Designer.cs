@@ -30,19 +30,22 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Warehouse));
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.namee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEdit = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbBranches = new System.Windows.Forms.ComboBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricelist = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pricelist_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.namee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cash_account = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.short_account = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pullout_whse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,11 +71,15 @@
             this.dgv.ColumnHeadersHeight = 40;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.pricelist,
+            this.pricelist_id,
             this.branch,
             this.code,
             this.namee,
-            this.btnEdit,
-            this.btnRemove});
+            this.cash_account,
+            this.short_account,
+            this.pullout_whse,
+            this.btnEdit});
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.Gray;
             this.dgv.Location = new System.Drawing.Point(29, 94);
@@ -80,57 +87,7 @@
             this.dgv.RowHeadersWidth = 10;
             this.dgv.Size = new System.Drawing.Size(647, 388);
             this.dgv.TabIndex = 6;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // branch
-            // 
-            this.branch.HeaderText = "Branch";
-            this.branch.Name = "branch";
-            this.branch.ReadOnly = true;
-            // 
-            // code
-            // 
-            this.code.HeaderText = "Code";
-            this.code.Name = "code";
-            this.code.ReadOnly = true;
-            // 
-            // namee
-            // 
-            this.namee.HeaderText = "Name";
-            this.namee.Name = "namee";
-            this.namee.ReadOnly = true;
-            // 
-            // btnEdit
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.DefaultCellStyle = dataGridViewCellStyle2;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.HeaderText = "Action";
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.ReadOnly = true;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseColumnTextForButtonValue = true;
-            // 
-            // btnRemove
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Firebrick;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            this.btnRemove.DefaultCellStyle = dataGridViewCellStyle3;
-            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemove.HeaderText = "Action";
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.ReadOnly = true;
-            this.btnRemove.Text = "Delete";
-            this.btnRemove.UseColumnTextForButtonValue = true;
+            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
             // 
             // label1
             // 
@@ -183,6 +140,85 @@
             this.txtSearch.Size = new System.Drawing.Size(205, 22);
             this.txtSearch.TabIndex = 9;
             // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.MinimumWidth = 100;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // pricelist
+            // 
+            this.pricelist.HeaderText = "Price List";
+            this.pricelist.MinimumWidth = 150;
+            this.pricelist.Name = "pricelist";
+            this.pricelist.ReadOnly = true;
+            // 
+            // pricelist_id
+            // 
+            this.pricelist_id.HeaderText = "Price List ID";
+            this.pricelist_id.MinimumWidth = 100;
+            this.pricelist_id.Name = "pricelist_id";
+            this.pricelist_id.ReadOnly = true;
+            this.pricelist_id.Visible = false;
+            // 
+            // branch
+            // 
+            this.branch.HeaderText = "Branch";
+            this.branch.MinimumWidth = 150;
+            this.branch.Name = "branch";
+            this.branch.ReadOnly = true;
+            // 
+            // code
+            // 
+            this.code.HeaderText = "Code";
+            this.code.MinimumWidth = 150;
+            this.code.Name = "code";
+            this.code.ReadOnly = true;
+            // 
+            // namee
+            // 
+            this.namee.HeaderText = "Name";
+            this.namee.MinimumWidth = 150;
+            this.namee.Name = "namee";
+            this.namee.ReadOnly = true;
+            // 
+            // cash_account
+            // 
+            this.cash_account.HeaderText = "Cash Account";
+            this.cash_account.MinimumWidth = 100;
+            this.cash_account.Name = "cash_account";
+            this.cash_account.ReadOnly = true;
+            // 
+            // short_account
+            // 
+            this.short_account.HeaderText = "Short Account";
+            this.short_account.MinimumWidth = 100;
+            this.short_account.Name = "short_account";
+            this.short_account.ReadOnly = true;
+            // 
+            // pullout_whse
+            // 
+            this.pullout_whse.HeaderText = "Pull Out Warehouse";
+            this.pullout_whse.MinimumWidth = 100;
+            this.pullout_whse.Name = "pullout_whse";
+            this.pullout_whse.ReadOnly = true;
+            // 
+            // btnEdit
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            this.btnEdit.DefaultCellStyle = dataGridViewCellStyle2;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.HeaderText = "Action";
+            this.btnEdit.MinimumWidth = 100;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ReadOnly = true;
+            this.btnEdit.Text = "Update Price";
+            this.btnEdit.UseColumnTextForButtonValue = true;
+            // 
             // Warehouse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,15 +245,19 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn branch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namee;
-        private System.Windows.Forms.DataGridViewButtonColumn btnEdit;
-        private System.Windows.Forms.DataGridViewButtonColumn btnRemove;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbBranches;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pricelist;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pricelist_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn branch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn namee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cash_account;
+        private System.Windows.Forms.DataGridViewTextBoxColumn short_account;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pullout_whse;
+        private System.Windows.Forms.DataGridViewButtonColumn btnEdit;
     }
 }

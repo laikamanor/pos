@@ -31,12 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SummaryDeposit_Details));
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblCustomerCode = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dtToDate = new System.Windows.Forms.DateTimePicker();
-            this.label21 = new System.Windows.Forms.Label();
-            this.dtFromDate = new System.Windows.Forms.DateTimePicker();
             this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reference2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +38,14 @@
             this.dep_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dep_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.running_balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblCustomerCode = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtToDate = new System.Windows.Forms.DateTimePicker();
+            this.label21 = new System.Windows.Forms.Label();
+            this.dtFromDate = new System.Windows.Forms.DateTimePicker();
+            this.lblBalance = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,76 +85,6 @@
             this.dgv.RowHeadersWidth = 10;
             this.dgv.Size = new System.Drawing.Size(863, 397);
             this.dgv.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(9, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 16);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Customer Code:";
-            // 
-            // lblCustomerCode
-            // 
-            this.lblCustomerCode.AutoSize = true;
-            this.lblCustomerCode.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomerCode.ForeColor = System.Drawing.Color.Black;
-            this.lblCustomerCode.Location = new System.Drawing.Point(124, 45);
-            this.lblCustomerCode.Name = "lblCustomerCode";
-            this.lblCustomerCode.Size = new System.Drawing.Size(30, 16);
-            this.lblCustomerCode.TabIndex = 8;
-            this.lblCustomerCode.Text = "N/A";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.DimGray;
-            this.label5.Location = new System.Drawing.Point(746, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(27, 16);
-            this.label5.TabIndex = 37;
-            this.label5.Text = "To:";
-            // 
-            // dtToDate
-            // 
-            this.dtToDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtToDate.CustomFormat = "yyyy-MM-dd";
-            this.dtToDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtToDate.Location = new System.Drawing.Point(779, 40);
-            this.dtToDate.Name = "dtToDate";
-            this.dtToDate.Size = new System.Drawing.Size(96, 22);
-            this.dtToDate.TabIndex = 36;
-            this.dtToDate.ValueChanged += new System.EventHandler(this.dtToDate_ValueChanged);
-            // 
-            // label21
-            // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.DimGray;
-            this.label21.Location = new System.Drawing.Point(597, 44);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(41, 16);
-            this.label21.TabIndex = 35;
-            this.label21.Text = "Date:";
-            // 
-            // dtFromDate
-            // 
-            this.dtFromDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtFromDate.CustomFormat = "yyyy-MM-dd";
-            this.dtFromDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFromDate.Location = new System.Drawing.Point(644, 40);
-            this.dtFromDate.Name = "dtFromDate";
-            this.dtFromDate.Size = new System.Drawing.Size(96, 22);
-            this.dtFromDate.TabIndex = 34;
-            this.dtFromDate.ValueChanged += new System.EventHandler(this.dtFromDate_ValueChanged);
             // 
             // transdate
             // 
@@ -210,12 +142,107 @@
             this.running_balance.Name = "running_balance";
             this.running_balance.ReadOnly = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DimGray;
+            this.label1.Location = new System.Drawing.Point(9, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 16);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Customer Code:";
+            // 
+            // lblCustomerCode
+            // 
+            this.lblCustomerCode.AutoSize = true;
+            this.lblCustomerCode.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCustomerCode.ForeColor = System.Drawing.Color.Black;
+            this.lblCustomerCode.Location = new System.Drawing.Point(124, 45);
+            this.lblCustomerCode.Name = "lblCustomerCode";
+            this.lblCustomerCode.Size = new System.Drawing.Size(30, 16);
+            this.lblCustomerCode.TabIndex = 8;
+            this.lblCustomerCode.Text = "N/A";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.DimGray;
+            this.label5.Location = new System.Drawing.Point(746, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(27, 16);
+            this.label5.TabIndex = 37;
+            this.label5.Text = "To:";
+            // 
+            // dtToDate
+            // 
+            this.dtToDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtToDate.CustomFormat = "yyyy-MM-dd";
+            this.dtToDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtToDate.Location = new System.Drawing.Point(779, 12);
+            this.dtToDate.Name = "dtToDate";
+            this.dtToDate.Size = new System.Drawing.Size(96, 22);
+            this.dtToDate.TabIndex = 36;
+            this.dtToDate.ValueChanged += new System.EventHandler(this.dtToDate_ValueChanged);
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.DimGray;
+            this.label21.Location = new System.Drawing.Point(597, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(41, 16);
+            this.label21.TabIndex = 35;
+            this.label21.Text = "Date:";
+            // 
+            // dtFromDate
+            // 
+            this.dtFromDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtFromDate.CustomFormat = "yyyy-MM-dd";
+            this.dtFromDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFromDate.Location = new System.Drawing.Point(644, 12);
+            this.dtFromDate.Name = "dtFromDate";
+            this.dtFromDate.Size = new System.Drawing.Size(96, 22);
+            this.dtFromDate.TabIndex = 34;
+            this.dtFromDate.ValueChanged += new System.EventHandler(this.dtFromDate_ValueChanged);
+            // 
+            // lblBalance
+            // 
+            this.lblBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBalance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBalance.ForeColor = System.Drawing.Color.Black;
+            this.lblBalance.Location = new System.Drawing.Point(736, 44);
+            this.lblBalance.Name = "lblBalance";
+            this.lblBalance.Size = new System.Drawing.Size(139, 16);
+            this.lblBalance.TabIndex = 48;
+            this.lblBalance.Text = "N/A";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
+            this.label3.Location = new System.Drawing.Point(597, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(133, 16);
+            this.label3.TabIndex = 47;
+            this.label3.Text = "Beginning Balance:";
+            // 
             // SummaryDeposit_Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(887, 473);
+            this.Controls.Add(this.lblBalance);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dtToDate);
             this.Controls.Add(this.label21);
@@ -250,5 +277,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dep_in;
         private System.Windows.Forms.DataGridViewTextBoxColumn dep_out;
         private System.Windows.Forms.DataGridViewTextBoxColumn running_balance;
+        public System.Windows.Forms.Label lblBalance;
+        private System.Windows.Forms.Label label3;
     }
 }

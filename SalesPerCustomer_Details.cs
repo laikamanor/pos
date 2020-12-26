@@ -95,7 +95,7 @@ namespace AB
                                         if (x.Value.ToString() != "{}")
                                         {
                                             JObject data = JObject.Parse(x.Value.ToString());
-                                            string ref1 = "", ref2 = "", transType = "";
+                                            string ref1 = "", ref2 = "", transType = "", remarks = "";
                                             double amtIn = 0.00, amtOut = 0.00;
                                             DateTime dtTransDate = new DateTime();
                                             foreach (var q in data)
@@ -141,10 +141,14 @@ namespace AB
                                                             {
                                                                 dtTransDate = Convert.ToDateTime(w.Value.ToString());
                                                             }
+                                                            else if (w.Key.Equals("remarks"))
+                                                            {
+                                                                remarks = w.Value.ToString();
+                                                            }
                                                         }
                                                         totalRunningBalance += amtIn;
                                                         totalRunningBalance -= amtOut;
-                                                        dgv.Rows.Add(dtTransDate.ToString("yyyy-MM-dd"), ref1, ref2, transType, Convert.ToDecimal(string.Format("{0:0.00}", amtIn)), Convert.ToDecimal(string.Format("{0:0.00}", amtOut)), Convert.ToDecimal(string.Format("{0:0.00}", totalRunningBalance)));
+                                                        dgv.Rows.Add(dtTransDate.ToString("yyyy-MM-dd"), ref1, ref2, transType, Convert.ToDecimal(string.Format("{0:0.00}", amtIn)), Convert.ToDecimal(string.Format("{0:0.00}", amtOut)), Convert.ToDecimal(string.Format("{0:0.00}", totalRunningBalance)),remarks);
                                                     }
                                                 }
                                             }

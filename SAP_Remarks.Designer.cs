@@ -123,6 +123,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.TextBox txtSAP;
-        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label label2;
     }
 }

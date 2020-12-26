@@ -36,6 +36,7 @@ namespace AB
 
         private void PendingOrder_Load(object sender, EventArgs e)
         {
+            dgvOrders.Columns["days_due"].Visible = gForType.Equals("for Payment") ? true : false;
             dtDate.Visible = true;
             label1.Visible = true;
             dtDate.Value = DateTime.Now;
@@ -77,7 +78,6 @@ namespace AB
             dtPayment.Columns.Add("sapnum");
             dtPayment.Columns.Add("reference2");
             dtSelectedDeposit.Rows.Clear();
-
             label7.Visible = true;
             cmbBranches.Visible = true;
             loadBranches();
@@ -373,6 +373,7 @@ namespace AB
                     Console.WriteLine(resultQuery);
                     request.AddHeader("Authorization", "Bearer " + token);            
                     var response = client.Execute(request);
+                    //Console.WriteLine(response.Content.ToString());
                     //MessageBox.Show(response.Content.ToString());
                     JObject jObject = new JObject();
 
@@ -409,6 +410,7 @@ namespace AB
                                             string referenceNumber = "",
                 transType = "", salesAgent = "N/A", cust_code = "";
                                             decimal amountDue = 0, tenderAmount = 0;
+                                            double daysDue = 0.00;
                                             DateTime dtTransDate = new DateTime();
                                             foreach (var q in data)
                                             {
@@ -420,7 +422,10 @@ namespace AB
                                                 {
                                                     transType = q.Value.ToString();
                                                 }
-                                                
+                                                else if (q.Key.Equals("cust_name"))
+                                                {
+                                                    cust_code = q.Value.ToString();
+                                                }
                                                 if (q.Key.Equals(forSAPAmountColumnName))
                                                 {
                                                     //Console.WriteLine(q.Value);
@@ -430,10 +435,7 @@ namespace AB
                                                 {
                                                     id = Convert.ToInt32(q.Value.ToString());
                                                 }
-                                                else if (q.Key.Equals("cust_code"))
-                                                {
-                                                    cust_code = q.Value.ToString();
-                                                }
+                                            
                                                 else if (q.Key.Equals("transnumber"))
                                                 {
                                                     transNumber = Convert.ToInt32(q.Value.ToString());
@@ -442,16 +444,13 @@ namespace AB
                                                 {
                                                     tenderAmount = decimal.Round(Convert.ToDecimal(q.Value.ToString()), 2, MidpointRounding.AwayFromZero);
                                                 }
-                                                else if (q.Key.Equals("created_user"))
+                                                else if (q.Key.Equals("user"))
                                                 {
-                                                    JObject jObjectCreatedUser = JObject.Parse(q.Value.ToString());
-                                                    foreach (var a in jObjectCreatedUser)
-                                                    {
-                                                        if (a.Key.Equals("username"))
-                                                        {
-                                                            salesAgent = a.Value.ToString();
-                                                        }
-                                                    }
+                                                    salesAgent = q.Value.ToString();
+                                                }
+                                                else if (q.Key.Equals("days_due"))
+                                                {
+                                                    daysDue = Convert.ToDouble(q.Value.ToString());
                                                 }
                                                 else if (q.Key.Equals("transdate"))
                                                 {
@@ -459,7 +458,7 @@ namespace AB
                                                     dtTransDate = Convert.ToDateTime(replaceT);
                                                 }
                                             }
-                                            dgvOrders.Rows.Add(false, id, transNumber, referenceNumber, Convert.ToDecimal(string.Format("{0:0.00}", amountDue)), salesAgent, transType, cust_code, "", dtTransDate.ToString("yyyy-MM-dd HH:mm"), Convert.ToDecimal(string.Format("{0:0.00}", tenderAmount)));
+                                            dgvOrders.Rows.Add(false, id, transNumber, referenceNumber, Convert.ToDecimal(string.Format("{0:0.00}", amountDue)), salesAgent, transType, cust_code, "", dtTransDate.ToString("yyyy-MM-dd HH:mm"), Convert.ToDecimal(string.Format("{0:0.00}", daysDue)), Convert.ToDecimal(string.Format("{0:0.00}", tenderAmount)));
                                             auto.Add(transNumber.ToString());
                                         }
                                         txtsearch.AutoCompleteCustomSource = auto;
@@ -1361,7 +1360,7 @@ namespace AB
                                 jsonObjectBody.Add("item_code", dgvitems.CurrentRow.Cells["item"].Value.ToString());
                                 var request = new RestRequest("/api/sales/item/transaction/details");
                                 request.AddHeader("Authorization", "Bearer " + token);
-                                Console.WriteLine(jsonObjectBody);
+    
                                 request.AddParameter("application/json", jsonObjectBody, ParameterType.RequestBody);
                                 request.Method = Method.PUT;
                                 var response = client.Execute(request);
@@ -1392,6 +1391,11 @@ namespace AB
             dtDate.Visible = checkDate.Checked;
             string subURL = gForType == "for Payment" ? "/api/payment/new" : "/api/sales/for_confirm";
             loadData(subURL);
+        }
+
+        private void cmbFromTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         public void pay(JObject jObjectPay, DataTable dtDeposit)

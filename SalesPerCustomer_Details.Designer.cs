@@ -46,15 +46,17 @@
             this.amt_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amt_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.running_balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.DimGray;
-            this.label5.Location = new System.Drawing.Point(161, 67);
+            this.label5.Location = new System.Drawing.Point(843, 35);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(27, 16);
             this.label5.TabIndex = 44;
@@ -62,10 +64,11 @@
             // 
             // dtToDate
             // 
+            this.dtToDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtToDate.CustomFormat = "yyyy-MM-dd";
             this.dtToDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtToDate.Location = new System.Drawing.Point(194, 62);
+            this.dtToDate.Location = new System.Drawing.Point(876, 30);
             this.dtToDate.Name = "dtToDate";
             this.dtToDate.Size = new System.Drawing.Size(96, 22);
             this.dtToDate.TabIndex = 43;
@@ -73,10 +76,11 @@
             // 
             // label21
             // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.DimGray;
-            this.label21.Location = new System.Drawing.Point(12, 66);
+            this.label21.Location = new System.Drawing.Point(694, 34);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(41, 16);
             this.label21.TabIndex = 42;
@@ -84,10 +88,11 @@
             // 
             // dtFromDate
             // 
+            this.dtFromDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtFromDate.CustomFormat = "yyyy-MM-dd";
             this.dtFromDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFromDate.Location = new System.Drawing.Point(59, 62);
+            this.dtFromDate.Location = new System.Drawing.Point(741, 30);
             this.dtFromDate.Name = "dtFromDate";
             this.dtFromDate.Size = new System.Drawing.Size(96, 22);
             this.dtFromDate.TabIndex = 41;
@@ -98,7 +103,7 @@
             this.lblCustomerCode.AutoSize = true;
             this.lblCustomerCode.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCustomerCode.ForeColor = System.Drawing.Color.Black;
-            this.lblCustomerCode.Location = new System.Drawing.Point(127, 35);
+            this.lblCustomerCode.Location = new System.Drawing.Point(127, 70);
             this.lblCustomerCode.Name = "lblCustomerCode";
             this.lblCustomerCode.Size = new System.Drawing.Size(30, 16);
             this.lblCustomerCode.TabIndex = 40;
@@ -109,7 +114,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(12, 35);
+            this.label1.Location = new System.Drawing.Point(12, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 16);
             this.label1.TabIndex = 39;
@@ -143,13 +148,14 @@
             this.transtype,
             this.amt_in,
             this.amt_out,
-            this.running_balance});
+            this.running_balance,
+            this.remarks});
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.Gray;
             this.dgv.Location = new System.Drawing.Point(12, 90);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(847, 392);
+            this.dgv.Size = new System.Drawing.Size(960, 392);
             this.dgv.TabIndex = 38;
             // 
             // lblBalance
@@ -157,7 +163,7 @@
             this.lblBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBalance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBalance.ForeColor = System.Drawing.Color.Black;
-            this.lblBalance.Location = new System.Drawing.Point(742, 66);
+            this.lblBalance.Location = new System.Drawing.Point(833, 70);
             this.lblBalance.Name = "lblBalance";
             this.lblBalance.Size = new System.Drawing.Size(117, 16);
             this.lblBalance.TabIndex = 46;
@@ -169,7 +175,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(603, 67);
+            this.label3.Location = new System.Drawing.Point(694, 71);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(133, 16);
             this.label3.TabIndex = 45;
@@ -231,12 +237,19 @@
             this.running_balance.Name = "running_balance";
             this.running_balance.ReadOnly = true;
             // 
+            // remarks
+            // 
+            this.remarks.HeaderText = "Remarks";
+            this.remarks.MinimumWidth = 150;
+            this.remarks.Name = "remarks";
+            this.remarks.ReadOnly = true;
+            // 
             // SalesPerCustomer_Details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(871, 503);
+            this.ClientSize = new System.Drawing.Size(984, 503);
             this.Controls.Add(this.lblBalance);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
@@ -249,7 +262,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SalesPerCustomer_Details";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sales Per Customer Details";
+            this.Text = "Customer Ledger Details";
             this.Load += new System.EventHandler(this.SalesPerCustomer_Details_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
@@ -275,5 +288,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn amt_in;
         private System.Windows.Forms.DataGridViewTextBoxColumn amt_out;
         private System.Windows.Forms.DataGridViewTextBoxColumn running_balance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remarks;
     }
 }

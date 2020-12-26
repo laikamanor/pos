@@ -80,6 +80,7 @@
             this.dgvitems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvitems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvitems.BackgroundColor = System.Drawing.Color.White;
             this.dgvitems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvitems.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -124,7 +125,6 @@
             this.reference.MinimumWidth = 150;
             this.reference.Name = "reference";
             this.reference.ReadOnly = true;
-            this.reference.Width = 150;
             // 
             // item_code
             // 
@@ -132,7 +132,6 @@
             this.item_code.MinimumWidth = 150;
             this.item_code.Name = "item_code";
             this.item_code.ReadOnly = true;
-            this.item_code.Width = 150;
             // 
             // unit_price
             // 
@@ -194,7 +193,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ItemDiscount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Item with Discount";
+            this.Text = "Transactions";
             this.Load += new System.EventHandler(this.ItemDiscount_Load);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();

@@ -78,6 +78,23 @@ namespace AB
             }
         }
 
+        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgv.Rows.Count > 0)
+            {
+                if (e.ColumnIndex == 9)
+                {
+                    if (e.RowIndex >= 0)
+                    {
+                        PriceList_Row row = new PriceList_Row();
+                        row.selectedID = string.IsNullOrEmpty(dgv.CurrentRow.Cells["pricelist_id"].Value.ToString()) ? 0 : Convert.ToInt32(dgv.CurrentRow.Cells["pricelist_id"].Value.ToString());
+                        row.lblPriceList.Text = dgv.CurrentRow.Cells["pricelist"].Value.ToString();
+                        row.ShowDialog();
+                    }
+                }
+            }
+        }
+
         public void loadData()
         {
             string branchCode = findCode(cmbBranches.Text, "Branch");
@@ -85,7 +102,14 @@ namespace AB
             dgv.Rows.Clear();
             foreach (DataRow row in dtWarehouse.Rows)
             {
-                dgv.Rows.Add(row["id"].ToString(), row["branch"].ToString(), row["whsecode"].ToString(), row["whsename"].ToString());
+
+                //dt.Columns.Add("pricelist");
+                //dt.Columns.Add("pricelist_id");
+                //dt.Columns.Add("cash_account");
+                //dt.Columns.Add("short_account");
+                //dt.Columns.Add("pullout_whse");
+
+                dgv.Rows.Add(row["id"].ToString(),row["pricelist"].ToString(), row["pricelist_id"].ToString(), row["branch"].ToString(), row["whsecode"].ToString(), row["whsename"].ToString(), row["cash_account"].ToString(), row["short_account"].ToString(), row["pullout_whse"].ToString());
             }
         }
 

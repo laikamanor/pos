@@ -272,7 +272,8 @@ namespace AB
                 {
                     cmb.SelectedIndex = 0;
                 }
-            }else if(cmb.Items.Count > 0 && isTo)
+            }
+            else if (cmb.Items.Count > 0 && isTo)
             {
                 cmb.SelectedIndex = 0;
             }

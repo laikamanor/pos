@@ -26,6 +26,7 @@ namespace AB
 
         private void AdvancePayment_Load(object sender, EventArgs e)
         {
+            lblTotal.Visible = isAdmin();
             cmbStatus.SelectedIndex = 0;
 
             //kapag summary deposit
@@ -44,7 +45,34 @@ namespace AB
             dgv.Columns["btnCancel"].Visible = gType.Equals("Summary Deposit") || gType.Equals("Used Deposit") ? false : true;
         }
 
-      public void loadData()
+        public bool isAdmin()
+        {
+            bool result = false;
+            if (Login.jsonResult != null)
+            {
+                foreach (var x in Login.jsonResult)
+                {
+                    if (x.Key.Equals("data"))
+                    {
+                        JObject jObjectData = JObject.Parse(x.Value.ToString());
+                        foreach (var y in jObjectData)
+                        {
+                            if (y.Key.Equals("isAdmin"))
+                            {
+                                if (y.Value.ToString().ToLower() == "true")
+                                {
+                                    result = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        public void loadData()
         {
             DataTable dtResponse = new DataTable();
             string status = "";
@@ -105,6 +133,31 @@ namespace AB
             else
             {
                 lblNoDataFound.Visible = true;
+            }
+            getTotal();
+        }
+
+        public void getTotal()
+        {
+            if (gType.Equals("Summary Deposit"))
+            {
+                if (dgv.Rows.Count > 0)
+                {
+                    double total = 0.00;
+                    for (int i = 0; i < dgv.Rows.Count; i++)
+                    {
+                        total += string.IsNullOrEmpty(dgv.Rows[i].Cells["balance"].Value.ToString()) ? 0.00 : Convert.ToDouble(dgv.Rows[i].Cells["balance"].Value.ToString());
+                    }
+                    lblTotal.Text = "Total: " + total.ToString("n2");
+                }
+                else
+                {
+                    lblTotal.Text = "Total: 0.00";
+                }
+            }
+            else
+            {
+                lblTotal.Visible = false;
             }
         }
 

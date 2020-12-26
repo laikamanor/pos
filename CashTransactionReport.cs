@@ -147,7 +147,7 @@ namespace AB
                             {
                                 warehouse = y.Value.ToString();
                             }
-                            else if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager"))
+                            else if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager") || y.Key.Equals("isAccounting"))
                             {
                                 if (y.Value.ToString().ToLower() == "true")
                                 {
@@ -241,6 +241,7 @@ namespace AB
 
         private void SalesReport_Load(object sender, EventArgs e)
         {
+            dgv.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             loadBranch();
             loadWarehouse();
             loadUsers(cmbCashier, true);

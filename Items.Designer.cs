@@ -158,6 +158,7 @@
             this.price.HeaderText = "Price";
             this.price.Name = "price";
             this.price.ReadOnly = true;
+            this.price.Visible = false;
             // 
             // Items
             // 

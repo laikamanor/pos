@@ -29,6 +29,7 @@ namespace AB
 
         private void TransferItems_Load(object sender, EventArgs e)
         {
+            dgvitems.Columns["itemname"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             loadData();
         }
 

@@ -43,7 +43,8 @@ namespace AB
                 {
                     dtResult = loadFinal();
                     finalReport finalReport = new finalReport();
-                    finalReport.Subreports[0].Database.Tables["payment_method"].SetDataSource(loadPaymentMethod());
+                    finalReport.Subreports[0].Database.Tables["sub_report1"].SetDataSource(loadFinal_SubQuery1());
+                    finalReport.Subreports[1].Database.Tables["payment_method"].SetDataSource(loadPaymentMethod());
                     finalReport.Database.Tables["row"].SetDataSource(dtResult);
                     finalReport.SetParameterValue("date_report", EnterDate.dateEntered);
                     crystalReportViewer1.ReportSource = null;
@@ -76,6 +77,45 @@ namespace AB
             }
             return dt;
         }
+
+        public DataTable loadFinal_SubQuery1()
+        {
+            DataTable dt = new DataTable();
+            //CASH
+            dt.Columns.Add("total_cash_on_hand", typeof(double));
+            dt.Columns.Add("total_cash_payment", typeof(double));
+            dt.Columns.Add("total_cash_deposit", typeof(double));
+            dt.Columns.Add("total_used_dep_payment", typeof(double));
+            dt.Columns.Add("total_bank_dep_payment", typeof(double));
+            dt.Columns.Add("total_epay_payment", typeof(double));
+            dt.Columns.Add("total_gcert_payment", typeof(double));
+            //SALES
+            dt.Columns.Add("gross", typeof(double));
+            dt.Columns.Add("net_sales", typeof(double));
+            dt.Columns.Add("disc_amount", typeof(double));
+            dt.Columns.Add("gross_cash_sales", typeof(double));
+            dt.Columns.Add("disc_cash_sales", typeof(double));
+            dt.Columns.Add("net_cash_sales", typeof(double));
+            dt.Columns.Add("gross_ar_sales", typeof(double));
+            dt.Columns.Add("disc_ar_sales", typeof(double));
+            dt.Columns.Add("net_ar_sales", typeof(double));
+            dt.Columns.Add("gross_agent_sales", typeof(double));
+            dt.Columns.Add("disc_agent_sales", typeof(double));
+            dt.Columns.Add("net_agent_sales", typeof(double));
+
+            //ITEMS
+            dt.Columns.Add("actual_cash", typeof(double));
+            dt.Columns.Add("remarks", typeof(string));
+            dt.Columns.Add("total_amount", typeof(double));
+            DataTable dtFromAPI = new DataTable();
+            dtFromAPI = finalCountc.loadFinal(EnterDate.dateEntered);
+            foreach (DataRow row in dtFromAPI.Rows)
+            {
+                dt.Rows.Add(Convert.ToDouble(row["total_cash_on_hand"].ToString()).ToString("n2"), Convert.ToDouble(row["total_cash_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["total_cash_deposit"].ToString()).ToString("n2"), Convert.ToDouble(row["total_used_dep_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["total_bank_dep_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["total_epay_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["total_gcert_payment"].ToString()).ToString("n2"), Convert.ToDouble(row["gross"].ToString()).ToString("n2"), Convert.ToDouble(row["net_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_amount"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_cash_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_ar_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["gross_agent_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["disc_agent_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["net_agent_sales"].ToString()).ToString("n2"), Convert.ToDouble(row["actual_cash"].ToString()), row["remarks"].ToString(), Convert.ToDouble(row["total_amount"].ToString()));
+            }
+            return dt;
+        }
+       
 
         public DataTable loadFinal()
         {

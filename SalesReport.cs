@@ -60,11 +60,11 @@ namespace AB
                             {
                                 warehouse = y.Value.ToString();
                             }
-                            else if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager"))
+                            else if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager") || y.Key.Equals("isAccounting"))
                             {
                                 if (y.Value.ToString().ToLower() == "true")
                                 {
-                                    cmbWarehouse.Items.Add("All");
+                                    cmbWarehouse.Items.Add("All-Good");
                                     foreach (DataRow row in dtWarehouse.Rows)
                                     {
                                         cmbWarehouse.Items.Add(row["whsename"].ToString());
@@ -332,6 +332,7 @@ namespace AB
                                                 int transNumber = 0, id = 0;
                                                 string referenceNumber = "", customerCode = "", processedBy = "", transType = "";
                                                 double gross = 0.00, docTotal = 0.00;
+                                                DateTime dtTransDate = new DateTime();
                                                 foreach (var z in jObjectSalesRows)
                                                 {
                                                     if (z.Key.Equals("id"))
@@ -366,6 +367,11 @@ namespace AB
                                                     {
                                                         transType = z.Value.ToString();
                                                     }
+                                                    else if (z.Key.Equals("transdate"))
+                                                    {
+                                                        string replaceT = z.Value.ToString().Replace("T", "");
+                                                        dtTransDate = Convert.ToDateTime(replaceT);
+                                                    }
                                                     //else if (z.Key.Equals("SalesType"))
                                                     //{
                                                     //    salesType = z.Value.ToString();
@@ -375,7 +381,7 @@ namespace AB
                                                     //    paymentType = z.Value.ToString();
                                                     //}
                                                 }
-                                                dgv.Rows.Add(false, id, transNumber, referenceNumber, Convert.ToDecimal(string.Format("{0:0.00}", gross)), Convert.ToDecimal(string.Format("{0:0.00}", docTotal)), customerCode, transType, processedBy);
+                                                dgv.Rows.Add(false, id, transNumber, referenceNumber, Convert.ToDecimal(string.Format("{0:0.00}", gross)), Convert.ToDecimal(string.Format("{0:0.00}", docTotal)), customerCode, transType, processedBy,dtTransDate.ToString("yyyy-MM-dd HH:mm"));
                                             }
                                         }
                                     }

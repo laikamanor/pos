@@ -30,6 +30,7 @@ namespace AB
             if (Login.jsonResult != null)
             {
                 Cursor.Current = Cursors.WaitCursor;
+                AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
                 string token = "";
                 foreach (var x in Login.jsonResult)
                 {
@@ -49,7 +50,6 @@ namespace AB
                     JObject jObject = new JObject();
                     jObject = JObject.Parse(response.Content.ToString());
                     dgv.Rows.Clear();
-                    AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
                     bool isSuccess = false;
                     foreach (var x in jObject)
                     {
@@ -71,11 +71,14 @@ namespace AB
                                     {
                                         JObject data = JObject.Parse(jsonArray[i].ToString());
                                         int id = 0;
-                                        string _code = "", name = "", address = "", contact = "";
-                                        DateTime dtBirthDate = new DateTime();
+                                        string _code = "", name = "";
                                         foreach (var q in data)
                                         {
-                                            if (q.Key.Equals("code"))
+                                            if (q.Key.Equals("id"))
+                                            {
+                                                id = Convert.ToInt32(q.Value.ToString());
+                                            }
+                                            else if (q.Key.Equals("code"))
                                             {
                                                 _code = q.Value.ToString();
                                                 auto.Add(q.Value.ToString());
@@ -84,26 +87,21 @@ namespace AB
                                             {
                                                 name = q.Value.ToString();
                                             }
-                                            else if (q.Key.Equals("address"))
+                                        }
+
+                                        if (!string.IsNullOrEmpty(txtSearch.Text.ToString().Trim()))
+                                        {
+                                            if (txtSearch.Text.ToString().Trim().ToLower().Contains(_code.ToLower()))
                                             {
-                                                address = q.Value.ToString();
-                                            }
-                                            else if (q.Key.Equals("contact"))
-                                            {
-                                                contact = q.Value.ToString();
-                                            }
-                                            else if (q.Key.Equals("birthdate"))
-                                            {
-                                                string replaceT = q.Value.ToString().Replace("T", "");
-                                                dtBirthDate = Convert.ToDateTime(replaceT);
-                                            }
-                                            else if (q.Key.Equals("id"))
-                                            {
-                                                id = Convert.ToInt32(q.Value.ToString());
+
+                                                dgv.Rows.Add(id, _code, name);
+                                                return;
                                             }
                                         }
-                                        txtSearch.AutoCompleteCustomSource = auto;
-                                        dgv.Rows.Add(id, _code, name,dtBirthDate.ToString("yyyy-MM-dd"), address,contact);
+                                        else
+                                        {
+                                            dgv.Rows.Add(id, _code, name);
+                                        }
                                     }
                                 }
                             }
@@ -122,17 +120,46 @@ namespace AB
                         MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+                txtSearch.AutoCompleteCustomSource = auto;
                 Cursor.Current = Cursors.Default;
             }
         }
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            AddCustomer addCustomer = new AddCustomer();
+            AddCustomer addCustomer = new AddCustomer("Add");
             addCustomer.ShowDialog();
             if (AddCustomer.isSubmit)
             {
                 loadData();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                loadData();
+            }
+        }
+
+        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgv.Rows.Count > 0)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    if (e.ColumnIndex == 3)
+                    {
+                        AddCustomer add = new AddCustomer("Edit");
+                        add.ShowDialog();
+                    }
+                }
             }
         }
     }

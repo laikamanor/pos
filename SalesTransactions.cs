@@ -175,11 +175,11 @@ namespace AB
                             {
                                 warehouse = y.Value.ToString();
                             }
-                            else if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager"))
+                            else if (y.Key.Equals("isAdmin") || y.Key.Equals("isManager") || y.Key.Equals("isAccounting"))
                             {
                                 if (y.Value.ToString().ToLower() == "true")
                                 {
-                                    cmbWhse.Items.Add("All");
+                                    cmbWhse.Items.Add("All-Good");
                                     foreach (DataRow row in dtWarehouse.Rows)
                                     {
                                         cmbWhse.Items.Add(row["whsename"].ToString());

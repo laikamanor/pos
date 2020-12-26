@@ -58,7 +58,7 @@
             this.panelAgentSalesSAP = new System.Windows.Forms.Panel();
             this.tpAgentSalesSAPIP = new System.Windows.Forms.TabPage();
             this.panelAgentSalesSAPIP = new System.Windows.Forms.Panel();
-            this.tpSalesSummaryCustomer = new System.Windows.Forms.TabPage();
+            this.tpCustomerLedger = new System.Windows.Forms.TabPage();
             this.panelPerCustomer = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tpCashSales.SuspendLayout();
@@ -78,7 +78,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tpAgentSalesSAPIP.SuspendLayout();
-            this.tpSalesSummaryCustomer.SuspendLayout();
+            this.tpCustomerLedger.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -89,7 +89,7 @@
             this.tabControl1.Controls.Add(this.tpCashSales);
             this.tabControl1.Controls.Add(this.tpARSales);
             this.tabControl1.Controls.Add(this.tpAgentSales);
-            this.tabControl1.Controls.Add(this.tpSalesSummaryCustomer);
+            this.tabControl1.Controls.Add(this.tpCustomerLedger);
             this.tabControl1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(12, 5);
             this.tabControl1.Name = "tabControl1";
@@ -417,15 +417,15 @@
             this.panelAgentSalesSAPIP.Size = new System.Drawing.Size(1166, 428);
             this.panelAgentSalesSAPIP.TabIndex = 1;
             // 
-            // tpSalesSummaryCustomer
+            // tpCustomerLedger
             // 
-            this.tpSalesSummaryCustomer.Controls.Add(this.panelPerCustomer);
-            this.tpSalesSummaryCustomer.Location = new System.Drawing.Point(4, 25);
-            this.tpSalesSummaryCustomer.Name = "tpSalesSummaryCustomer";
-            this.tpSalesSummaryCustomer.Size = new System.Drawing.Size(1198, 497);
-            this.tpSalesSummaryCustomer.TabIndex = 3;
-            this.tpSalesSummaryCustomer.Text = "Sales Summary Per Customer";
-            this.tpSalesSummaryCustomer.UseVisualStyleBackColor = true;
+            this.tpCustomerLedger.Controls.Add(this.panelPerCustomer);
+            this.tpCustomerLedger.Location = new System.Drawing.Point(4, 25);
+            this.tpCustomerLedger.Name = "tpCustomerLedger";
+            this.tpCustomerLedger.Size = new System.Drawing.Size(1198, 497);
+            this.tpCustomerLedger.TabIndex = 3;
+            this.tpCustomerLedger.Text = "Customer Ledger";
+            this.tpCustomerLedger.UseVisualStyleBackColor = true;
             // 
             // panelPerCustomer
             // 
@@ -469,7 +469,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tpAgentSalesSAPIP.ResumeLayout(false);
-            this.tpSalesSummaryCustomer.ResumeLayout(false);
+            this.tpCustomerLedger.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -505,7 +505,7 @@
         private System.Windows.Forms.Panel panelARSalesSAPIP;
         private System.Windows.Forms.TabPage tpAgentSalesSAPIP;
         private System.Windows.Forms.Panel panelAgentSalesSAPIP;
-        private System.Windows.Forms.TabPage tpSalesSummaryCustomer;
+        private System.Windows.Forms.TabPage tpCustomerLedger;
         private System.Windows.Forms.Panel panelPerCustomer;
     }
 }

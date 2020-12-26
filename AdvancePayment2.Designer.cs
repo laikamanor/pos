@@ -51,6 +51,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblNoDataFound = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +64,7 @@
             this.btnAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddUser.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddUser.ForeColor = System.Drawing.Color.White;
-            this.btnAddUser.Location = new System.Drawing.Point(562, 64);
+            this.btnAddUser.Location = new System.Drawing.Point(728, 64);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(146, 22);
             this.btnAddUser.TabIndex = 8;
@@ -137,7 +138,7 @@
             this.dgv.Location = new System.Drawing.Point(12, 88);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 10;
-            this.dgv.Size = new System.Drawing.Size(696, 286);
+            this.dgv.Size = new System.Drawing.Size(862, 253);
             this.dgv.TabIndex = 5;
             this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
             // 
@@ -274,11 +275,23 @@
             this.lblNoDataFound.AutoSize = true;
             this.lblNoDataFound.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoDataFound.ForeColor = System.Drawing.Color.DimGray;
-            this.lblNoDataFound.Location = new System.Drawing.Point(318, 165);
+            this.lblNoDataFound.Location = new System.Drawing.Point(401, 165);
             this.lblNoDataFound.Name = "lblNoDataFound";
             this.lblNoDataFound.Size = new System.Drawing.Size(105, 18);
             this.lblNoDataFound.TabIndex = 11;
             this.lblNoDataFound.Text = "No data found";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(9, 344);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(79, 18);
+            this.lblTotal.TabIndex = 12;
+            this.lblTotal.Text = "Total: 0.00";
+            this.lblTotal.Visible = false;
             // 
             // AdvancePayment2
             // 
@@ -286,7 +299,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(721, 403);
+            this.ClientSize = new System.Drawing.Size(887, 403);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblNoDataFound);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbStatus);
@@ -328,5 +342,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewButtonColumn btnEdit;
         private System.Windows.Forms.DataGridViewButtonColumn btnCancel;
+        private System.Windows.Forms.Label lblTotal;
     }
 }

@@ -61,17 +61,6 @@
             this.Label3 = new System.Windows.Forms.Label();
             this.cmbsales = new System.Windows.Forms.ComboBox();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
-            this.selectt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.base_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ordernum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountdue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salesagent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tendertype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cust_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aps = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tenderamount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.lblItemsCount = new System.Windows.Forms.Label();
@@ -103,6 +92,18 @@
             this.discamt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.free = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.selectt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.base_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordernum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountdue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salesagent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tendertype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cust_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aps = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.days_due = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tenderamount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
@@ -269,6 +270,7 @@
             this.cmbFromTime.Name = "cmbFromTime";
             this.cmbFromTime.Size = new System.Drawing.Size(60, 23);
             this.cmbFromTime.TabIndex = 63;
+            this.cmbFromTime.SelectedIndexChanged += new System.EventHandler(this.cmbFromTime_SelectedIndexChanged);
             this.cmbFromTime.SelectedValueChanged += new System.EventHandler(this.cmbFromTime_SelectedValueChanged);
             // 
             // label2
@@ -599,6 +601,7 @@
             this.cust_code,
             this.aps,
             this.transdate,
+            this.days_due,
             this.tenderamount});
             this.dgvOrders.EnableHeadersVisualStyles = false;
             this.dgvOrders.GridColor = System.Drawing.Color.Gray;
@@ -608,99 +611,6 @@
             this.dgvOrders.Size = new System.Drawing.Size(840, 519);
             this.dgvOrders.TabIndex = 0;
             this.dgvOrders.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellContentClick);
-            // 
-            // selectt
-            // 
-            this.selectt.HeaderText = "Select";
-            this.selectt.MinimumWidth = 50;
-            this.selectt.Name = "selectt";
-            this.selectt.Width = 50;
-            // 
-            // base_id
-            // 
-            this.base_id.HeaderText = "ID";
-            this.base_id.MinimumWidth = 100;
-            this.base_id.Name = "base_id";
-            this.base_id.ReadOnly = true;
-            this.base_id.Visible = false;
-            // 
-            // transnumber
-            // 
-            this.transnumber.HeaderText = "Trans. Number";
-            this.transnumber.MinimumWidth = 100;
-            this.transnumber.Name = "transnumber";
-            this.transnumber.ReadOnly = true;
-            this.transnumber.Visible = false;
-            // 
-            // ordernum
-            // 
-            this.ordernum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ordernum.FillWeight = 309.7052F;
-            this.ordernum.HeaderText = "#";
-            this.ordernum.MinimumWidth = 100;
-            this.ordernum.Name = "ordernum";
-            this.ordernum.ReadOnly = true;
-            // 
-            // amountdue
-            // 
-            this.amountdue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.amountdue.FillWeight = 63.88947F;
-            this.amountdue.HeaderText = "Amt. Due";
-            this.amountdue.MinimumWidth = 100;
-            this.amountdue.Name = "amountdue";
-            this.amountdue.ReadOnly = true;
-            // 
-            // salesagent
-            // 
-            this.salesagent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.salesagent.FillWeight = 55.40216F;
-            this.salesagent.HeaderText = "User";
-            this.salesagent.MinimumWidth = 100;
-            this.salesagent.Name = "salesagent";
-            this.salesagent.ReadOnly = true;
-            // 
-            // tendertype
-            // 
-            this.tendertype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.tendertype.FillWeight = 48.57439F;
-            this.tendertype.HeaderText = "Sales Type";
-            this.tendertype.MinimumWidth = 100;
-            this.tendertype.Name = "tendertype";
-            this.tendertype.ReadOnly = true;
-            // 
-            // cust_code
-            // 
-            this.cust_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.cust_code.FillWeight = 61.54522F;
-            this.cust_code.HeaderText = "Customer Code";
-            this.cust_code.MinimumWidth = 100;
-            this.cust_code.Name = "cust_code";
-            this.cust_code.ReadOnly = true;
-            // 
-            // aps
-            // 
-            this.aps.HeaderText = "APs";
-            this.aps.MinimumWidth = 100;
-            this.aps.Name = "aps";
-            this.aps.ReadOnly = true;
-            this.aps.Visible = false;
-            // 
-            // transdate
-            // 
-            this.transdate.FillWeight = 54.2846F;
-            this.transdate.HeaderText = "Trans. Date";
-            this.transdate.MinimumWidth = 200;
-            this.transdate.Name = "transdate";
-            this.transdate.ReadOnly = true;
-            this.transdate.Width = 200;
-            // 
-            // tenderamount
-            // 
-            this.tenderamount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.tenderamount.HeaderText = "Tender Amount";
-            this.tenderamount.MinimumWidth = 100;
-            this.tenderamount.Name = "tenderamount";
-            this.tenderamount.ReadOnly = true;
             // 
             // panel2
             // 
@@ -1083,6 +993,105 @@
             this.free.ReadOnly = true;
             this.free.Visible = false;
             // 
+            // selectt
+            // 
+            this.selectt.HeaderText = "Select";
+            this.selectt.MinimumWidth = 50;
+            this.selectt.Name = "selectt";
+            this.selectt.Width = 50;
+            // 
+            // base_id
+            // 
+            this.base_id.HeaderText = "ID";
+            this.base_id.MinimumWidth = 100;
+            this.base_id.Name = "base_id";
+            this.base_id.ReadOnly = true;
+            this.base_id.Visible = false;
+            // 
+            // transnumber
+            // 
+            this.transnumber.HeaderText = "Trans. Number";
+            this.transnumber.MinimumWidth = 100;
+            this.transnumber.Name = "transnumber";
+            this.transnumber.ReadOnly = true;
+            this.transnumber.Visible = false;
+            // 
+            // ordernum
+            // 
+            this.ordernum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ordernum.FillWeight = 309.7052F;
+            this.ordernum.HeaderText = "#";
+            this.ordernum.MinimumWidth = 100;
+            this.ordernum.Name = "ordernum";
+            this.ordernum.ReadOnly = true;
+            // 
+            // amountdue
+            // 
+            this.amountdue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.amountdue.FillWeight = 63.88947F;
+            this.amountdue.HeaderText = "Amt. Due";
+            this.amountdue.MinimumWidth = 100;
+            this.amountdue.Name = "amountdue";
+            this.amountdue.ReadOnly = true;
+            // 
+            // salesagent
+            // 
+            this.salesagent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.salesagent.FillWeight = 55.40216F;
+            this.salesagent.HeaderText = "User";
+            this.salesagent.MinimumWidth = 100;
+            this.salesagent.Name = "salesagent";
+            this.salesagent.ReadOnly = true;
+            // 
+            // tendertype
+            // 
+            this.tendertype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.tendertype.FillWeight = 48.57439F;
+            this.tendertype.HeaderText = "Sales Type";
+            this.tendertype.MinimumWidth = 100;
+            this.tendertype.Name = "tendertype";
+            this.tendertype.ReadOnly = true;
+            // 
+            // cust_code
+            // 
+            this.cust_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cust_code.FillWeight = 61.54522F;
+            this.cust_code.HeaderText = "Customer Code";
+            this.cust_code.MinimumWidth = 100;
+            this.cust_code.Name = "cust_code";
+            this.cust_code.ReadOnly = true;
+            // 
+            // aps
+            // 
+            this.aps.HeaderText = "APs";
+            this.aps.MinimumWidth = 100;
+            this.aps.Name = "aps";
+            this.aps.ReadOnly = true;
+            this.aps.Visible = false;
+            // 
+            // transdate
+            // 
+            this.transdate.FillWeight = 54.2846F;
+            this.transdate.HeaderText = "Trans. Date";
+            this.transdate.MinimumWidth = 200;
+            this.transdate.Name = "transdate";
+            this.transdate.ReadOnly = true;
+            this.transdate.Width = 200;
+            // 
+            // days_due
+            // 
+            this.days_due.HeaderText = "Aging";
+            this.days_due.Name = "days_due";
+            this.days_due.ReadOnly = true;
+            // 
+            // tenderamount
+            // 
+            this.tenderamount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.tenderamount.HeaderText = "Tender Amount";
+            this.tenderamount.MinimumWidth = 100;
+            this.tenderamount.Name = "tenderamount";
+            this.tenderamount.ReadOnly = true;
+            // 
             // PendingOrder2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1173,6 +1182,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn discamt;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalprice;
         private System.Windows.Forms.DataGridViewCheckBoxColumn free;
+        private System.Windows.Forms.CheckBox checkDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selectt;
         private System.Windows.Forms.DataGridViewTextBoxColumn base_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn transnumber;
@@ -1183,7 +1193,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cust_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn aps;
         private System.Windows.Forms.DataGridViewTextBoxColumn transdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn days_due;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenderamount;
-        private System.Windows.Forms.CheckBox checkDate;
     }
 }

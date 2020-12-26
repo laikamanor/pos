@@ -19,7 +19,6 @@ namespace AB
         {
             InitializeComponent();
         }
-
         private void Branch_Load(object sender, EventArgs e)
         {
             loadData();

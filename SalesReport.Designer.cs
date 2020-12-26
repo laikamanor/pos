@@ -34,15 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesReport));
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.selectt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gross = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doctotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.processed_by = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label21 = new System.Windows.Forms.Label();
             this.dtFromDate = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
@@ -63,15 +54,19 @@
             this.totalprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.free = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.lblOrderCount = new System.Windows.Forms.Label();
+            this.checkSelectAll = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbWarehouse = new System.Windows.Forms.ComboBox();
             this.cmbToTime = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbFromTime = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkSelectAll = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.lblItemsCount = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtTotalPayment = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -92,17 +87,23 @@
             this.Label9 = new System.Windows.Forms.Label();
             this.Label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.lblOrderCount = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.lblItemsCount = new System.Windows.Forms.Label();
+            this.selectt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transnumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gross = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doctotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.processed_by = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvitems)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel11.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel12.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv
@@ -135,7 +136,8 @@
             this.doctotal,
             this.customer_code,
             this.transtype,
-            this.processed_by});
+            this.processed_by,
+            this.transdate});
             this.dgv.EnableHeadersVisualStyles = false;
             this.dgv.GridColor = System.Drawing.Color.Gray;
             this.dgv.Location = new System.Drawing.Point(15, 162);
@@ -145,77 +147,6 @@
             this.dgv.TabIndex = 3;
             this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
             this.dgv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
-            // 
-            // selectt
-            // 
-            this.selectt.FillWeight = 150.8476F;
-            this.selectt.HeaderText = "Select";
-            this.selectt.MinimumWidth = 75;
-            this.selectt.Name = "selectt";
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 50;
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // transnumber
-            // 
-            this.transnumber.HeaderText = "Trans. #";
-            this.transnumber.MinimumWidth = 150;
-            this.transnumber.Name = "transnumber";
-            this.transnumber.ReadOnly = true;
-            this.transnumber.Visible = false;
-            // 
-            // reference
-            // 
-            this.reference.FillWeight = 344.67F;
-            this.reference.HeaderText = "Reference";
-            this.reference.MinimumWidth = 150;
-            this.reference.Name = "reference";
-            this.reference.ReadOnly = true;
-            // 
-            // gross
-            // 
-            this.gross.FillWeight = 40.89647F;
-            this.gross.HeaderText = "Gross";
-            this.gross.MinimumWidth = 100;
-            this.gross.Name = "gross";
-            this.gross.ReadOnly = true;
-            // 
-            // doctotal
-            // 
-            this.doctotal.FillWeight = 40.89647F;
-            this.doctotal.HeaderText = "Doc. Total";
-            this.doctotal.MinimumWidth = 100;
-            this.doctotal.Name = "doctotal";
-            this.doctotal.ReadOnly = true;
-            // 
-            // customer_code
-            // 
-            this.customer_code.FillWeight = 40.89647F;
-            this.customer_code.HeaderText = "Customer Code";
-            this.customer_code.MinimumWidth = 150;
-            this.customer_code.Name = "customer_code";
-            this.customer_code.ReadOnly = true;
-            // 
-            // transtype
-            // 
-            this.transtype.FillWeight = 40.89647F;
-            this.transtype.HeaderText = "Trans. Type";
-            this.transtype.MinimumWidth = 150;
-            this.transtype.Name = "transtype";
-            this.transtype.ReadOnly = true;
-            // 
-            // processed_by
-            // 
-            this.processed_by.FillWeight = 40.89647F;
-            this.processed_by.HeaderText = "Processed By";
-            this.processed_by.MinimumWidth = 150;
-            this.processed_by.Name = "processed_by";
-            this.processed_by.ReadOnly = true;
             // 
             // label21
             // 
@@ -482,6 +413,43 @@
             this.panel1.Size = new System.Drawing.Size(400, 466);
             this.panel1.TabIndex = 56;
             // 
+            // panel11
+            // 
+            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(117)))), ((int)(((byte)(32)))));
+            this.panel11.Controls.Add(this.lblOrderCount);
+            this.panel11.Controls.Add(this.checkSelectAll);
+            this.panel11.Location = new System.Drawing.Point(15, 137);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(382, 27);
+            this.panel11.TabIndex = 73;
+            // 
+            // lblOrderCount
+            // 
+            this.lblOrderCount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblOrderCount.AutoSize = true;
+            this.lblOrderCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderCount.ForeColor = System.Drawing.Color.White;
+            this.lblOrderCount.Location = new System.Drawing.Point(159, 6);
+            this.lblOrderCount.Name = "lblOrderCount";
+            this.lblOrderCount.Size = new System.Drawing.Size(65, 15);
+            this.lblOrderCount.TabIndex = 67;
+            this.lblOrderCount.Text = "Orders (0)";
+            // 
+            // checkSelectAll
+            // 
+            this.checkSelectAll.AutoSize = true;
+            this.checkSelectAll.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkSelectAll.ForeColor = System.Drawing.Color.White;
+            this.checkSelectAll.Location = new System.Drawing.Point(4, 6);
+            this.checkSelectAll.Name = "checkSelectAll";
+            this.checkSelectAll.Size = new System.Drawing.Size(77, 18);
+            this.checkSelectAll.TabIndex = 66;
+            this.checkSelectAll.Text = "Select All";
+            this.checkSelectAll.UseVisualStyleBackColor = true;
+            this.checkSelectAll.CheckedChanged += new System.EventHandler(this.checkSelectAll_CheckedChanged);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -616,19 +584,6 @@
             this.label4.TabIndex = 67;
             this.label4.Text = "Time:";
             // 
-            // checkSelectAll
-            // 
-            this.checkSelectAll.AutoSize = true;
-            this.checkSelectAll.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkSelectAll.ForeColor = System.Drawing.Color.White;
-            this.checkSelectAll.Location = new System.Drawing.Point(4, 6);
-            this.checkSelectAll.Name = "checkSelectAll";
-            this.checkSelectAll.Size = new System.Drawing.Size(77, 18);
-            this.checkSelectAll.TabIndex = 66;
-            this.checkSelectAll.Text = "Select All";
-            this.checkSelectAll.UseVisualStyleBackColor = true;
-            this.checkSelectAll.CheckedChanged += new System.EventHandler(this.checkSelectAll_CheckedChanged);
-            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
@@ -649,6 +604,29 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(511, 466);
             this.panel3.TabIndex = 57;
+            // 
+            // panel12
+            // 
+            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel12.BackColor = System.Drawing.Color.ForestGreen;
+            this.panel12.Controls.Add(this.lblItemsCount);
+            this.panel12.Location = new System.Drawing.Point(3, 10);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(505, 29);
+            this.panel12.TabIndex = 65;
+            // 
+            // lblItemsCount
+            // 
+            this.lblItemsCount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblItemsCount.AutoSize = true;
+            this.lblItemsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblItemsCount.ForeColor = System.Drawing.Color.White;
+            this.lblItemsCount.Location = new System.Drawing.Point(233, 8);
+            this.lblItemsCount.Name = "lblItemsCount";
+            this.lblItemsCount.Size = new System.Drawing.Size(57, 15);
+            this.lblItemsCount.TabIndex = 15;
+            this.lblItemsCount.Text = "Items (0)";
             // 
             // panel2
             // 
@@ -898,52 +876,83 @@
             this.label1.TabIndex = 46;
             this.label1.Text = "BILLS";
             // 
-            // panel11
+            // selectt
             // 
-            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(117)))), ((int)(((byte)(32)))));
-            this.panel11.Controls.Add(this.lblOrderCount);
-            this.panel11.Controls.Add(this.checkSelectAll);
-            this.panel11.Location = new System.Drawing.Point(15, 137);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(382, 27);
-            this.panel11.TabIndex = 73;
+            this.selectt.FillWeight = 150.8476F;
+            this.selectt.HeaderText = "Select";
+            this.selectt.MinimumWidth = 75;
+            this.selectt.Name = "selectt";
             // 
-            // lblOrderCount
+            // ID
             // 
-            this.lblOrderCount.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblOrderCount.AutoSize = true;
-            this.lblOrderCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderCount.ForeColor = System.Drawing.Color.White;
-            this.lblOrderCount.Location = new System.Drawing.Point(159, 6);
-            this.lblOrderCount.Name = "lblOrderCount";
-            this.lblOrderCount.Size = new System.Drawing.Size(65, 15);
-            this.lblOrderCount.TabIndex = 67;
-            this.lblOrderCount.Text = "Orders (0)";
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 50;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
             // 
-            // panel12
+            // transnumber
             // 
-            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel12.BackColor = System.Drawing.Color.ForestGreen;
-            this.panel12.Controls.Add(this.lblItemsCount);
-            this.panel12.Location = new System.Drawing.Point(3, 10);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(505, 29);
-            this.panel12.TabIndex = 65;
+            this.transnumber.HeaderText = "Trans. #";
+            this.transnumber.MinimumWidth = 150;
+            this.transnumber.Name = "transnumber";
+            this.transnumber.ReadOnly = true;
+            this.transnumber.Visible = false;
             // 
-            // lblItemsCount
+            // reference
             // 
-            this.lblItemsCount.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblItemsCount.AutoSize = true;
-            this.lblItemsCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblItemsCount.ForeColor = System.Drawing.Color.White;
-            this.lblItemsCount.Location = new System.Drawing.Point(233, 8);
-            this.lblItemsCount.Name = "lblItemsCount";
-            this.lblItemsCount.Size = new System.Drawing.Size(57, 15);
-            this.lblItemsCount.TabIndex = 15;
-            this.lblItemsCount.Text = "Items (0)";
+            this.reference.FillWeight = 344.67F;
+            this.reference.HeaderText = "Reference";
+            this.reference.MinimumWidth = 150;
+            this.reference.Name = "reference";
+            this.reference.ReadOnly = true;
+            // 
+            // gross
+            // 
+            this.gross.FillWeight = 40.89647F;
+            this.gross.HeaderText = "Gross";
+            this.gross.MinimumWidth = 100;
+            this.gross.Name = "gross";
+            this.gross.ReadOnly = true;
+            // 
+            // doctotal
+            // 
+            this.doctotal.FillWeight = 40.89647F;
+            this.doctotal.HeaderText = "Doc. Total";
+            this.doctotal.MinimumWidth = 100;
+            this.doctotal.Name = "doctotal";
+            this.doctotal.ReadOnly = true;
+            // 
+            // customer_code
+            // 
+            this.customer_code.FillWeight = 40.89647F;
+            this.customer_code.HeaderText = "Customer Code";
+            this.customer_code.MinimumWidth = 150;
+            this.customer_code.Name = "customer_code";
+            this.customer_code.ReadOnly = true;
+            // 
+            // transtype
+            // 
+            this.transtype.FillWeight = 40.89647F;
+            this.transtype.HeaderText = "Trans. Type";
+            this.transtype.MinimumWidth = 150;
+            this.transtype.Name = "transtype";
+            this.transtype.ReadOnly = true;
+            // 
+            // processed_by
+            // 
+            this.processed_by.FillWeight = 40.89647F;
+            this.processed_by.HeaderText = "Processed By";
+            this.processed_by.MinimumWidth = 150;
+            this.processed_by.Name = "processed_by";
+            this.processed_by.ReadOnly = true;
+            // 
+            // transdate
+            // 
+            this.transdate.HeaderText = "Trans. Date";
+            this.transdate.MinimumWidth = 150;
+            this.transdate.Name = "transdate";
+            this.transdate.ReadOnly = true;
             // 
             // SalesReport
             // 
@@ -963,13 +972,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvitems)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -999,15 +1008,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn selectt;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transnumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn reference;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gross;
-        private System.Windows.Forms.DataGridViewTextBoxColumn doctotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customer_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transtype;
-        private System.Windows.Forms.DataGridViewTextBoxColumn processed_by;
         private System.Windows.Forms.CheckBox checkSelectAll;
         internal System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.Label txtTotalPayment;
@@ -1039,5 +1039,15 @@
         internal System.Windows.Forms.Label lblOrderCount;
         private System.Windows.Forms.Panel panel12;
         internal System.Windows.Forms.Label lblItemsCount;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn selectt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transnumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn reference;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gross;
+        private System.Windows.Forms.DataGridViewTextBoxColumn doctotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customer_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transtype;
+        private System.Windows.Forms.DataGridViewTextBoxColumn processed_by;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transdate;
     }
 }

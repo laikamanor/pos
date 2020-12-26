@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AB.UI_Class;
+using Newtonsoft.Json.Linq;
+using Tulpep.NotificationWindow;
 namespace AB
 {
     public partial class MainMenu : Form
@@ -18,7 +20,34 @@ namespace AB
         utility_class utilityc = new utility_class();
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            this.Text = "Atlantic Bakery - " + Login.fullName + " - v1.5 - " + utilityc.URL.Replace("http://", "");
+            this.Text = "Atlantic Bakery - " + Login.fullName + " - v1.8 - " + utilityc.URL.Replace("http://", "");
+        }
+
+        public bool isAdmin()
+        {
+            bool result = false;
+            if (Login.jsonResult != null)
+            {
+                foreach (var x in Login.jsonResult)
+                {
+                    if (x.Key.Equals("data"))
+                    {
+                        JObject jObjectData = JObject.Parse(x.Value.ToString());
+                        foreach (var y in jObjectData)
+                        {
+                            if (y.Key.Equals("isAdmin"))
+                            {
+                                if (y.Value.ToString().ToLower() == "true")
+                                {
+                                    result = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
         }
 
         public void showForm(Form form)
@@ -49,8 +78,15 @@ namespace AB
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users users = new Users();
-            showForm(users);
+            if (isAdmin())
+            {
+                Users users = new Users();
+                showForm(users);
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
@@ -115,14 +151,28 @@ namespace AB
 
         private void branchesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Branches branch = new Branches();
-            showForm(branch);
+            if (isAdmin())
+            {
+                Branches branch = new Branches();
+                showForm(branch);
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void customersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Customers customers = new Customers();
-            showForm(customers);
+            if (isAdmin())
+            {
+                Customers customers = new Customers();
+                showForm(customers);
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void inventoryCountToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,19 +218,65 @@ namespace AB
 
         private void objectTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ObjectType adjustmentIn = new ObjectType();
-            showForm(adjustmentIn);
+            if (isAdmin())
+            {
+                ObjectType adjustmentIn = new ObjectType();
+                showForm(adjustmentIn);
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void warehouseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Warehouse warehouse = new Warehouse();
-            showForm(warehouse);
+            if (isAdmin())
+            {
+                Warehouse warehouse = new Warehouse();
+                showForm(warehouse);
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Items items = new Items();
+            if (isAdmin())
+            {
+                Items items = new Items();
+                showForm(items);
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void cashVarianceTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CashVariance items = new CashVariance();
+            showForm(items);
+        }
+
+        private void itemSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ItemSalesReport items = new ItemSalesReport();
+            showForm(items);
+        }
+
+        private void seriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Series items = new Series();
+            showForm(items);
+        }
+
+        private void priceListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PriceList items = new PriceList();
             showForm(items);
         }
     }

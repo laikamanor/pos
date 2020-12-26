@@ -23,6 +23,12 @@ namespace AB.API_Class.Warehouse
                 dt.Columns.Add("whsename");
                 dt.Columns.Add("id");
                 dt.Columns.Add("branch");
+
+                dt.Columns.Add("pricelist");
+                dt.Columns.Add("pricelist_id");
+                dt.Columns.Add("cash_account");
+                dt.Columns.Add("short_account");
+                dt.Columns.Add("pullout_whse");
                 Cursor.Current = Cursors.WaitCursor;
                 string token = "";
                 foreach (var x in Login.jsonResult)
@@ -41,6 +47,7 @@ namespace AB.API_Class.Warehouse
                 
                     request.AddHeader("Authorization", "Bearer " + token);
                     var response = client.Execute(request);
+                    Console.WriteLine(response.Content.ToString());
                     JObject jObject = new JObject();
                     if (response.Content.ToString().Substring(0, 1).Equals("{"))
                     {
@@ -70,15 +77,23 @@ namespace AB.API_Class.Warehouse
                                     for (int i = 0; i < jsonArray.Count(); i++)
                                     {
                                         JObject data = JObject.Parse(jsonArray[i].ToString());
-                                        int id = 0;
+                                        int id = 0, priceListID = 0;
                                         string warehouse = "", warehouseName = "",
-                                        branchCode = "";
+                                        branchCode = "", priceList = "", pullOutWhse = "", cashAccount = "", shortAccount = "";
                                         foreach (var q in data)
                                         {
 
-                                            if (q.Key.Equals("id"))
+                                            if (q.Key.Equals("pricelist"))
                                             {
-                                                id = Convert.ToInt32(q.Value.ToString());
+                                                priceList = q.Value.ToString();
+                                            }
+                                            else if (q.Key.Equals("pricelist_id"))
+                                            {
+                                                priceListID = string.IsNullOrEmpty(q.Value.ToString()) ? 0 : Convert.ToInt32(q.Value.ToString());
+                                            }
+                                            else if (q.Key.Equals("id"))
+                                            {
+                                                id = string.IsNullOrEmpty(q.Value.ToString()) ? 0 : Convert.ToInt32(q.Value.ToString());
                                             }
                                             else if (q.Key.Equals("whsecode"))
                                             {
@@ -92,8 +107,20 @@ namespace AB.API_Class.Warehouse
                                             {
                                                 branchCode = q.Value.ToString();
                                             }
+                                            else if (q.Key.Equals("cash_account"))
+                                            {
+                                                cashAccount = q.Value.ToString();
+                                            }
+                                            else if (q.Key.Equals("short_account"))
+                                            {
+                                                shortAccount = q.Value.ToString();
+                                            }
+                                            else if (q.Key.Equals("pullout_whse"))
+                                            {
+                                                pullOutWhse = q.Value.ToString();
+                                            }
                                         }
-                                        dt.Rows.Add(warehouse, warehouseName,id,branchCode);
+                                        dt.Rows.Add(warehouse, warehouseName,id,branchCode,priceList,priceListID,cashAccount,shortAccount,pullOutWhse);
                                     }
                                 }
                             }

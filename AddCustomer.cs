@@ -17,20 +17,19 @@ namespace AB
     public partial class AddCustomer : Form
     {
         customertype_class customertypec = new customertype_class();
-        warehouse_class warehousec = new warehouse_class();
         utility_class utilityc = new utility_class();
-        DataTable dtCustomerTypes, dtWarehouses;
-
+        DataTable dtCustomerTypes;
+        public string gType = "";
         public static bool isSubmit = false;
-        public AddCustomer()
+        public AddCustomer(string type)
         {
+            gType = type;
             InitializeComponent();
         }
 
         private void AddCustomer_Load(object sender, EventArgs e)
         {
             loadCustomerTypes();
-            loadWarehouses();
         }
 
         public void loadCustomerTypes()
@@ -64,23 +63,13 @@ namespace AB
                 MessageBox.Show("Customer Type field is required", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbCustomerType.Focus();
             }
-            else
+            else if (gType.Equals("Add"))
             {
                 insertCustomer();
             }
-        }
-
-        public void loadWarehouses()
-        {
-            dtWarehouses = new DataTable();
-            dtWarehouses = warehousec.returnWarehouse("");
-            if (dtWarehouses.Rows.Count > 0)
+            else if (gType.Equals("Edit"))
             {
-                cmbWarehouse.Items.Clear();
-                foreach (DataRow row in dtWarehouses.Rows)
-                {
-                    cmbWarehouse.Items.Add(row["whsecode"].ToString());
-                }
+                insertCustomer();
             }
         }
 
@@ -107,8 +96,9 @@ namespace AB
                     request.Method = Method.POST;
 
                     JObject jObject = new JObject();
-                    jObject.Add("code", (txtCode.Text == String.Empty ? null : txtCode.Text));
-                    jObject.Add("name", (txtName.Text == String.Empty ? null : txtName.Text));
+                    JObject joHeader = new JObject();
+                    joHeader.Add("code", (txtCode.Text == String.Empty ? null : txtCode.Text));
+                    joHeader.Add("name", (txtName.Text == String.Empty ? null : txtName.Text));
 
                     int cust_id = 0;
                     foreach(DataRow row in dtCustomerTypes.Rows)
@@ -118,61 +108,108 @@ namespace AB
                             cust_id = Convert.ToInt32(row["id"].ToString());
                         }
                     }
-                    jObject.Add("cust_type", cust_id);
-                    jObject.Add("birthdate", dtBirthDate.Value.ToString("yyyy-MM-dd"));
-                    jObject.Add("address", (txtAddress.Text == String.Empty ? null : txtAddress.Text));
-                    jObject.Add("contact", (txtContact.Text == String.Empty ? null : txtContact.Text));
-                    jObject.Add("whse", (cmbWarehouse.SelectedIndex== -1 ?  null : cmbWarehouse.Text.Trim()));
+                    joHeader.Add("cust_type", cust_id);
+
+                    JArray jarrayDetails = new JArray();
+
+                    for (int i = 0; i < dgv.Rows.Count; i++)
+                    {
+                        JObject joDetails = new JObject();
+
+                        string firstName = dgv.Rows[i].Cells["first_name"].Value.ToString(),
+                            middleName = dgv.Rows[i].Cells["middle_initial"].Value.ToString(),
+                            lastName = dgv.Rows[i].Cells["last_name"].Value.ToString(),
+                            birthDate = dgv.Rows[i].Cells["birthdate"].Value.ToString(),
+                            landLineNumber = dgv.Rows[i].Cells["landline_number"].Value.ToString(),
+                            mobileNumber = dgv.Rows[i].Cells["mobile_number"].Value.ToString(),
+                           aDdress = dgv.Rows[i].Cells["address"].Value.ToString(),
+                           emailAddress = dgv.Rows[i].Cells["email_address"].Value.ToString();
+
+                        joDetails.Add("first_name", firstName);
+                        joDetails.Add("middle_initial", middleName);
+                        joDetails.Add("last_name", lastName);
+                        joDetails.Add("birthdate", birthDate);
+                        joDetails.Add("landline_number", landLineNumber);
+                        joDetails.Add("mobile_number", mobileNumber);
+                        joDetails.Add("address", aDdress);
+                        joDetails.Add("email", emailAddress);
+                        jarrayDetails.Add(joDetails);
+                    }
+                    jObject.Add("header", joHeader);
+                    jObject.Add("details", jarrayDetails);
 
                     Console.WriteLine(jObject);
                     request.AddParameter("application/json", jObject, ParameterType.RequestBody);
                     var response = client.Execute(request);
-                    jObject = JObject.Parse(response.Content.ToString());
-                    bool isSuccess = false;
-
-                    string msg = "No message response found";
-                    foreach (var x in jObject)
+                    if (response.ErrorMessage == null)
                     {
-                        if (x.Key.Equals("message"))
+                        if (response.Content.Substring(0, 1).Equals("{"))
                         {
-                            msg = x.Value.ToString();
-                        }
-                    }
+                            jObject = JObject.Parse(response.Content.ToString());
+                            bool isSuccess = false;
 
-                    foreach (var x in jObject)
-                    {
-                        if (x.Key.Equals("success"))
-                        {
-                            isSuccess = Convert.ToBoolean(x.Value.ToString());
-                            txtCode.Clear();
-                            txtName.Clear();
-                            isSubmit = true;
-                            MessageBox.Show(msg, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            txtCode.Clear();
-                            txtName.Clear();
-                            txtAddress.Clear();
-                            txtContact.Clear();
-                            cmbCustomerType.SelectedIndex = -1;
-                            cmbWarehouse.SelectedIndex = -1;
-                        }
-                    }
+                            string msg = "No message response found";
+                            foreach (var x in jObject)
+                            {
+                                if (x.Key.Equals("message"))
+                                {
+                                    msg = x.Value.ToString();
+                                }
+                            }
 
-                    if (!isSuccess)
-                    {
-                        if (msg.Equals("Token is invalid"))
-                        {
-                            MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            foreach (var x in jObject)
+                            {
+                                if (x.Key.Equals("success"))
+                                {
+                                    isSuccess = Convert.ToBoolean(x.Value.ToString());
+                                    txtCode.Clear();
+                                    txtName.Clear();
+                                    isSubmit = true;
+                                    MessageBox.Show(msg, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    txtCode.Clear();
+                                    txtName.Clear();
+                                    cmbCustomerType.SelectedIndex = -1;
+                                    this.Dispose();
+                                }
+                            }
+
+                            if (!isSuccess)
+                            {
+                                if (msg.Equals("Token is invalid"))
+                                {
+                                    MessageBox.Show("Your login session is expired. Please login again", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
                         }
                         else
                         {
-                            MessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(response.Content.ToString(), "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show(response.ErrorMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     Cursor.Current = Cursors.Default;
                 }
             }
         }
 
+        private void btnAddCustomerDetails_Click(object sender, EventArgs e)
+        {
+            AddCustomer_Details details = new AddCustomer_Details();
+            details.ShowDialog();
+            if (AddCustomer_Details.isSubmit)
+            {
+                string firstName = AddCustomer_Details.firstName,
+    middleName = AddCustomer_Details.middleName, lastName = AddCustomer_Details.lastName, landlineNo = AddCustomer_Details.landlineNo, mobileNo = AddCustomer_Details.mobileNo, email = AddCustomer_Details.email, address = AddCustomer_Details.address, birthDate = AddCustomer_Details.birthDate;
 
+                dgv.Rows.Add(firstName, middleName, lastName, birthDate, landlineNo, mobileNo, email, address);
+            }
+        }
     }
 }
